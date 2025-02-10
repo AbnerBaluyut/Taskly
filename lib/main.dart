@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/router/app_router.dart';
-import 'core/utils/bloc/dark_mode_bloc.dart';
+import 'core/global/dark_mode_bloc.dart';
 import 'core/utils/shared_preferences_manager.dart';
 import 'core/styles/theme.dart';
 import 'features/splash/bloc/splash_bloc.dart';

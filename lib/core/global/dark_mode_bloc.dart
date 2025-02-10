@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../shared_preferences_manager.dart';
+import '../utils/shared_preferences_manager.dart';
 
 class DarkModeBloc  extends Cubit<bool> {
   

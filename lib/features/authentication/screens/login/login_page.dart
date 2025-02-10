@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/common_widgets/common_scaffold.dart';
 import '../../../../core/router/app_routes.dart';
-import '../../../../core/utils/bloc/dark_mode_bloc.dart';
+import '../../../../core/global/dark_mode_bloc.dart';
 import '../../../../core/styles/dimension.dart';
 import '_components/login_content.dart';
 import '_components/login_divider.dart';
