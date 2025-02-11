@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
+import 'package:taskly/core/extensions/double_extension.dart';
 
 import '../../../../../core/styles/custom_colors.dart';
 import '../../../../../core/styles/dimension.dart';
@@ -14,6 +15,7 @@ class LoginHeader extends StatelessWidget{
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center, 
       children: [
+        Dimension.spacingUltraLarge.height(),
         Text(
           'Login',
           style: TextStyle(
@@ -22,7 +24,7 @@ class LoginHeader extends StatelessWidget{
             color: context.isDarkMode() ? Colors.white : CustomColors.gray2
           ),
         ),
-        SizedBox(height: Dimension.spacingSmall),
+        Dimension.spacingSmall.height(),
         Text(
           "Hi! Welcome to the Taskly",
           style: TextStyle(
@@ -30,7 +32,8 @@ class LoginHeader extends StatelessWidget{
             fontWeight: FontWeight.w400,
             color:CustomColors.gray3
           ),
-        )
+        ),
+        Dimension.spacingExtraLarge.height(),
       ],
     );
   }

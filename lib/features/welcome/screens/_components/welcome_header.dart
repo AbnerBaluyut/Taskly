@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
+import 'package:taskly/core/extensions/double_extension.dart';
 
 import '../../../../core/styles/assets.dart';
 import '../../../../core/styles/custom_colors.dart';
@@ -44,7 +45,7 @@ class WelcomeHeader extends StatelessWidget {
             ]
           )
         ),
-        const SizedBox(height: Dimension.spacingSmall),
+        Dimension.spacingSmall.height(),
         Text(
           "is simply dummy text of the printing and typesetting industry",
           style: TextStyle(

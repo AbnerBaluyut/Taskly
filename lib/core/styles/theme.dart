@@ -7,8 +7,19 @@ ThemeData lightTheme = ThemeData(
   primaryColor: CustomColors.primaryColor,
   textSelectionTheme: TextSelectionThemeData(
     cursorColor: CustomColors.primaryColor,
-    selectionColor: CustomColors.primaryColor,
-    selectionHandleColor: CustomColors.primaryColor,
+    selectionColor: Colors.blue.shade300,
+    selectionHandleColor: Colors.blue.shade300,
+  ),
+  inputDecorationTheme: InputDecorationTheme(
+    suffixIconColor: WidgetStateColor.resolveWith((state) {
+      if (state.contains(WidgetState.error)) {
+        return Colors.red.shade400;
+      } else if (state.contains(WidgetState.disabled)) {
+        return Colors.grey.shade400;
+      } else {
+        return Colors.grey.shade600;
+      }
+    })
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
@@ -38,8 +49,19 @@ ThemeData darkTheme = ThemeData(
   primaryColor: CustomColors.primaryColor,
   textSelectionTheme: TextSelectionThemeData(
     cursorColor: CustomColors.primaryColor,
-    selectionColor: CustomColors.primaryColor,
-    selectionHandleColor: CustomColors.primaryColor,
+    selectionColor: Colors.blue.shade300,
+    selectionHandleColor: Colors.blue.shade300,
+  ),
+  inputDecorationTheme: InputDecorationTheme(
+    suffixIconColor: WidgetStateColor.resolveWith((state) {
+      if (state.contains(WidgetState.error)) {
+        return Colors.red.shade400;
+      } else if (state.contains(WidgetState.disabled)) {
+        return Colors.grey.shade400;
+      } else {
+        return Colors.grey.shade600;
+      }
+    })
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(

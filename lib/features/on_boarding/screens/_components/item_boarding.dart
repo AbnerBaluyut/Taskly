@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskly/core/extensions/double_extension.dart';
 
 import '../../../../core/styles/custom_colors.dart';
 import '../../../../core/styles/dimension.dart';
@@ -28,9 +29,9 @@ class ItemBoarding extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(height: Dimension.spacingLarge),
+          Dimension.spacingLarge.height(),
           Image.asset(image, height: 280, width: 280),
-          const SizedBox(height: Dimension.spacingMedium),
+          Dimension.spacingMedium.height(),
           Text(
             title,
             style: TextStyle(
@@ -40,7 +41,7 @@ class ItemBoarding extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: Dimension.spacingSmall),
+          Dimension.spacingSmall.height(),
           Text(
             description,
             style: TextStyle(

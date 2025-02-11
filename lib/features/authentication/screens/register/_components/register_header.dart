@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskly/core/extensions/double_extension.dart';
 
 import '../../../../../core/common_widgets/common_elevated_button.dart';
 import '../../../../../core/styles/custom_colors.dart';
@@ -24,7 +25,7 @@ class RegisterHeader extends StatelessWidget {
             fontWeight: FontWeight.bold
           ),
         ),
-        const SizedBox(height: Dimension.spacingSmall),
+        Dimension.spacingSmall.height(),
         Text(
           "Fill your information below",
           style: TextStyle(
@@ -33,7 +34,7 @@ class RegisterHeader extends StatelessWidget {
             color: CustomColors.gray3
           ),
         ),
-        const SizedBox(height: Dimension.spacingExtraLarge),
+        Dimension.spacingExtraLarge.height(),
         Stack(
           alignment: Alignment.bottomRight,
           clipBehavior: Clip.none,

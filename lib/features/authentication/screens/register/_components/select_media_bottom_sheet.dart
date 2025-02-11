@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
+import 'package:taskly/core/extensions/double_extension.dart';
 
 import '../../../../../core/styles/custom_colors.dart';
 import '../../../../../core/styles/dimension.dart';
@@ -41,7 +42,7 @@ class SelectMediaBottomSheet extends StatelessWidget {
                 ),
               )
             ),
-            const SizedBox(height: Dimension.spacingLarge),
+            Dimension.spacingLarge.height(),
             Text(
               "Upload Profile Picture",
               style: TextStyle(
@@ -50,7 +51,7 @@ class SelectMediaBottomSheet extends StatelessWidget {
                 color: context.isDarkMode() ? Colors.white : CustomColors.gray2
               ),
             ),
-            const SizedBox(height: Dimension.spacingMedium),
+            Dimension.spacingMedium.height(),
             ListTile(
               leading: Icon(Icons.camera_alt, color: CustomColors.primaryColor,),
               dense: true,

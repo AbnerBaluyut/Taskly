@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 extension IntExtension on int {
 
   Duration milliseconds() {
@@ -14,5 +16,14 @@ extension IntExtension on int {
 
   Duration hours() {
     return Duration(hours: this);
+  }
+
+  // Widgets
+  Widget height({Widget? child}) {
+    return SizedBox(height: toDouble(), child: child);
+  }
+  
+  Widget width({Widget? child}) {
+    return SizedBox(width: toDouble(), child: child);
   }
 }

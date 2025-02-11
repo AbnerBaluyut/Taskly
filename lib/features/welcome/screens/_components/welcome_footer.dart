@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
+import 'package:taskly/core/extensions/double_extension.dart';
 
 import '../../../../core/common_widgets/common_elevated_button.dart';
 import '../../../../core/styles/custom_colors.dart';
@@ -34,7 +35,7 @@ class WelcomeFooter extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: Dimension.spacingLarge),
+        Dimension.spacingLarge.height(),
         RichText(
           textAlign: TextAlign.center,
           text: TextSpan(
@@ -58,7 +59,7 @@ class WelcomeFooter extends StatelessWidget {
             ]
           ),
         ),
-        const SizedBox(height: Dimension.spacingExtraLarge),
+        Dimension.spacingExtraLarge.height()
       ],
     ); 
   }

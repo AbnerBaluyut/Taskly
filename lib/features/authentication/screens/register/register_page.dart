@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:taskly/core/extensions/double_extension.dart';
 import '../../../../core/common_widgets/common_scaffold.dart';
 import '../../../../core/styles/dimension.dart';
 import '_components/register_content.dart';
@@ -62,9 +63,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         );
                       },
                     ),
-                    const SizedBox(height: Dimension.spacingExtraLarge),
+                    Dimension.spacingExtraLarge.height(),
                     RegisterContent(),
-                    const SizedBox(height: Dimension.spacingMedium),
+                    Dimension.spacingMedium.height(),
                     RegisterFooter(
                       onTapRegister: () {
                         log("Proceed to Home after successful registration");
@@ -73,7 +74,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         log("Checkbox is checked: $isChecked");
                       },
                     ),
-                    const SizedBox(height: Dimension.spacingLarge),
+                     Dimension.spacingLarge.height()
                   ],
                 ),
               ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/utils/enums/social.dart';
+import '../../../core/enums/social.dart';
 
 class SocialModel {
 

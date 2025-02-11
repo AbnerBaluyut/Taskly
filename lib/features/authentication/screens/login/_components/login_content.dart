@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
+import 'package:taskly/core/extensions/double_extension.dart';
 import '../../../../../core/common_widgets/common_elevated_button.dart';
 import '../../../../../core/common_widgets/common_text_field.dart';
 import '../../../../../core/styles/custom_colors.dart';
@@ -20,38 +21,12 @@ class LoginContent extends StatefulWidget {
 class _LoginContentState extends State<LoginContent> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<CommonTextFieldState> _nameFieldKey = GlobalKey<CommonTextFieldState>();
+  final GlobalKey<CommonTextFieldState> _passwordFieldKey = GlobalKey<CommonTextFieldState>();
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-
-  //testing
-  String? errorNameText;
-  String? errorPasswordText;
-
-  @override
-  void initState() {
-    _nameController.addListener(_nameListener);
-    _passwordController.addListener(_passwordListener);
-    super.initState();
-  }
-
-  void _nameListener() {
-    if (_nameController.text.isNotEmpty) {
-      setState(() {
-        errorNameText = null;
-      });
-    } 
-  }
-
-  void _passwordListener() {
-    if (_passwordController.text.isNotEmpty) {
-      setState(() {
-        errorPasswordText = null;
-      });
-    } 
-  }
-  
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -66,52 +41,40 @@ class _LoginContentState extends State<LoginContent> {
           mainAxisSize: MainAxisSize.min,
           children: [
             CommonTextField (
+              key: _nameFieldKey,
               controller: _nameController,
               helperText: "Name",
               hintText: "Ex. Juan Dela Cruz",
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.next,
-              errorText: errorNameText,
               validator: (value) {
                 var getValue = (value ?? "").trim();
                 if (getValue.isEmpty) {
-                  setState(() {
-                    errorNameText = "Name is required";
-                  });
-                  return null;
-                } else {
-                  setState(() {
-                    errorNameText = null;
-                  });
-                  return null;
+                  _nameFieldKey.currentState?.shake();
+                  return "Name is required.";
                 }
+                return null;
               },
             ),
-            const SizedBox(height: Dimension.spacingLarge),
+            Dimension.spacingLarge.height(),
             CommonTextField(
+              key: _passwordFieldKey,
               controller: _passwordController,
               helperText: "Password",
               hintText: "**********",
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.done,
               obscureText: true,
-              errorText: errorPasswordText,
               validator: (value) {
                 var getValue = (value ?? "").trim();
-                if (getValue.isEmpty) {
-                  setState(() {
-                    errorPasswordText = "Password is required";
-                  });
-                  return null;
-                } else {
-                  setState(() {
-                    errorPasswordText = null;
-                  });
-                  return null;
+                if (getValue.isEmpty) { 
+                  _passwordFieldKey.currentState?.shake();
+                  return "Password is required";
                 }
+                return null;
               },
             ),
-            const SizedBox(height: Dimension.spacingSmall),
+            Dimension.spacingSmall.height(),
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
@@ -130,12 +93,12 @@ class _LoginContentState extends State<LoginContent> {
                 ),
               )
             ),
-            const SizedBox(height: Dimension.spacingSuperLarge),
+            Dimension.spacingSuperLarge.height(),
             SizedBox(
               width: context.screenWidth(),
               child: CommonElevatedButton(
                 onButtonPressed: () {
-                  if (_formKey.currentState!.validate()) {
+                  if (_formKey.currentState?.validate() ?? false) {
                     widget.onTapLogin();
                   }
                 },

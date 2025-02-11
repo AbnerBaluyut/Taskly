@@ -4,10 +4,11 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
+import 'package:taskly/core/extensions/double_extension.dart';
 
 import '../../../../../core/styles/custom_colors.dart';
 import '../../../../../core/styles/dimension.dart';
-import '../../../../../core/utils/enums/social.dart';
+import '../../../../../core/enums/social.dart';
 import '../../../models/social_model.dart';
 import 'item_social_button.dart';
 
@@ -58,7 +59,7 @@ class LoginFooter extends StatelessWidget {
             )
           ).toList(),
         ),
-        SizedBox(height: Dimension.spacingUltraLarge),
+        Dimension.spacingUltraLarge.height(),
         RichText(
           text: TextSpan(
             text: "Don't have an account? ",
@@ -82,6 +83,7 @@ class LoginFooter extends StatelessWidget {
             ]
           ),
         ),
+        Dimension.spacingSuperLarge.height(),
       ],
     );
   }
