@@ -108,7 +108,7 @@ class _LoginContentState extends State<LoginContent> {
                 fontWeight: FontWeight.w600,
                 padding: EdgeInsets.symmetric(
                   horizontal: Dimension.spacingLarge,
-                  vertical: Dimension.spacingLarge
+                  vertical: Dimension.spacingMedium
                 ),
               ),
             )

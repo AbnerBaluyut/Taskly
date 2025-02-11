@@ -21,7 +21,13 @@ class CommonTextField extends StatefulWidget {
   final bool filled;
   final TextStyle? style;
   final TextStyle? hintStyle;
+  final InputBorder? enabledBorder;
   final InputBorder? border;
+  final InputBorder? focusedBorder;
+  final InputBorder? errorBorder;
+  final InputBorder? focusedErrorBorder;
+  
+  
   final TextInputAction? textInputAction;
 
   const CommonTextField({
@@ -40,7 +46,11 @@ class CommonTextField extends StatefulWidget {
     this.filled = true,
     this.style,
     this.hintStyle,
+    this.enabledBorder,
     this.border,
+    this.focusedBorder,
+    this.errorBorder,
+    this.focusedErrorBorder,
     this.textInputAction
   });
 
@@ -106,35 +116,35 @@ class CommonTextFieldState extends State<CommonTextField> {
                 fontWeight: FontWeight.w400,
                 fontSize: 14.0
               ),
-              enabledBorder: widget.border ?? OutlineInputBorder(
+              enabledBorder: widget.enabledBorder ?? widget.border ?? OutlineInputBorder(
                 borderRadius: BorderRadius.circular(3),
                 borderSide: BorderSide(
                   color:Color(0xFFE8E8E8),
                   width: 0.5
                 ),
               ),
-              border: widget.border ??  OutlineInputBorder(
+              border: widget.border ?? OutlineInputBorder(
                 borderRadius: BorderRadius.circular(3),
                 borderSide: BorderSide(
                   color: Color(0xFFE8E8E8),
                   width: 0.5
                 ),
               ),
-              focusedBorder: widget.border ??  OutlineInputBorder(
+              focusedBorder: widget.focusedBorder ?? widget.border ?? OutlineInputBorder(
                 borderRadius: BorderRadius.circular(3),
                 borderSide: BorderSide(
                   color: Color(0xFFE8E8E8),
                   width: 0.5
                 ),
               ),
-              errorBorder: OutlineInputBorder(
+              errorBorder: widget.errorBorder ?? widget.border ?? OutlineInputBorder(
                 borderRadius: BorderRadius.circular(3),
                 borderSide: BorderSide(
                   color: Colors.red.shade400,
                   width: 2.0
                 ),
               ),
-              focusedErrorBorder: OutlineInputBorder(
+              focusedErrorBorder: widget.focusedErrorBorder ?? widget.border ?? OutlineInputBorder(
                 borderRadius: BorderRadius.circular(3),
                 borderSide: BorderSide(
                   color: Colors.red.shade400,
@@ -146,12 +156,12 @@ class CommonTextFieldState extends State<CommonTextField> {
                 fontWeight: FontWeight.w500,
                 color: Colors.red.shade400,
               ),
-              prefix: Padding(
+              prefix: (widget.prefixIcon != null) ? null : Padding(
                 padding: EdgeInsets.only(left: 20.0),
               ),
               prefixIcon: widget.prefixIcon,
               suffixIcon: (widget.obscureText == true) ? _togglePasswordVisibility() : widget.suffixIcon,
-              contentPadding: const EdgeInsets.only(bottom: 0.0, top: 15.0),
+              contentPadding: const EdgeInsets.only(bottom: 0.0, top: 15.0, right: 6.0),
             ),
             validator: widget.validator,
             onChanged: widget.onChanged,

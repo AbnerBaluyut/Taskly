@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'custom_colors.dart';
 
 ThemeData lightTheme = ThemeData(
+  fontFamily: "DMSans",
   brightness: Brightness.light,
   primaryColor: CustomColors.primaryColor,
   textSelectionTheme: TextSelectionThemeData(
@@ -45,6 +46,7 @@ ThemeData lightTheme = ThemeData(
 );
 
 ThemeData darkTheme = ThemeData(
+  fontFamily: "DMSans",
   brightness: Brightness.dark,
   primaryColor: CustomColors.primaryColor,
   textSelectionTheme: TextSelectionThemeData(

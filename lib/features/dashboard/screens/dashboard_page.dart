@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../../core/common_widgets/common_scaffold.dart';
+import '../../calendar/screens/calendar_content.dart';
+import '../../chat/screens/chat_content.dart';
+import '../../home/screens/home_content.dart';
+import '../../profile/screens/profile_content.dart';
 import '_components/dashboard_bottom_nav_bar.dart';
 
 class DashboardPage  extends StatefulWidget {
@@ -27,18 +31,10 @@ class _DashboardPageState  extends State<DashboardPage> with SingleTickerProvide
         controller: _tabController,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          Center(
-            child: Text("Home"),
-          ),
-          Center(
-            child: Text("Calendar"),
-          ),
-          Center(
-            child: Text("Chat"),
-          ),
-          Center(
-            child: Text("Profile"),
-          ),
+          HomeContent(),
+          CalendarContent(),
+          ChatContent(),
+          ProfileContent()
         ]  
       ),
       bottomNavigationBar: DashboardBottomNavBar(

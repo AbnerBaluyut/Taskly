@@ -69,7 +69,7 @@ class _RegisterFooterState extends State<RegisterFooter> {
               fontColor: Colors.white,
               padding: EdgeInsets.symmetric(
                 horizontal: Dimension.spacingLarge,
-                vertical: Dimension.spacingLarge
+                vertical: Dimension.spacingMedium
               ),
             ),
           )

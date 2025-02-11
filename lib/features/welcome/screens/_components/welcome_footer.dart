@@ -31,7 +31,7 @@ class WelcomeFooter extends StatelessWidget {
             borderRadius: BorderRadius.circular(100),
             padding: EdgeInsets.symmetric(
               horizontal: Dimension.spacingLarge,
-              vertical: Dimension.spacingLarge
+              vertical: Dimension.spacingMedium
             ),
           ),
         ),
