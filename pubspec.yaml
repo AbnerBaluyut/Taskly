@@ -49,6 +49,9 @@ dependencies:
   flutter_native_splash: ^2.4.4
   font_awesome_flutter: ^10.8.0
 
+  # SVG
+  flutter_svg: ^2.0.17
+
 flutter_native_splash:
   android: true
   ios: true

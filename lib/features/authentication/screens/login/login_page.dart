@@ -38,19 +38,14 @@ class LoginPage extends StatelessWidget {
                       onTapForgotPassword: () {
                         log("Forgot Password");
                       },
-                      onTapLogin: () {
-                        log("Login");
-                      },
+                      onTapLogin: () => context.go(AppRoutes.dashboard),
                     ),
                     LoginDivider(),
                     LoginFooter(
                       onTapSocial: (social) {
                         log("Social: ${social.name}");
                       },
-                      onTapRegister: () {
-                        log("Register");
-                        context.push(AppRoutes.register);
-                      },
+                      onTapRegister: () => context.push(AppRoutes.register),
                     )
                   ],
                 ),

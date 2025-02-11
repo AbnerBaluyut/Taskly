@@ -2,7 +2,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/authentication/screens/login/login_page.dart';
 import '../../features/authentication/screens/register/register_page.dart';
-import '../../features/home/screens/home_page.dart';
+import '../../features/dashboard/screens/dashboard_page.dart';
 import '../../features/on_boarding/screens/on_boarding_page.dart';
 import '../../features/splash/splash_page.dart';
 import '../../features/welcome/screens/welcome_page.dart';
@@ -44,9 +44,9 @@ class AppRouter {
         },
       ),
       GoRoute(
-        path: AppRoutes.home, 
+        path: AppRoutes.dashboard, 
         builder: (context, state) {
-          return const HomePage();
+          return const DashboardPage();
         },
       ),
     ],
