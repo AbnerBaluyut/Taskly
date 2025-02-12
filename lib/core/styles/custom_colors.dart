@@ -7,6 +7,8 @@ class CustomColors {
   static const gray = Color(0xFF333333);
   static const gray2 = Color(0xFF333333);
   static const gray3 = Color(0xFF888585);
+  static const  gray4 = Color(0xFFD2D2D2);
 
   static const blueGray = Color(0xFF9DB2CE);
+  static const neutral200 = Color(0xFFF1F2F4);
 }

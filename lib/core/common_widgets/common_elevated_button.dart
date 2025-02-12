@@ -18,7 +18,7 @@ class CommonElevatedButton extends ElevatedButton {
     return CommonElevatedButton(
       key: key,
       onButtonPressed: onPressed,
-      icon: icon,
+      custom: icon,
       borderRadius: borderRadius,
       padding: padding,
       backgroundColor: backgroundColor,
@@ -32,7 +32,7 @@ class CommonElevatedButton extends ElevatedButton {
     super.key, 
     this.onButtonPressed, 
     this.text,
-    this.icon,
+    this.custom,
     this.fontColor = Colors.white,
     this.fontWeight = FontWeight.w400,
     this.fontSize = 16,
@@ -44,7 +44,7 @@ class CommonElevatedButton extends ElevatedButton {
     this.shadowColor = Colors.transparent,
     this.overlayColor = Colors.black45,
     this.shape,
-  }) : assert(text != null || icon != null), super(
+  }) : assert(text != null || custom != null), super(
       onPressed: onButtonPressed,
       child: (text != null) ? Text(
         text,
@@ -53,7 +53,7 @@ class CommonElevatedButton extends ElevatedButton {
           fontWeight: fontWeight,
           color: fontColor,
         ),
-      ) : icon,
+      ) : custom,
       style: ElevatedButton.styleFrom(
         shadowColor: shadowColor,
         backgroundColor: backgroundColor,
@@ -69,7 +69,7 @@ class CommonElevatedButton extends ElevatedButton {
 
   final VoidCallback? onButtonPressed;
   final String? text;
-  final Widget? icon;
+  final Widget? custom;
   final Color fontColor;
   final Color backgroundColor;
   final Color shadowColor;

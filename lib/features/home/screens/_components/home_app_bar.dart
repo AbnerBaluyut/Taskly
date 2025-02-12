@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:taskly/core/extensions/int_extension.dart';
 
 import '../../../../core/common_widgets/common_text_field.dart';
+import '../../../../core/styles/assets.dart';
 
 class HomeAppBar extends AppBar {
 
   HomeAppBar({super.key}) : super(
     leading: IconButton(
-      icon: Icon(FontAwesomeIcons.barsStaggered, size: 20.0),
+      icon: Image.asset(Assets.menu, height: 26, width: 26),
       padding: EdgeInsets.zero,
       onPressed: () {},
     ),
@@ -25,7 +25,7 @@ class HomeAppBar extends AppBar {
     ),
     titleSpacing: 0.0,
     actions: [
-      10.width(),
+      5.width(),
       IconButton(
         style: IconButton.styleFrom(
           shape: RoundedRectangleBorder(
@@ -35,8 +35,17 @@ class HomeAppBar extends AppBar {
           overlayColor: Colors.black54,
           backgroundColor: Colors.grey.shade200
         ),
-        icon: Icon(Icons.notifications_none_outlined),
-        iconSize: 24.0,
+        icon: Stack(
+          alignment: Alignment.topRight,
+          children: [
+            Icon(Icons.notifications_none_outlined),
+            CircleAvatar(
+              radius: 4,
+              backgroundColor: Colors.red,
+            )
+          ],
+        ),
+        iconSize: 25.0,
         onPressed: () {},
       ),
       IconButton(
@@ -48,9 +57,16 @@ class HomeAppBar extends AppBar {
           backgroundColor: Colors.grey.shade200,
           overlayColor: Colors.black54,
         ),
-        icon: Icon(Icons.person_outline_sharp),
+        iconSize: 25,
+        icon: Image.asset(
+          Assets.face,
+          height: 25.0,
+          width: 25.0,
+          fit: BoxFit.contain,
+        ),
         onPressed: () {},
       ),
+      8.width(),
     ]
   );
 }

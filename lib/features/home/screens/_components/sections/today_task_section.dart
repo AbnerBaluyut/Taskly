@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 import 'package:taskly/core/extensions/int_extension.dart';
 
-import '../../../../core/styles/custom_colors.dart';
-import '../../../../core/styles/dimension.dart';
+import '../../../../../core/styles/custom_colors.dart';
+import '../../../../../core/styles/dimension.dart';
+import '../cells/item_task.dart';
 
 class TodayTaskSection extends StatelessWidget {
   
@@ -33,9 +34,10 @@ class TodayTaskSection extends StatelessWidget {
                 ),
               ),
               TextButton(
-               style: TextButton.styleFrom(
+                style: TextButton.styleFrom(
                   overlayColor: Colors.transparent,
-                  padding: EdgeInsets.zero
+                  padding: EdgeInsets.zero,
+                  visualDensity: VisualDensity.compact
                 ),
                 onPressed: () {},
                 child: Text(
@@ -58,23 +60,34 @@ class TodayTaskSection extends StatelessWidget {
             vertical: Dimension.paddingMedium
           ),
           itemBuilder: (ctx, index) {
-            return Container(
-              height: 80,
-              decoration: BoxDecoration(
-                border: Border.all(color: CustomColors.gray2),
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              padding: EdgeInsets.symmetric(horizontal: Dimension.paddingMedium),
-              child: Text(
-                'Task Title',
-                style: TextStyle(fontSize: 16.0),
-              )
-            );
+
+            if (index == 0) {
+              return ItemTask(
+                status: "In Progress",
+                statusColor: Colors.red,
+                label: "Low",
+                labelColor: Colors.green.shade900,
+              );  
+            } else if (index == 1) {
+              return ItemTask(
+                status: "Done",
+                statusColor: Colors.green.shade900,
+                label: "Mid",
+                labelColor: Colors.blue.shade900,
+              );
+            } else {
+              return ItemTask(
+                status: "To Do",
+                statusColor: Colors.blue.shade900,
+                label: "High",
+                labelColor: Colors.red,
+              );
+            }
           }, 
           separatorBuilder: (ctx, index) {
             return Dimension.paddingMedium.height();
           }, 
-          itemCount: 10
+          itemCount: 3
         )
       ],
     );
