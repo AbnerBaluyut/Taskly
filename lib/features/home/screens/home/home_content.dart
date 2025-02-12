@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 
-import '../../../core/common_widgets/common_scaffold.dart';
-import '../../../core/global/dark_mode_bloc.dart';
-import '../../../core/styles/custom_colors.dart';
-import '../../../core/styles/dimension.dart';
-import '../../dashboard/bloc/bottom_nav_bloc.dart';
+import '../../../../core/common_widgets/common_scaffold.dart';
+import '../../../../core/global/dark_mode_bloc.dart';
+import '../../../../core/router/app_routes.dart';
+import '../../../../core/styles/custom_colors.dart';
+import '../../../../core/styles/dimension.dart';
+import '../../../dashboard/bloc/bottom_nav_bloc.dart';
 import '_components/home_app_bar.dart';
 import '_components/sections/project_section.dart';
 import '_components/sections/today_task_section.dart';
@@ -22,7 +24,6 @@ class HomeContent extends StatefulWidget {
 class _HomeContentState extends State<HomeContent> {
 
   final _scrollController = ScrollController();
-
   final _scrollThreshold = 100.0;
 
   @override
@@ -72,7 +73,9 @@ class _HomeContentState extends State<HomeContent> {
               ),
             ),
             Dimension.spacingSmall.height(),
-            ProjectSection(),
+            ProjectSection(
+              onTapViewMore: () => context.push(AppRoutes.moreProjects),
+            ),
             Dimension.spacingMedium.height(),
             TodayTaskSection(),
             Dimension.spacingMegaLarge.height(),

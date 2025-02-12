@@ -4,9 +4,9 @@ import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 import 'package:taskly/core/extensions/int_extension.dart';
 
-import '../../../../../core/common_widgets/common_elevated_button.dart';
-import '../../../../../core/styles/custom_colors.dart';
-import '../../../../../core/styles/dimension.dart';
+import '../../../../../../core/common_widgets/common_elevated_button.dart';
+import '../../../../../../core/styles/custom_colors.dart';
+import '../../../../../../core/styles/dimension.dart';
 
 class ItemProject extends StatelessWidget {
   const ItemProject({
@@ -19,15 +19,11 @@ class ItemProject extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    int memberItemsLength = 10; // kung ilan members naka assign sa project
-
-    bool isTabletOrIpad = (context.screenWidth() >= 600); // check if mobile or tablet/ipad gamit niya
-
-    int itemSize = (isTabletOrIpad) ? 150 : 80;  // eto item size ng circled image para sa mobile or tablet/ipad
-
-    int minimumMembers = (context.screenWidth() / itemSize).floor(); // compute mo if ilan members kakasya niya. mag base lang tayo sa screen width
-    
-    int membersLeft = (memberItemsLength - minimumMembers); // bawasan mo ng members
+    int memberItemsLength = 10;
+    bool isTabletOrIpad = (context.screenWidth() >= 600);
+    int itemSize = (isTabletOrIpad) ? 150 : 80;
+    int minimumMembers = (context.screenWidth() / itemSize).floor();
+    int membersLeft = (memberItemsLength - minimumMembers);
     
     return CommonElevatedButton(
       onButtonPressed: () {},
@@ -117,7 +113,7 @@ class ItemProject extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   color: context.isDarkMode() ? Colors.white54 : CustomColors.gray3
                 ),
-                maxLines: 5,
+                maxLines: 3,
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.start,
               ),

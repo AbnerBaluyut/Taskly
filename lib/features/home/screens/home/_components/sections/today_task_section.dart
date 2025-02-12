@@ -3,8 +3,8 @@ import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 import 'package:taskly/core/extensions/int_extension.dart';
 
-import '../../../../../core/styles/custom_colors.dart';
-import '../../../../../core/styles/dimension.dart';
+import '../../../../../../core/styles/custom_colors.dart';
+import '../../../../../../core/styles/dimension.dart';
 import '../cells/item_task.dart';
 
 class TodayTaskSection extends StatelessWidget {

@@ -3,13 +3,15 @@ import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 import 'package:taskly/core/extensions/int_extension.dart';
 
-import '../../../../../core/styles/custom_colors.dart';
-import '../../../../../core/styles/dimension.dart';
+import '../../../../../../core/styles/custom_colors.dart';
+import '../../../../../../core/styles/dimension.dart';
 import '../cells/item_project.dart';
 
 class ProjectSection extends StatelessWidget {
 
-  const ProjectSection({super.key});
+  const ProjectSection({super.key, required this.onTapViewMore});
+
+  final VoidCallback onTapViewMore;
   
 
   @override
@@ -43,7 +45,7 @@ class ProjectSection extends StatelessWidget {
                       padding: EdgeInsets.zero,
                       visualDensity: VisualDensity.compact
                     ),
-                    onPressed: () {},
+                    onPressed: onTapViewMore,
                     child: Text(
                       "View More",
                       style: TextStyle(
@@ -58,7 +60,7 @@ class ProjectSection extends StatelessWidget {
             ),
             20.height(),
             SizedBox(
-              height: 320,
+              height: 270,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,

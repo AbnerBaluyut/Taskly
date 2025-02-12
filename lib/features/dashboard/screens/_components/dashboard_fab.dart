@@ -76,6 +76,7 @@ class _DashboardFabState extends State<DashboardFab> {
             ),
             10.width(),
             FloatingActionButton(
+              heroTag: null,
               onPressed: () {
                 widget.onTapAddTask();
                 _closeFab();

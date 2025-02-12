@@ -1,0 +1,220 @@
+import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:taskly/core/extensions/context_extension.dart';
+import 'package:taskly/core/extensions/double_extension.dart';
+
+import '../../../../../../core/common_widgets/common_elevated_button.dart';
+import '../../../../../../core/styles/custom_colors.dart';
+import '../../../../../../core/styles/dimension.dart';
+
+class ItemProject extends StatelessWidget {
+
+  const ItemProject({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    int memberItemsLength = 10;
+    bool isTabletOrIpad = (context.screenWidth() >= 600);
+    int itemSize = (isTabletOrIpad) ? 150 : 80;
+    int minimumMembers = (context.screenWidth() / itemSize).floor();
+    int membersLeft = (memberItemsLength - minimumMembers);
+
+    return Card(
+      elevation: 6.0,
+      margin: EdgeInsets.zero,
+      color: Colors.white,
+      shadowColor: Colors.black54,
+      child: CommonElevatedButton(
+        onButtonPressed: () {},
+        padding: EdgeInsets.zero,
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        shadowColor: Colors.transparent,
+        custom: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8.0),
+            gradient: LinearGradient(
+              colors: [Colors.red, Colors.transparent],
+              stops: [0.03, 0.03],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+          ),
+          padding: EdgeInsets.symmetric(
+            horizontal: Dimension.paddingLarge,
+            vertical: Dimension.paddingMedium,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Row(
+                spacing: Dimension.spacingSmall,
+                children: [
+                  CircleAvatar(
+                    backgroundColor: CustomColors.primaryColor,
+                    radius: 20,
+                    child: Icon(Icons.person, color: Colors.white, size: 30.0,),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Easelife Mobile App', 
+                        style: TextStyle(
+                          fontSize: 16.0, 
+                          fontWeight: FontWeight.w500,
+                          color: context.isDarkMode() ? Colors.white :CustomColors.gray2
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        spacing: 4.0,
+                        children: [
+                          Icon(Icons.calendar_month, size: 16.0, color: context.isDarkMode() ? Colors.white60 : Colors.grey.shade600),
+                          Text(
+                            '14 February 2025', 
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w400,
+                              color: context.isDarkMode() ? Colors.white60 : Colors.grey.shade600
+                            )
+                          )
+                        ],
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              Dimension.spacingSmall.height(),
+              Text(
+                "Description:",
+                style: TextStyle(
+                  fontSize: 15.0, 
+                  fontWeight: FontWeight.w400,
+                  color: context.isDarkMode() ? Colors.white70 : CustomColors.gray 
+                ),
+              ),
+              Text(
+                "Lorem Ipsum is Lorem Ipsum and amets Lorem Ipsum amet. Lorem Ipsum  is a utility for creating a Lorem Ipsum. Lorem Ipsum  is a utility for creating a Lorem Ipsum and a Lorem Ipsum is a utility for creating a Lorem Ipsum and a Lorem Ipsum is a utility for creating a Lorem Ipsum and a Lorem Ipsum is a utility for creating  a Lorem Ipsum and a Lorem Ipsum is a utility for creating",
+                style: TextStyle(
+                  fontSize: 14.0, 
+                  fontWeight: FontWeight.w400,
+                  color: context.isDarkMode() ? Colors.white54 : CustomColors.gray3
+                ),
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.start,
+              ),
+              Dimension.spacingMedium.height(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Teams:', style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w400, color: context.isDarkMode() ? Colors.white :CustomColors.gray)),
+                        RowSuper(
+                          innerDistance: -14,
+                          children: List.generate((memberItemsLength > minimumMembers) ? (minimumMembers + 1) : memberItemsLength, (index) {
+                            Color? color;
+                            if (index == 0) {
+                              color = Colors.blue;
+                            } else if (index == 1) {
+                              color = Colors.green;
+                            } else if (index == 2) {
+                              color = Colors.cyan;
+                            } else if (index == 3) {
+                              color = Colors.amberAccent;
+                            } else if (index == 4) {
+                              color = Colors.deepOrange;
+                            } else if (index == 5) {
+                              color = Colors.pink;
+                            } else if (index == 6) {
+                              color = Colors.deepPurple;
+                            } else if (index == 7) {
+                              color = Colors.brown;
+                            } else if (index == 8) {
+                              color = Colors.blueGrey;
+                            } else if (index == 9) {
+                              color = Colors.blueGrey.shade300;
+                            }
+        
+                            if (index >= minimumMembers) {
+                              return CircleAvatar(
+                                backgroundColor: Colors.grey.shade400,
+                                radius: 20,
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  radius: 19,
+                                  child: Text(
+                                    (membersLeft > 100) ? "+99" : "+$membersLeft",
+                                    style: TextStyle(
+                                      fontSize: 15.0,
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.w600
+                                    ),
+                                  ),
+                                ),
+                              );
+                            } else {
+                              return CircleAvatar(
+                                backgroundColor: Colors.grey.shade400,
+                                radius: 20,
+                                child: CircleAvatar(
+                                  backgroundColor: color,
+                                  radius: 19,
+                                  child: Icon(Icons.person, color: Colors.white),
+                                ),
+                              );
+                            }
+                          }),
+                        )
+                      ],
+                    ),
+                  ),
+                  Dimension.spacingSmall.width(),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 10.0,
+                    children: [
+                      Text('Progress:', style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w400, color: context.isDarkMode() ? Colors.white :CustomColors.gray)),
+                      Row(
+                        spacing: 6.0,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(
+                              value: 0.50,
+                              color: Colors.blue,
+                              backgroundColor: Colors.grey.shade200,
+                            ),
+                          ),
+                          Text('50%', style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold, color: context.isDarkMode() ? Colors.white60 : CustomColors.gray2)),
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

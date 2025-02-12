@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 
-import '../../../../../core/common_widgets/common_elevated_button.dart';
-import '../../../../../core/styles/custom_colors.dart';
-import '../../../../../core/styles/dimension.dart';
+import '../../../../../../core/common_widgets/common_elevated_button.dart';
+import '../../../../../../core/styles/custom_colors.dart';
+import '../../../../../../core/styles/dimension.dart';
 
 class ItemTask extends StatelessWidget {
 

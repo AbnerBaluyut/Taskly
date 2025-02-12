@@ -3,7 +3,7 @@ import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import '../../../core/common_widgets/common_scaffold.dart';
 import '../../calendar/screens/calendar_content.dart';
 import '../../chat/screens/chat_content.dart';
-import '../../home/screens/home_content.dart';
+import '../../home/screens/home/home_content.dart';
 import '../../profile/screens/profile_content.dart';
 import '_components/dashboard_bottom_nav_bar.dart';
 import '_components/dashboard_fab.dart';

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/int_extension.dart';
 
-import '../../../../core/common_widgets/common_text_field.dart';
-import '../../../../core/styles/assets.dart';
+import '../../../../../core/common_widgets/common_text_field.dart';
+import '../../../../../core/styles/assets.dart';
 
 class HomeAppBar extends AppBar {
 
