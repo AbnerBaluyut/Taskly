@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/int_extension.dart';
 
 import '../../../../core/common_widgets/common_text_field.dart';
@@ -6,13 +7,21 @@ import '../../../../core/styles/assets.dart';
 
 class HomeAppBar extends AppBar {
 
-  HomeAppBar({super.key}) : super(
-    leading: IconButton(
-      icon: Image.asset(Assets.menu, height: 26, width: 26),
-      padding: EdgeInsets.zero,
-      onPressed: () {},
+  HomeAppBar({super.key, required this.onTapSideMenu}) : super(
+    leading: Builder(
+      builder: (context) {
+        return IconButton(
+          icon: Image.asset(
+            Assets.menu, 
+            height: 26, 
+            width: 26,
+            color: context.isDarkMode() ? Colors.white : Colors.black,
+          ),
+          padding: EdgeInsets.zero,
+          onPressed: onTapSideMenu,
+        );
+      }
     ),
-    toolbarHeight: 80.0,
     centerTitle: true,
     surfaceTintColor: Colors.transparent,
     title: CommonTextField(
@@ -38,7 +47,7 @@ class HomeAppBar extends AppBar {
         icon: Stack(
           alignment: Alignment.topRight,
           children: [
-            Icon(Icons.notifications_none_outlined),
+            Icon(Icons.notifications_none_outlined, color: Colors.black54),
             CircleAvatar(
               radius: 4,
               backgroundColor: Colors.red,
@@ -69,4 +78,6 @@ class HomeAppBar extends AppBar {
       8.width(),
     ]
   );
+
+  final VoidCallback onTapSideMenu;
 }

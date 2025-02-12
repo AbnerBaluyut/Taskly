@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 import 'package:taskly/core/extensions/int_extension.dart';
 
@@ -18,6 +19,7 @@ class ProjectSection extends StatelessWidget {
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             20.height(),
             Padding(
@@ -32,7 +34,7 @@ class ProjectSection extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
-                      color: CustomColors.gray2,
+                      color: context.isDarkMode() ? Colors.white :CustomColors.gray2,
                     ),
                   ),
                   TextButton(
@@ -54,6 +56,7 @@ class ProjectSection extends StatelessWidget {
                 ],
               ),
             ),
+            20.height(),
             SizedBox(
               height: 320,
               child: ListView.separated(

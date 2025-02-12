@@ -2,6 +2,7 @@ import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
+import 'package:taskly/core/extensions/int_extension.dart';
 
 import '../../../../../core/common_widgets/common_elevated_button.dart';
 import '../../../../../core/styles/custom_colors.dart';
@@ -18,16 +19,20 @@ class ItemProject extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    int memberItemsLength = 10;
-    bool isTabletOrIpad = (context.screenWidth() >= 600);
-    int itemSize = (isTabletOrIpad) ? 150 : 80; 
-    int minimumMembers = (context.screenWidth() / itemSize).floor();
-    int membersLeft = (memberItemsLength - minimumMembers);
+    int memberItemsLength = 10; // kung ilan members naka assign sa project
+
+    bool isTabletOrIpad = (context.screenWidth() >= 600); // check if mobile or tablet/ipad gamit niya
+
+    int itemSize = (isTabletOrIpad) ? 150 : 80;  // eto item size ng circled image para sa mobile or tablet/ipad
+
+    int minimumMembers = (context.screenWidth() / itemSize).floor(); // compute mo if ilan members kakasya niya. mag base lang tayo sa screen width
+    
+    int membersLeft = (memberItemsLength - minimumMembers); // bawasan mo ng members
     
     return CommonElevatedButton(
       onButtonPressed: () {},
       overlayColor: tagColor,
-      backgroundColor: Colors.white,
+      backgroundColor: context.isDarkMode() ? CustomColors.gray2 : Colors.white,
       padding: EdgeInsets.zero,
       custom: Container(
         width: 300,
@@ -62,7 +67,7 @@ class ItemProject extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16.0, 
                           fontWeight: FontWeight.w500,
-                          color: CustomColors.gray2
+                          color: context.isDarkMode() ? Colors.white :CustomColors.gray2
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -72,13 +77,13 @@ class ItemProject extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         spacing: 4.0,
                         children: [
-                          Icon(Icons.calendar_month, size: 20.0, color: Colors.grey.shade600),
+                          Icon(Icons.calendar_month, size: 20.0, color: context.isDarkMode() ? Colors.white60 : Colors.grey.shade600),
                           Text(
                             '14 February 2025', 
                             style: TextStyle(
                               fontSize: 14.0,
                               fontWeight: FontWeight.w400,
-                              color: Colors.grey.shade600
+                              color: context.isDarkMode() ? Colors.white60 : Colors.grey.shade600
                             )
                           )
                         ],
@@ -100,16 +105,17 @@ class ItemProject extends StatelessWidget {
               style: TextStyle(
                 fontSize: 15.0, 
                 fontWeight: FontWeight.w400,
-                color: CustomColors.gray 
+                color: context.isDarkMode() ? Colors.white70 : CustomColors.gray 
               ),
             ),
+            4.height(),
             Expanded(
               child: Text(
                 "Lorem Ipsum is Lorem Ipsum and amets Lorem Ipsum amet. Lorem Ipsum  is a utility for creating a Lorem Ipsum. Lorem Ipsum  is a utility for creating a Lorem Ipsum and a Lorem Ipsum is a utility for creating a Lorem Ipsum and a Lorem Ipsum is a utility for creating a Lorem Ipsum and a Lorem Ipsum is a utility for creating  a Lorem Ipsum and a Lorem Ipsum is a utility for creating",
                 style: TextStyle(
                   fontSize: 14.0, 
                   fontWeight: FontWeight.w400,
-                  color: CustomColors.gray3
+                  color: context.isDarkMode() ? Colors.white54 : CustomColors.gray3
                 ),
                 maxLines: 5,
                 overflow: TextOverflow.ellipsis,
@@ -126,7 +132,7 @@ class ItemProject extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Teams:', style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w400, color: CustomColors.gray)),
+                      Text('Teams:', style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w400, color: context.isDarkMode() ? Colors.white :CustomColors.gray)),
                       RowSuper(
                         innerDistance: -14,
                         children: List.generate((memberItemsLength > minimumMembers) ? (minimumMembers + 1) : memberItemsLength, (index) {
@@ -192,7 +198,7 @@ class ItemProject extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   spacing: 10.0,
                   children: [
-                    Text('Progress:', style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w400, color: CustomColors.gray)),
+                    Text('Progress:', style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w400, color: context.isDarkMode() ? Colors.white :CustomColors.gray)),
                     Row(
                       spacing: 6.0,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -202,12 +208,12 @@ class ItemProject extends StatelessWidget {
                           height: 20,
                           width: 20,
                           child: CircularProgressIndicator(
-                            value: 0.55,
+                            value: 0.50,
                             color: tagColor,
                             backgroundColor: Colors.grey.shade200,
                           ),
                         ),
-                        Text('75%', style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold, color: CustomColors.gray2)),
+                        Text('50%', style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold, color: context.isDarkMode() ? Colors.white60 : CustomColors.gray2)),
                       ],
                     )
                   ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 import 'package:taskly/core/extensions/int_extension.dart';
 
@@ -26,11 +27,11 @@ class TodayTaskSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Today Task',
+                'Task Today',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
-                  color: CustomColors.gray2,
+                  color: context.isDarkMode() ? Colors.white :CustomColors.gray2,
                 ),
               ),
               TextButton(

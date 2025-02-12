@@ -35,7 +35,7 @@ class ItemTask extends StatelessWidget {
     return CommonElevatedButton(
       onButtonPressed: () {},
       padding: EdgeInsets.zero,
-      backgroundColor: Colors.white,
+      backgroundColor: context.isDarkMode() ?CustomColors.gray2 : Colors.white,
       overlayColor: statusColor,
       custom: Stack(
         alignment: Alignment.topRight,
@@ -62,7 +62,7 @@ class ItemTask extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 14.0,
                         fontWeight: FontWeight.w400,
-                        color: CustomColors.gray
+                        color: context.isDarkMode() ? Colors.white : CustomColors.gray
                       ),
                     ),
                     Chip(
@@ -94,7 +94,7 @@ class ItemTask extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 15.0,
                     fontWeight: FontWeight.w500,
-                    color: CustomColors.gray
+                    color: context.isDarkMode() ? Colors.white : CustomColors.gray
                   ),
                   maxLines: 5,
                   overflow: TextOverflow.ellipsis,
@@ -109,13 +109,13 @@ class ItemTask extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       spacing: 4.0,
                       children: [
-                        Icon(Icons.calendar_month, size: 20.0, color: Colors.grey.shade600),
+                        Icon(Icons.calendar_month, size: 20.0, color: context.isDarkMode() ? Colors.white60 : Colors.grey.shade600),
                         Text(
                           '09:00 AM - 01:00 PM', 
                           style: TextStyle(
                             fontSize: 13.0,
                             fontWeight: FontWeight.w400,
-                            color: Colors.grey.shade600
+                            color: context.isDarkMode() ? Colors.white60 : Colors.grey.shade600
                           )
                         ),
                       ],
