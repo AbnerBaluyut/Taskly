@@ -34,7 +34,6 @@ class MenuSection extends StatelessWidget {
       custom: Row(
         children: [
           Container(
-            alignment: Alignment.center,
             height: 36.0,
             width: 36.0,
             decoration: BoxDecoration(
@@ -51,7 +50,9 @@ class MenuSection extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              color: context.isDarkMode() ? Colors.white : CustomColors.gray2,
+            color: (isLogOut) 
+              ? Colors.red.shade400 
+              : (context.isDarkMode() ? Colors.white : CustomColors.gray2),
               fontSize: 14.0,
               fontWeight: FontWeight.w500
             ),
