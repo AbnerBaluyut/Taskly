@@ -5,6 +5,7 @@ import 'core/global/dark_mode_bloc.dart';
 import 'core/utils/shared_preferences_manager.dart';
 import 'core/styles/theme.dart';
 import 'features/dashboard/bloc/bottom_nav_bloc.dart';
+import 'features/dashboard/bloc/dashboard_bloc.dart';
 import 'features/splash/bloc/splash_bloc.dart';
 
 void main() async {
@@ -22,6 +23,9 @@ void main() async {
         BlocProvider(
           create: (_) => BottomNavBloc()
         ),
+        BlocProvider(
+          create: (_) => DashboardBloc()
+        )
       ], 
       child: const MyApp()
     )

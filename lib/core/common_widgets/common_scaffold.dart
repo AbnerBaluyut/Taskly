@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
 
-class CommonScaffold extends StatelessWidget {
+class CommonScaffold extends StatefulWidget {
 
   const CommonScaffold({
-    super.key, 
+    super.key,
     required this.body,
     this.appBar,
     this.android,
@@ -61,72 +61,86 @@ class CommonScaffold extends StatelessWidget {
   final String? restorationId;
   final bool extendBody;
   final bool extendBodyBehindAppBar;
+
+  @override
+  State<StatefulWidget> createState() => CommonScaffoldState();
+
   
+}
+
+class CommonScaffoldState extends State<CommonScaffold> {
+
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void openDrawer() => _scaffoldKey.currentState?.openDrawer();
+  void closeDrawer() => _scaffoldKey.currentState?.closeDrawer();
+
   @override
   Widget build(BuildContext context) {
-    if (appBar != null) {
+    if (widget.appBar != null) {
       return GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
+          key: _scaffoldKey,
           appBar: AppBar(
-            key: appBar?.key,
+            key: widget.appBar?.key,
             systemOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: Colors.transparent,
-              statusBarIconBrightness: context.isDarkMode() ? Brightness.light : (android ?? Brightness.dark),
-              statusBarBrightness: context.isDarkMode() ? Brightness.dark : (ios ?? Brightness.light),
+              statusBarIconBrightness: context.isDarkMode() ? Brightness.light : (widget.android ?? Brightness.dark),
+              statusBarBrightness: context.isDarkMode() ? Brightness.dark : (widget.ios ?? Brightness.light),
             ),
-            leading: appBar?.leading,
-            automaticallyImplyLeading: appBar?.automaticallyImplyLeading ?? true,
-            title: appBar?.title,
-            actions: appBar?.actions,
-            flexibleSpace: appBar?.flexibleSpace,
-            bottom: appBar?.bottom,
-            elevation: appBar?.elevation,
-            scrolledUnderElevation: appBar?.scrolledUnderElevation,
-            notificationPredicate: appBar?.notificationPredicate ?? defaultScrollNotificationPredicate,
-            shadowColor: appBar?.shadowColor,
-            surfaceTintColor: appBar?.surfaceTintColor,
-            shape: appBar?.shape,
-            backgroundColor: appBar?.backgroundColor,
-            foregroundColor: appBar?.foregroundColor,
-            iconTheme: appBar?.iconTheme,
-            actionsIconTheme: appBar?.actionsIconTheme,
-            primary: appBar?.primary ?? true,
-            centerTitle: appBar?.centerTitle,
-            excludeHeaderSemantics: appBar?.excludeHeaderSemantics ?? false,
-            titleSpacing: appBar?.titleSpacing,
-            toolbarOpacity: appBar?.toolbarOpacity ?? 1.0,
-            bottomOpacity: appBar?.bottomOpacity ?? 1.0,
-            toolbarHeight: appBar?.toolbarHeight,
-            leadingWidth: appBar?.leadingWidth,
-            toolbarTextStyle: appBar?.toolbarTextStyle,
-            titleTextStyle: appBar?.titleTextStyle,
-            forceMaterialTransparency: appBar?.forceMaterialTransparency ?? false,
-            clipBehavior: appBar?.clipBehavior
+            leading: widget.appBar?.leading,
+            automaticallyImplyLeading: widget.appBar?.automaticallyImplyLeading ?? true,
+            title: widget.appBar?.title,
+            actions: widget.appBar?.actions,
+            flexibleSpace: widget.appBar?.flexibleSpace,
+            bottom: widget.appBar?.bottom,
+            elevation: widget.appBar?.elevation,
+            scrolledUnderElevation: widget.appBar?.scrolledUnderElevation,
+            notificationPredicate: widget.appBar?.notificationPredicate ?? defaultScrollNotificationPredicate,
+            shadowColor: widget.appBar?.shadowColor,
+            surfaceTintColor: widget.appBar?.surfaceTintColor,
+            shape: widget.appBar?.shape,
+            backgroundColor: widget.appBar?.backgroundColor,
+            foregroundColor: widget.appBar?.foregroundColor,
+            iconTheme: widget.appBar?.iconTheme,
+            actionsIconTheme: widget.appBar?.actionsIconTheme,
+            primary: widget.appBar?.primary ?? true,
+            centerTitle: widget.appBar?.centerTitle,
+            excludeHeaderSemantics: widget.appBar?.excludeHeaderSemantics ?? false,
+            titleSpacing: widget.appBar?.titleSpacing,
+            toolbarOpacity: widget.appBar?.toolbarOpacity ?? 1.0,
+            bottomOpacity: widget.appBar?.bottomOpacity ?? 1.0,
+            toolbarHeight: widget.appBar?.toolbarHeight,
+            leadingWidth: widget.appBar?.leadingWidth,
+            toolbarTextStyle: widget.appBar?.toolbarTextStyle,
+            titleTextStyle: widget.appBar?.titleTextStyle,
+            forceMaterialTransparency: widget.appBar?.forceMaterialTransparency ?? false,
+            clipBehavior: widget.appBar?.clipBehavior
           ),
-          body: body,
-          floatingActionButton: floatingActionButton,
-          floatingActionButtonLocation: floatingActionButtonLocation,
-          floatingActionButtonAnimator: floatingActionButtonAnimator,
-          persistentFooterButtons: persistentFooterButtons,
-          persistentFooterAlignment: persistentFooterAlignment,
-          drawer: drawer,
-          onDrawerChanged: onDrawerChanged,
-          endDrawer: endDrawer,
-          onEndDrawerChanged: onEndDrawerChanged,
-          bottomNavigationBar: bottomNavigationBar,
-          bottomSheet: bottomSheet,
-          backgroundColor: backgroundColor,
-          resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-          primary: primary,
-          drawerDragStartBehavior: drawerDragStartBehavior,
-          extendBody: extendBody,
-          extendBodyBehindAppBar: extendBodyBehindAppBar,
-          drawerScrimColor: drawerScrimColor,
-          drawerEdgeDragWidth: drawerEdgeDragWidth,
-          drawerEnableOpenDragGesture: drawerEnableOpenDragGesture,
-          endDrawerEnableOpenDragGesture: endDrawerEnableOpenDragGesture,
-          restorationId: restorationId,
+          body: widget.body,
+          floatingActionButton: widget.floatingActionButton,
+          floatingActionButtonLocation: widget.floatingActionButtonLocation,
+          floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
+          persistentFooterButtons: widget.persistentFooterButtons,
+          persistentFooterAlignment: widget.persistentFooterAlignment,
+          drawer: widget.drawer,
+          onDrawerChanged: widget.onDrawerChanged,
+          endDrawer: widget.endDrawer,
+          onEndDrawerChanged: widget.onEndDrawerChanged,
+          bottomNavigationBar: widget.bottomNavigationBar,
+          bottomSheet: widget.bottomSheet,
+          backgroundColor: widget.backgroundColor,
+          resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
+          primary: widget.primary,
+          drawerDragStartBehavior: widget.drawerDragStartBehavior,
+          extendBody: widget.extendBody,
+          extendBodyBehindAppBar: widget.extendBodyBehindAppBar,
+          drawerScrimColor: widget.drawerScrimColor,
+          drawerEdgeDragWidth: widget.drawerEdgeDragWidth,
+          drawerEnableOpenDragGesture: widget.drawerEnableOpenDragGesture,
+          endDrawerEnableOpenDragGesture: widget.endDrawerEnableOpenDragGesture,
+          restorationId: widget.restorationId,
         ),
       );
     }
@@ -137,33 +151,34 @@ class CommonScaffold extends StatelessWidget {
       child: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
-          statusBarIconBrightness: context.isDarkMode() ? Brightness.light : (android ?? Brightness.dark),
-          statusBarBrightness: context.isDarkMode() ? Brightness.dark : (ios ?? Brightness.light),
+          statusBarIconBrightness: context.isDarkMode() ? Brightness.light : (widget.android ?? Brightness.dark),
+          statusBarBrightness: context.isDarkMode() ? Brightness.dark : (widget.ios ?? Brightness.light),
         ),
         child: Scaffold(
-          body: body,
-          floatingActionButton: floatingActionButton,
-          floatingActionButtonLocation: floatingActionButtonLocation,
-          floatingActionButtonAnimator: floatingActionButtonAnimator,
-          persistentFooterButtons: persistentFooterButtons,
-          persistentFooterAlignment: persistentFooterAlignment,
-          drawer: drawer,
-          onDrawerChanged: onDrawerChanged,
-          endDrawer: endDrawer,
-          onEndDrawerChanged: onEndDrawerChanged,
-          bottomNavigationBar: bottomNavigationBar,
-          bottomSheet: bottomSheet,
-          backgroundColor: backgroundColor,
-          resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-          primary: primary,
-          drawerDragStartBehavior: drawerDragStartBehavior,
-          extendBody: extendBody,
-          extendBodyBehindAppBar: extendBodyBehindAppBar,
-          drawerScrimColor: drawerScrimColor,
-          drawerEdgeDragWidth: drawerEdgeDragWidth,
-          drawerEnableOpenDragGesture: drawerEnableOpenDragGesture,
-          endDrawerEnableOpenDragGesture: endDrawerEnableOpenDragGesture,
-          restorationId: restorationId,
+          key: _scaffoldKey,
+          body: widget.body,
+          floatingActionButton: widget.floatingActionButton,
+          floatingActionButtonLocation: widget.floatingActionButtonLocation,
+          floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
+          persistentFooterButtons: widget.persistentFooterButtons,
+          persistentFooterAlignment: widget.persistentFooterAlignment,
+          drawer: widget.drawer,
+          onDrawerChanged: widget.onDrawerChanged,
+          endDrawer: widget.endDrawer,
+          onEndDrawerChanged: widget.onEndDrawerChanged,
+          bottomNavigationBar: widget.bottomNavigationBar,
+          bottomSheet: widget.bottomSheet,
+          backgroundColor: widget.backgroundColor,
+          resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
+          primary: widget.primary,
+          drawerDragStartBehavior: widget.drawerDragStartBehavior,
+          extendBody: widget.extendBody,
+          extendBodyBehindAppBar: widget.extendBodyBehindAppBar,
+          drawerScrimColor: widget.drawerScrimColor,
+          drawerEdgeDragWidth: widget.drawerEdgeDragWidth,
+          drawerEnableOpenDragGesture: widget.drawerEnableOpenDragGesture,
+          endDrawerEnableOpenDragGesture:widget.endDrawerEnableOpenDragGesture,
+          restorationId: widget.restorationId,
         ),
       ),
     );

@@ -5,11 +5,12 @@ import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 
 import '../../../../core/common_widgets/common_scaffold.dart';
-import '../../../../core/global/dark_mode_bloc.dart';
 import '../../../../core/router/app_routes.dart';
 import '../../../../core/styles/custom_colors.dart';
 import '../../../../core/styles/dimension.dart';
 import '../../../dashboard/bloc/bottom_nav_bloc.dart';
+import '../../../dashboard/bloc/dashboard_bloc.dart';
+import '../../../dashboard/bloc/dashboard_event.dart';
 import '_components/home_app_bar.dart';
 import '_components/sections/project_section.dart';
 import '_components/sections/today_task_section.dart';
@@ -49,7 +50,7 @@ class _HomeContentState extends State<HomeContent> {
 
     return CommonScaffold(
       appBar: HomeAppBar(
-        onTapSideMenu: () => context.read<DarkModeBloc>().toggleDarkMode(),
+        onTapSideMenu: () => context.read<DashboardBloc>().add(OpenSideMenuEvent()),
       ),
       body: SingleChildScrollView(
         controller: _scrollController,
