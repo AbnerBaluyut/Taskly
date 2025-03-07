@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
+import 'package:taskly/core/extensions/int_extension.dart';
 import '../../../core/common_widgets/common_scaffold.dart';
 import '../../calendar/screens/calendar_content.dart';
 import '../../chat/screens/chat_content.dart';
@@ -41,15 +42,26 @@ class _DashboardPageState  extends State<DashboardPage> with SingleTickerProvide
       ),
       bottomNavigationBar: DashboardBottomNavBar(
         tabController: _tabController,
+        onTap: (_) => setState(() {}),
       ),
       floatingActionButtonLocation: ExpandableFab.location,
-      floatingActionButton: DashboardFab(
-        onTapAddProject: () {
-
-        },
-        onTapAddTask: () {
+      floatingActionButton: AnimatedSlide(
+        duration: 500.milliseconds(),
+        curve: Curves.easeInOut,
+        offset: (_tabController?.index == 0) ? Offset.zero : Offset(0, 2),
+        child: AnimatedOpacity(
+          duration: 500.milliseconds(),
+          opacity: (_tabController?.index == 0) ? 1 : 0,
+          child: DashboardFab(
+            key: UniqueKey(),
+            onTapAddProject: () {
           
-        },
+            },
+            onTapAddTask: () {
+              
+            },
+          ),
+        ),
       ),
     );
   }
