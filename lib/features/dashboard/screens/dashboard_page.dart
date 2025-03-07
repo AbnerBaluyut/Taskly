@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:taskly/core/extensions/int_extension.dart';
 import '../../../core/common_widgets/common_scaffold.dart';
@@ -6,7 +9,10 @@ import '../../calendar/screens/calendar_content.dart';
 import '../../chat/screens/chat_content.dart';
 import '../../home/screens/home/home_content.dart';
 import '../../profile/screens/profile_content.dart';
+import '../bloc/dashboard_bloc.dart';
+import '../bloc/dashboard_state.dart';
 import '_components/dashboard_bottom_nav_bar.dart';
+import '_components/dashboard_drawer.dart';
 import '_components/dashboard_fab.dart';
 
 class DashboardPage  extends StatefulWidget {
@@ -21,45 +27,64 @@ class _DashboardPageState  extends State<DashboardPage> with SingleTickerProvide
 
   TabController? _tabController;
 
+  final _scaffoldKey = GlobalKey<CommonScaffoldState>();
+
   @override
   void initState() {
     _tabController = TabController(vsync: this, length: 4);
     super.initState();
   }
 
+  void _toggleSideMenu(bool value) {
+    if (value) {
+      _scaffoldKey.currentState?.openDrawer();
+    } else {
+      _scaffoldKey.currentState?.closeDrawer();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return CommonScaffold(
-      body: TabBarView(
-        controller: _tabController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          HomeContent(),
-          CalendarContent(),
-          ChatContent(),
-          ProfileContent()
-        ]  
-      ),
-      bottomNavigationBar: DashboardBottomNavBar(
-        tabController: _tabController,
-        onTap: (_) => setState(() {}),
-      ),
-      floatingActionButtonLocation: ExpandableFab.location,
-      floatingActionButton: AnimatedSlide(
-        duration: 500.milliseconds(),
-        curve: Curves.easeInOut,
-        offset: (_tabController?.index == 0) ? Offset.zero : Offset(0, 2),
-        child: AnimatedOpacity(
+    return BlocListener<DashboardBloc, DashboardState>(
+      listener: (context, state) {
+        if (state is SideMenuState) {
+          _toggleSideMenu(state.isOpenSideMenu);
+        }
+      },
+      child: CommonScaffold(
+        key: _scaffoldKey,
+        body: TabBarView(
+          controller: _tabController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: [
+            HomeContent(),
+            CalendarContent(),
+            ChatContent(),
+            ProfileContent()
+          ]  
+        ),
+        drawer: DashboardDrawer(),
+        bottomNavigationBar: DashboardBottomNavBar(
+          tabController: _tabController,
+          onTap: (_) => setState(() {}),
+        ),
+        floatingActionButtonLocation: ExpandableFab.location,
+        floatingActionButton: AnimatedSlide(
           duration: 500.milliseconds(),
-          opacity: (_tabController?.index == 0) ? 1 : 0,
-          child: DashboardFab(
-            key: UniqueKey(),
-            onTapAddProject: () {
-          
-            },
-            onTapAddTask: () {
-              
-            },
+          curve: Curves.easeInOut,
+          offset: (_tabController?.index == 0) ? Offset.zero : Offset(0, 2),
+          child: AnimatedOpacity(
+            duration: 500.milliseconds(),
+            opacity: (_tabController?.index == 0) ? 1 : 0,
+            child: DashboardFab(
+              key: UniqueKey(),
+              onTapAddProject: () {
+                log("ADD PROJECT");
+              },
+              onTapAddTask: () {
+                log("ADD TASK");
+              },
+            ),
           ),
         ),
       ),
