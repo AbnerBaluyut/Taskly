@@ -9,7 +9,9 @@ import '../../../../../../core/styles/dimension.dart';
 
 class ItemProject extends StatelessWidget {
 
-  const ItemProject({super.key});
+  const ItemProject({super.key, required this.tagColor});
+
+  final Color? tagColor;
 
   @override
   Widget build(BuildContext context) {
@@ -23,19 +25,20 @@ class ItemProject extends StatelessWidget {
     return Card(
       elevation: 6.0,
       margin: EdgeInsets.zero,
-      color: Colors.white,
-      shadowColor: Colors.black54,
+      color: context.isDarkMode() ? CustomColors.gray2 :Colors.white,
+      shadowColor: context.isDarkMode() ? Colors.black87 :Colors.black54,
       child: CommonElevatedButton(
         onButtonPressed: () {},
         padding: EdgeInsets.zero,
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         shadowColor: Colors.transparent,
+        overlayColor: tagColor ?? Colors.transparent,
         custom: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.0),
             gradient: LinearGradient(
-              colors: [Colors.red, Colors.transparent],
+              colors: [tagColor ?? Colors.transparent, Colors.transparent],
               stops: [0.03, 0.03],
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
@@ -161,7 +164,7 @@ class ItemProject extends StatelessWidget {
                                     (membersLeft > 100) ? "+99" : "+$membersLeft",
                                     style: TextStyle(
                                       fontSize: 15.0,
-                                      color: Colors.blue,
+                                      color: tagColor ?? Colors.transparent,
                                       fontWeight: FontWeight.w600
                                     ),
                                   ),
@@ -200,7 +203,7 @@ class ItemProject extends StatelessWidget {
                             width: 20,
                             child: CircularProgressIndicator(
                               value: 0.50,
-                              color: Colors.blue,
+                              color: tagColor ?? Colors.transparent,
                               backgroundColor: Colors.grey.shade200,
                             ),
                           ),
