@@ -6,7 +6,7 @@ class Assets {
   static const String onBoarding1 = "assets/png/on_boarding_1.png";
   static const String onBoarding2 = "assets/png/on_boarding_2.png";
   static const String onBoarding3 = "assets/png/on_boarding_3.png";
-  static const String camera = "assets/png/camera.png";
+  static const String camera = "assets/png/ic_camera.png";
   static const String menu = "assets/png/menu.png";
   
   static const String unselectedCalendar = "assets/png/calendar.png";
@@ -20,6 +20,13 @@ class Assets {
 
   static const String unselectedUser = "assets/png/user.png";
   static const String selectedUser = "assets/png/user_selected.png";
+
+  static const String icEdit = "assets/png/ic_edit.png";
+  static const String icLock = "assets/png/ic_lock.png";
+  static const String icSupport = "assets/png/ic_support.png";
+  static const String icDocument = "assets/png/ic_document.png";
+  static const String icSettings = "assets/png/ic_settings.png";
+  static const String icLogout = "assets/png/ic_exit.png";
 
   // GIFs
   static const String welcomeGif = "assets/gif/welcome.gif";
