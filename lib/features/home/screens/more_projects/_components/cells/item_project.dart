@@ -30,7 +30,7 @@ class ItemProject extends StatelessWidget {
       child: CommonElevatedButton(
         onButtonPressed: () {},
         padding: EdgeInsets.zero,
-        backgroundColor: Colors.transparent,
+        backgroundColor: context.isDarkMode() ? CustomColors.gray2 : Colors.white,
         elevation: 0.0,
         shadowColor: Colors.transparent,
         overlayColor: tagColor ?? Colors.transparent,

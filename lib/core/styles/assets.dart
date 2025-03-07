@@ -21,6 +21,13 @@ class Assets {
   static const String unselectedUser = "assets/png/user.png";
   static const String selectedUser = "assets/png/user_selected.png";
 
+  static const String icEdit = "assets/png/ic_edit.png";
+  static const String icLock = "assets/png/ic_lock.png";
+  static const String icSupport = "assets/png/ic_support.png";
+  static const String icDocument = "assets/png/ic_document.png";
+  static const String icSettings = "assets/png/ic_settings.png";
+  static const String icLogout = "assets/png/ic_exit.png";
+
   // GIFs
   static const String welcomeGif = "assets/gif/welcome.gif";
 
