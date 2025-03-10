@@ -1,10 +1,12 @@
 import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 import 'package:taskly/core/extensions/int_extension.dart';
 
 import '../../../../../../core/common_widgets/common_elevated_button.dart';
+import '../../../../../../core/router/app_routes.dart';
 import '../../../../../../core/styles/custom_colors.dart';
 import '../../../../../../core/styles/dimension.dart';
 
@@ -26,7 +28,7 @@ class ItemProject extends StatelessWidget {
     int membersLeft = (memberItemsLength - minimumMembers);
     
     return CommonElevatedButton(
-      onButtonPressed: () {},
+      onButtonPressed: () => context.push(AppRoutes.projectDetails),
       overlayColor: tagColor,
       backgroundColor: context.isDarkMode() ? CustomColors.gray2 : Colors.white,
       padding: EdgeInsets.zero,
