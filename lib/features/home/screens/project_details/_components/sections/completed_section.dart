@@ -5,8 +5,8 @@ import '../../../../../../core/styles/custom_colors.dart';
 import '../../../../../../core/styles/dimension.dart';
 import '../cells/task_item.dart';
 
-class CompetedSection extends StatelessWidget {
-  const CompetedSection({super.key});
+class CompletedSection extends StatelessWidget {
+  const CompletedSection({super.key});
 
   @override
   Widget build(BuildContext context) {

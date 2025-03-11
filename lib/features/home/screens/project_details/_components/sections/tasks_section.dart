@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'competed_section.dart';
+import 'completed_section.dart';
 import 'in_progress_section.dart';
 import 'todo_section.dart';
 
@@ -22,7 +22,7 @@ class TasksSection extends StatelessWidget {
             children: [
               TodoSection(),
               InProgressSection(),
-              CompetedSection()
+              CompletedSection()
             ],
           ),
         )
