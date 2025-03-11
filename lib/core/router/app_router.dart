@@ -4,6 +4,7 @@ import '../../features/authentication/screens/login/login_page.dart';
 import '../../features/authentication/screens/register/register_page.dart';
 import '../../features/dashboard/screens/dashboard_page.dart';
 import '../../features/home/screens/more_projects/more_projects_page.dart';
+import '../../features/home/screens/project_details/project_details_page.dart';
 import '../../features/on_boarding/screens/on_boarding_page.dart';
 import '../../features/profile/screens/edit_profile/edit_profile_page.dart';
 import '../../features/splash/splash_page.dart';
@@ -61,6 +62,12 @@ class AppRouter {
         path: AppRoutes.editProfile, 
         builder: (context, state) {
           return const EditProfilePage();
+        },
+      ),
+       GoRoute(
+        path: AppRoutes.projectDetails, 
+        builder: (context, state) {
+          return const ProjectDetailsPage();
         },
       ),
     ],

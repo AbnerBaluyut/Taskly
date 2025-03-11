@@ -111,7 +111,7 @@ class ItemTask extends StatelessWidget {
                       children: [
                         Icon(Icons.calendar_month, size: 20.0, color: context.isDarkMode() ? Colors.white60 : Colors.grey.shade600),
                         Text(
-                          '09:00 AM - 01:00 PM', 
+                          '01:00 PM', 
                           style: TextStyle(
                             fontSize: 13.0,
                             fontWeight: FontWeight.w400,

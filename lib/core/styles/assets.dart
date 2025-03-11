@@ -27,6 +27,7 @@ class Assets {
   static const String icDocument = "assets/png/ic_document.png";
   static const String icSettings = "assets/png/ic_settings.png";
   static const String icLogout = "assets/png/ic_exit.png";
+  static const String icCalendar = "assets/png/ic_calendar.png";
 
   // GIFs
   static const String welcomeGif = "assets/gif/welcome.gif";

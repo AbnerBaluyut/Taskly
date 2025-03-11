@@ -1,0 +1,105 @@
+import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:taskly/core/extensions/context_extension.dart';
+import 'package:taskly/core/extensions/double_extension.dart';
+import 'package:taskly/core/extensions/int_extension.dart';
+
+import '../../../../../../core/styles/custom_colors.dart';
+import '../../../../../../core/styles/dimension.dart';
+
+class TeamsSection extends StatelessWidget {
+
+  const TeamsSection({super.key, required this.theme});
+
+  final Color theme;
+
+
+  @override
+  Widget build(BuildContext context) {
+
+    int memberItemsLength = 10;
+    bool isTabletOrIpad = (context.screenWidth() >= 600);
+
+    int itemSize = (isTabletOrIpad) ? 150 : 80; 
+    int minimumMembers = (context.screenWidth() / itemSize).floor();
+    int membersLeft = (memberItemsLength - minimumMembers);
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: Dimension.paddingMedium),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Teams",
+            style: TextStyle(
+              color: CustomColors.gray,
+              fontSize: 18.0,
+              fontWeight: FontWeight.w500
+            ),
+          ),
+          4.height(),
+          SizedBox(
+            height: 60.0,
+            child: RowSuper(
+              innerDistance: -14,
+              children: [
+                ...List.generate((memberItemsLength > minimumMembers) ? (minimumMembers + 1) : memberItemsLength, (index) {
+                  if (index >= minimumMembers) {
+                    return CircleAvatar(
+                    backgroundColor: Colors.grey.shade400,
+                    radius: 24,
+                    child: CircleAvatar(
+                      backgroundColor: theme,
+                      radius: 23,
+                      child: Text(
+                        (membersLeft > 100) ? "+99" : "+$membersLeft",
+                        style: TextStyle(
+                          fontSize: 13.0,
+                          color: context.isDarkMode() ? CustomColors.gray2 : Colors.white,
+                          fontWeight: FontWeight.w600
+                        ),
+                      ),
+                    ),
+                  );
+                  } else {
+                    return CircleAvatar(
+                      backgroundColor: Colors.grey.shade400,
+                      radius: 24,
+                      child: CircleAvatar(
+                        backgroundColor: context.isDarkMode() ? CustomColors.gray2 : Colors.white,
+                        radius: 23,
+                        child: Icon(Icons.person, color: CustomColors.gray2, size: 20.0)
+                      ),
+                    );
+                  }
+                }),
+                // Container(
+                //   width: 46.0,
+                //   height: 46.0,
+                //   decoration: BoxDecoration(
+                //     color: Colors.white,
+                //     shape: BoxShape.circle,
+                //     border: Border.all(color: CustomColors.primaryColor)
+                //   ),
+                //   child: CommonElevatedButton(
+                //     onButtonPressed: () {},
+                //     borderRadius: BorderRadius.circular(28.0),
+                //     overlayColor: CustomColors.primaryColor,
+                //     backgroundColor: Colors.transparent,
+                //     padding: EdgeInsets.zero,
+                //     custom: Icon(
+                //       Icons.add,
+                //       size: 24.0,
+                //       color: CustomColors.primaryColor
+                //     ),
+                //   ),
+                // ),
+              ],
+            ),
+          ),
+          Dimension.spacingMedium.height()
+        ],
+      ),
+    );
+  }
+}
