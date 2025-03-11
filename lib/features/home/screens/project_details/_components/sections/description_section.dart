@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 
-import '../../../../../core/styles/custom_colors.dart';
-import '../../../../../core/styles/dimension.dart';
+import '../../../../../../core/styles/custom_colors.dart';
+import '../../../../../../core/styles/dimension.dart';
 import 'expandable_text.dart';
 
 class DescriptionSection extends StatelessWidget {

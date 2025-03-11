@@ -3,11 +3,11 @@ import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 import 'package:taskly/core/extensions/int_extension.dart';
 
-import '../../../../../core/styles/custom_colors.dart';
-import '../../../../../core/styles/dimension.dart';
+import '../../../../../../core/styles/custom_colors.dart';
+import '../../../../../../core/styles/dimension.dart';
 
-class Header extends StatelessWidget {
-  const Header({super.key});
+class HeaderSection extends StatelessWidget {
+  const HeaderSection({super.key});
 
   @override
   Widget build(BuildContext context) {
