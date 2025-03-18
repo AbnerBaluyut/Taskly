@@ -11,15 +11,21 @@ class MenuSection extends StatelessWidget {
   const MenuSection({
     super.key,
     required this.icon,
+    this.iconColor = CustomColors.primaryColor,
+    this.overlayColor = CustomColors.primaryColor,
     required this.title,
+    required this.tintColor,
     required this.onButtonPressed,
-    this.isLogOut = false
   });
 
-  final String icon; 
+  final String icon;
+  final Color iconColor;
+
   final String title;
+  final Color tintColor;
+  final Color overlayColor;
+
   final VoidCallback onButtonPressed;
-  final bool isLogOut;
 
   @override
   Widget build(BuildContext context) {
@@ -30,29 +36,23 @@ class MenuSection extends StatelessWidget {
       elevation: 0.0,
       borderRadius: BorderRadius.circular(0.0),
       shadowColor: Colors.transparent,
-      overlayColor: CustomColors.primaryColor,
+      overlayColor: overlayColor,
       custom: Row(
         children: [
-          Container(
-            height: 36.0,
-            width: 36.0,
-            decoration: BoxDecoration(
-              color: CustomColors.neutral200,
-              shape: BoxShape.circle
-            ),
+          CircleAvatar(
+            backgroundColor: CustomColors.neutral200,
             child: CommonImage(
               path: icon,
               height: 20.0,
               width: 20.0,
+              color: iconColor,
             ),
           ),
           const SizedBox(width: Dimension.spacingMedium),
           Text(
             title,
             style: TextStyle(
-            color: (isLogOut) 
-              ? Colors.red.shade400 
-              : (context.isDarkMode() ? Colors.white : CustomColors.gray2),
+            color: tintColor,
               fontSize: 14.0,
               fontWeight: FontWeight.w500
             ),
@@ -60,9 +60,7 @@ class MenuSection extends StatelessWidget {
           Spacer(),
           Icon(
             Icons.keyboard_arrow_right_rounded,
-            color: (isLogOut) 
-              ? Colors.red.shade400 
-              : (context.isDarkMode() ? Colors.white : CustomColors.gray2),
+            color: tintColor,
             size: 24.0
           )
         ],

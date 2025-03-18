@@ -5,8 +5,8 @@ import '../../../../../../core/styles/custom_colors.dart';
 import '../../../../../../core/styles/dimension.dart';
 import '../cells/task_item.dart';
 
-class InProgressSection extends StatelessWidget {
-  const InProgressSection({super.key});
+class InProgressContent extends StatelessWidget {
+  const InProgressContent({super.key});
 
   @override
   Widget build(BuildContext context) {

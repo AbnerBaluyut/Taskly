@@ -5,11 +5,12 @@ import '../../../../../../core/styles/custom_colors.dart';
 import '../../../../../../core/styles/dimension.dart';
 import '../cells/task_item.dart';
 
-class CompletedSection extends StatelessWidget {
-  const CompletedSection({super.key});
+class TodoContent extends StatelessWidget {
+  const TodoContent({super.key});
 
   @override
   Widget build(BuildContext context) {
+
     return ListView.separated(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
@@ -17,7 +18,7 @@ class CompletedSection extends StatelessWidget {
         horizontal: Dimension.paddingMedium,
         vertical: Dimension.paddingMedium
       ),
-      itemCount: 5,
+      itemCount: 7,
       itemBuilder: (context, index) {
         return TaskItem(theme: CustomColors.primaryColor);
       },

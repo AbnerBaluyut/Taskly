@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../core/styles/custom_colors.dart';
+import '../styles/custom_colors.dart';
 
-class ExpandableText extends StatefulWidget {
+class CommonExpandableText extends StatefulWidget {
 
-  const ExpandableText({
+  const CommonExpandableText({
     super.key, 
     required this.text
   });
@@ -12,10 +12,10 @@ class ExpandableText extends StatefulWidget {
   final String text;
 
   @override
-  State<ExpandableText> createState() => _ExpandableTextState();
+  State<CommonExpandableText> createState() => _CommonExpandableTextState();
 }
 
-class _ExpandableTextState extends State<ExpandableText> {
+class _CommonExpandableTextState extends State<CommonExpandableText> {
 
   bool isExpanded = false;
 

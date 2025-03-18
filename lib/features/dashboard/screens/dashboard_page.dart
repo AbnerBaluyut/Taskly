@@ -64,6 +64,7 @@ class _DashboardPageState  extends State<DashboardPage> with SingleTickerProvide
           ]  
         ),
         drawer: DashboardDrawer(),
+        drawerEnableOpenDragGesture: _tabController?.index == 0,
         bottomNavigationBar: DashboardBottomNavBar(
           tabController: _tabController,
           onTap: (_) => setState(() {}),

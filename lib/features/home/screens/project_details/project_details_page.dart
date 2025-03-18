@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
+import 'package:taskly/core/extensions/double_extension.dart';
 
 import '../../../../core/styles/custom_colors.dart';
+import '../../../../core/styles/dimension.dart';
+import '_components/tab_contents/completed_content.dart';
 import '_components/sections/description_section.dart';
 import '_components/sections/header_section.dart';
+import '_components/tab_contents/in_progress_content.dart';
+import '_components/tab_contents/todo_content.dart';
 import '_components/tab_bar_header_delegate.dart';
-import '_components/sections/tasks_section.dart';
 import '_components/sections/teams_section.dart';
 
 class ProjectDetailsPage extends StatefulWidget {
@@ -57,10 +61,13 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> with SingleTick
           ),
           SliverToBoxAdapter(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 HeaderSection(),
+                Dimension.spacingMedium.height(),
                 DescriptionSection(),
+                Dimension.spacingMedium.height(),
                 TeamsSection(theme: CustomColors.primaryColor)
               ],
             ),
@@ -70,7 +77,15 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> with SingleTick
             delegate: TabBarHeaderDelegate(tabController: tabController)
           )
         ],
-        body: TasksSection(tabController: tabController),
+        body: TabBarView(
+          controller: tabController,
+          physics: NeverScrollableScrollPhysics(),
+          children: [
+            TodoContent(),
+            InProgressContent(),
+            CompletedContent()
+          ],
+        ),
       ),
     );
   }

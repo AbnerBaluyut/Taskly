@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
-import 'package:taskly/core/extensions/double_extension.dart';
-import 'package:taskly/core/extensions/int_extension.dart';
 
 import '../../../../../../core/styles/custom_colors.dart';
 import '../../../../../../core/styles/dimension.dart';
@@ -13,14 +11,13 @@ class HeaderSection extends StatelessWidget {
   Widget build(BuildContext context) {
 
     var value = 50.0 / 100.0; 
-
     
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: Dimension.paddingMedium),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: Dimension.spacingSmall,
         children: [
-          Dimension.spacingSmall.height(),
           Text(
             "Easelife Mobile App",
             style: TextStyle(
@@ -68,7 +65,6 @@ class HeaderSection extends StatelessWidget {
               )
             ],
           ),
-          4.height(),
           LinearProgressIndicator(
             value: value,
             backgroundColor: CustomColors.lightGray,
@@ -76,7 +72,6 @@ class HeaderSection extends StatelessWidget {
             minHeight: 5.0,
             borderRadius: BorderRadius.circular(Dimension.radiusLarge),
           ),
-          Dimension.spacingMedium.height()
         ],
       ),
     );

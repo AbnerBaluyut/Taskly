@@ -17,10 +17,8 @@ class TeamsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    int memberItemsLength = 10;
-    bool isTabletOrIpad = (context.screenWidth() >= 600);
-
-    int itemSize = (isTabletOrIpad) ? 150 : 80; 
+    int memberItemsLength = 50;
+    int itemSize = 40; 
     int minimumMembers = (context.screenWidth() / itemSize).floor();
     int membersLeft = (memberItemsLength - minimumMembers);
 
@@ -73,27 +71,6 @@ class TeamsSection extends StatelessWidget {
                     );
                   }
                 }),
-                // Container(
-                //   width: 46.0,
-                //   height: 46.0,
-                //   decoration: BoxDecoration(
-                //     color: Colors.white,
-                //     shape: BoxShape.circle,
-                //     border: Border.all(color: CustomColors.primaryColor)
-                //   ),
-                //   child: CommonElevatedButton(
-                //     onButtonPressed: () {},
-                //     borderRadius: BorderRadius.circular(28.0),
-                //     overlayColor: CustomColors.primaryColor,
-                //     backgroundColor: Colors.transparent,
-                //     padding: EdgeInsets.zero,
-                //     custom: Icon(
-                //       Icons.add,
-                //       size: 24.0,
-                //       color: CustomColors.primaryColor
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),

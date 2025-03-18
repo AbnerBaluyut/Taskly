@@ -90,7 +90,7 @@ class ItemTask extends StatelessWidget {
                 ),
                 Dimension.spacingSmall.height(),
                 Text(
-                  "UI Enhancement: Splash Page",
+                  "UI Enhancement: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua consequ ut labore et dolore magna aliqu fugiat nulla pariatur. Excepteur sint",
                   style: TextStyle(
                     fontSize: 15.0,
                     fontWeight: FontWeight.w500,

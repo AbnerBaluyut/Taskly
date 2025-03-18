@@ -14,12 +14,6 @@ class TabBarHeaderDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent)  {
 
-    final List<Widget> tabs = [
-      Tab(text: "To Do"),
-      Tab(text: "In Progress"),
-      Tab(text: "Completed")
-    ];
-
     return Container(
       color: Colors.white,
       padding: EdgeInsets.symmetric(horizontal: Dimension.paddingMedium),
@@ -37,7 +31,11 @@ class TabBarHeaderDelegate extends SliverPersistentHeaderDelegate {
           4.height(),
           TabBar(
             controller: tabController,
-            tabs: tabs,
+            tabs: [
+              Tab(text: "To Do"),
+              Tab(text: "In Progress"),
+              Tab(text: "Completed")
+            ],
             indicatorSize: TabBarIndicatorSize.tab,
             indicatorAnimation: TabIndicatorAnimation.elastic,
             indicator: TabIndicator(),

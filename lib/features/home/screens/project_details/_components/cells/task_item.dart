@@ -25,121 +25,132 @@ class TaskItem extends StatelessWidget {
     
     return CommonElevatedButton(
       onButtonPressed: () {},
-      padding: EdgeInsets.symmetric(
-        horizontal: Dimension.paddingMedium,
-        vertical: Dimension.paddingSmall
-      ),
+      padding: EdgeInsets.all(Dimension.paddingSmall),
       backgroundColor: context.isDarkMode() ? CustomColors.gray2 : Colors.white,
       overlayColor: theme,
       borderSide: BorderSide(color: CustomColors.gray4),
       borderRadius: BorderRadius.circular(8.0),
-      custom: Row(
+      custom: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                spacing: Dimension.spacingSmall,
-                children: [
-                  Text(
-                    "Easelife Mobile App",
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.w400,
-                      color: context.isDarkMode() ? Colors.white : CustomColors.gray
-                    ),
-                  ),
-                  Chip(
-                    label: Text(
-                      "Low",
-                      style: TextStyle(
-                        fontSize: 14.0,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500
-                      ),
-                    ),
-                    side: BorderSide.none,
-                    backgroundColor: Colors.blue.shade900,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100.0)
-                    ),
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    visualDensity: VisualDensity(horizontal: 0.0, vertical: -4),
-                    labelPadding: EdgeInsets.symmetric(
-                      horizontal: Dimension.paddingMedium
-                    ),
-                    padding: EdgeInsets.zero
-                  )
-                ],
-              ),
-              Dimension.spacingSmall.height(),
-              Text(
-                "UI Enhancement: Splash Page",
-                style: TextStyle(
-                  fontSize: 15.0,
-                  fontWeight: FontWeight.w500,
-                  color: context.isDarkMode() ? Colors.white : CustomColors.gray
-                ),
-                maxLines: 5,
-                overflow: TextOverflow.ellipsis,
-              ),
-              Dimension.spacingSmall.height(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                spacing: 4.0,
-                children: [
-                  Icon(Icons.calendar_month, size: 20.0, color: context.isDarkMode() ? Colors.white60 : Colors.grey.shade600),
-                  Text(
-                    'February 16, 2025 - 01:00 PM', 
-                    style: TextStyle(
-                      fontSize: 13.0,
-                      fontWeight: FontWeight.w400,
-                      color: context.isDarkMode() ? Colors.white60 : Colors.grey.shade600
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
-          Spacer(),
-          RowSuper(
-            innerDistance: -14,
-            invert: true,
-            children: [
-              ...List.generate((memberItemsLength > minimumMembers) ? (minimumMembers + 1) : memberItemsLength, (index) {
-                    
-                if (index >= minimumMembers) {
-                  return CircleAvatar(
-                    backgroundColor: Colors.grey.shade400,
-                    radius: 16,
-                    child: CircleAvatar(
-                      backgroundColor: theme,
-                      radius: 15,
+              Expanded(
+                flex: 2,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  spacing: Dimension.spacingSmall,
+                  children: [
+                    Flexible(
                       child: Text(
-                        (membersLeft > 100) ? "+99" : "+$membersLeft",
+                        "Easelife Mobile App",
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          fontSize: 13.0,
-                          color: context.isDarkMode() ? CustomColors.gray2 : Colors.white,
-                          fontWeight: FontWeight.w600
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w400,
+                          color: context.isDarkMode() ? Colors.white : CustomColors.gray
                         ),
                       ),
                     ),
-                  );
-                } else {
-                  return CircleAvatar(
-                    backgroundColor: Colors.grey.shade400,
-                    radius: 16,
-                    child: CircleAvatar(
-                      backgroundColor: context.isDarkMode() ? CustomColors.gray2 : Colors.white,
-                      radius: 15,
-                      child: Icon(Icons.person, color: theme, size: 20.0)
+                    Chip(
+                      label: Text(
+                        "Low",
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500
+                        ),
+                      ),
+                      side: BorderSide.none,
+                      backgroundColor: Colors.blue.shade900,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100.0)
+                      ),
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      visualDensity: VisualDensity(horizontal: 0.0, vertical: -4),
+                      labelPadding: EdgeInsets.symmetric(
+                        horizontal: Dimension.paddingMedium
+                      ),
+                      padding: EdgeInsets.zero
                     ),
-                  );
-                }
-              }).reversed,
+                  ],
+                ),
+              ),
+              Dimension.spacingMedium.width(),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: RowSuper(
+                    innerDistance: -14,
+                    invert: true,
+                    children: [
+                      ...List.generate((memberItemsLength > minimumMembers) ? (minimumMembers + 1) : memberItemsLength, (index) {      
+                        if (index >= minimumMembers) {
+                          return CircleAvatar(
+                            backgroundColor: Colors.grey.shade400,
+                            radius: 16,
+                            child: CircleAvatar(
+                              backgroundColor: theme,
+                              radius: 15,
+                              child: Text(
+                                (membersLeft > 100) ? "+99" : "+$membersLeft",
+                                style: TextStyle(
+                                  fontSize: 13.0,
+                                  color: context.isDarkMode() ? CustomColors.gray2 : Colors.white,
+                                  fontWeight: FontWeight.w600
+                                ),
+                              ),
+                            ),
+                          );
+                        } else {
+                          return CircleAvatar(
+                            backgroundColor: Colors.grey.shade400,
+                            radius: 16,
+                            child: CircleAvatar(
+                              backgroundColor: context.isDarkMode() ? CustomColors.gray2 : Colors.white,
+                              radius: 15,
+                              child: Icon(Icons.person, color: theme, size: 20.0)
+                            ),
+                          );
+                        }
+                      }).reversed,
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+          Dimension.spacingSmall.height(),
+          Text(
+            "UI Enhancement: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua consequ ut labore et dolore magna aliqu fugiat nulla pariatur. Excepteur sint",
+            style: TextStyle(
+              fontSize: 15.0,
+              fontWeight: FontWeight.w500,
+              color: context.isDarkMode() ? Colors.white : CustomColors.gray
+            ),
+            maxLines: 5,
+            overflow: TextOverflow.ellipsis,
+          ),
+          Dimension.spacingSmall.height(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: 4.0,
+            children: [
+              Icon(Icons.calendar_month, size: 20.0, color: context.isDarkMode() ? Colors.white60 : Colors.grey.shade600),
+              Text(
+                'February 16, 2025 - 01:00 PM', 
+                style: TextStyle(
+                  fontSize: 13.0,
+                  fontWeight: FontWeight.w400,
+                  color: context.isDarkMode() ? Colors.white60 : Colors.grey.shade600
+                ),
+              )
             ],
           )
         ],

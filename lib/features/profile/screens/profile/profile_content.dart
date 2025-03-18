@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:taskly/core/extensions/context_extension.dart';
+import 'package:taskly/core/extensions/double_extension.dart';
 
 import '../../../../core/common_widgets/common_scaffold.dart';
 import '../../../../core/router/app_routes.dart';
 import '../../../../core/styles/assets.dart';
 import '../../../../core/styles/custom_colors.dart';
 import '../../../../core/styles/dimension.dart';
-import '../../../dashboard/bloc/bottom_nav_bloc.dart';
 import '_components/menu_section.dart';
-import '_components/profile_header.dart';
+import '_components/info_section.dart';
 
 class ProfileContent extends StatefulWidget {
   const ProfileContent({super.key});
@@ -20,37 +20,27 @@ class ProfileContent extends StatefulWidget {
 
 class _ProfileContentState extends State<ProfileContent> {
 
-  final _scrollController = ScrollController();
-  final _scrollThreshold = 100.0;
-
-  @override
-  void initState() {
-    _scrollController.addListener(_scrollListener);
-    super.initState();
-  }
-
-  void _scrollListener() {
-
-    final currentScroll = _scrollController.offset;
-    final isVisible = context.read<BottomNavBloc>().state;
-
-    if (currentScroll >= _scrollThreshold && isVisible) {
-      context.read<BottomNavBloc>().setIsHideBottomNav(false);
-    } else if (currentScroll < _scrollThreshold && !isVisible) {
-      context.read<BottomNavBloc>().setIsHideBottomNav(true);
-    }
-  }
-
-
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
+      appBar: AppBar(
+        title: Text(
+          "Profile",
+          style: TextStyle(
+            color: context.isDarkMode() ? Colors.white : CustomColors.gray2,
+            fontSize: 25.0,
+            fontWeight: FontWeight.w600
+          ),
+        ),
+        surfaceTintColor: Colors.transparent,
+        centerTitle: false,
+      ),
       body: SingleChildScrollView(
-        controller: _scrollController,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ProfileHeader(),
+            InfoSection(),
+            Dimension.spacingMedium.height(),
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: Dimension.spacingMedium,
@@ -68,34 +58,42 @@ class _ProfileContentState extends State<ProfileContent> {
             MenuSection(
               icon: Assets.icEdit, 
               title: "Edit Profile", 
+              tintColor: (context.isDarkMode() ? Colors.white : CustomColors.gray2),
               onButtonPressed: () => context.push(AppRoutes.editProfile),
             ),
             MenuSection(
               icon: Assets.icLock, 
               title: "Change Password", 
+              tintColor: (context.isDarkMode() ? Colors.white : CustomColors.gray2),
               onButtonPressed: () {}
             ),
             MenuSection(
               icon: Assets.icSupport, 
               title: "Help & Support", 
+              tintColor: (context.isDarkMode() ? Colors.white : CustomColors.gray2),
               onButtonPressed: () {}
             ),
             MenuSection(
               icon: Assets.icDocument, 
               title: "Terms & Conditions", 
+              tintColor: (context.isDarkMode() ? Colors.white : CustomColors.gray2),
               onButtonPressed: () {}
             ),
             MenuSection(
               icon: Assets.icSettings, 
               title: "Settings", 
+              tintColor: (context.isDarkMode() ? Colors.white : CustomColors.gray2),
               onButtonPressed: () {}
             ),
             MenuSection(
-              icon: Assets.icLogout, 
+              icon: Assets.icLogout,
               title: "Log out", 
+              iconColor: Colors.red,
+              tintColor: Colors.red,
+              overlayColor: Colors.red,
               onButtonPressed: () => context.go(AppRoutes.login),
-              isLogOut: true
-            )
+            ),
+            Dimension.spacingLarge.height()
           ],
         ),
       ),
