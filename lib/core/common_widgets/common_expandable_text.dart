@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskly/core/extensions/context_extension.dart';
 
 import '../styles/custom_colors.dart';
 
@@ -29,7 +30,7 @@ class _CommonExpandableTextState extends State<CommonExpandableText> {
           maxLines: isExpanded ? 100 : 2,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-            color: CustomColors.gray3,
+            color: context.isDarkMode() ? Colors.white : CustomColors.gray3,
             fontSize: 14.0,
             fontWeight: FontWeight.w400
           ),

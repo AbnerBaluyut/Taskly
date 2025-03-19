@@ -16,12 +16,13 @@ class HeaderSection extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: Dimension.paddingMedium),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         spacing: Dimension.spacingSmall,
         children: [
           Text(
             "Easelife Mobile App",
             style: TextStyle(
-              color: CustomColors.gray2,
+              color: context.isDarkMode() ? Colors.white : CustomColors.gray2,
               fontSize: 24.0,
               fontWeight: FontWeight.w600
             ),
@@ -39,7 +40,7 @@ class HeaderSection extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14.0,
                   fontWeight: FontWeight.w400,
-                  color: context.isDarkMode() ? Colors.white60 : Colors.grey.shade600
+                  color: context.isDarkMode() ? Colors.white : Colors.grey.shade600 
                 ),
               )
             ],
@@ -50,7 +51,7 @@ class HeaderSection extends StatelessWidget {
               Text(
                 "In Progress",
                 style: TextStyle(
-                  color: CustomColors.gray,
+                  color: context.isDarkMode() ? Colors.white : CustomColors.gray,
                   fontSize: 14.0,
                   fontWeight: FontWeight.w500
                 ),
@@ -58,7 +59,7 @@ class HeaderSection extends StatelessWidget {
               Text(
                 "50%",
                 style: TextStyle(
-                  color: CustomColors.gray,
+                  color: context.isDarkMode() ? Colors.white : CustomColors.gray,
                   fontSize: 16.0,
                   fontWeight: FontWeight.w500
                 ),

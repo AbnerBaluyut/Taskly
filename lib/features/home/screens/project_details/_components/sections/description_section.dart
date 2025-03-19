@@ -1,4 +1,5 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:taskly/core/extensions/context_extension.dart';
 
 import '../../../../../../core/styles/custom_colors.dart';
 import '../../../../../../core/styles/dimension.dart';
@@ -17,7 +18,7 @@ class DescriptionSection extends StatelessWidget {
           Text(
             "Description",
             style: TextStyle(
-              color: CustomColors.gray,
+              color: context.isDarkMode() ? Colors.white : CustomColors.gray,
               fontSize: 18.0,
               fontWeight: FontWeight.w500
             ),

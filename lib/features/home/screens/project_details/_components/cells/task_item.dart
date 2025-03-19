@@ -95,13 +95,13 @@ class TaskItem extends StatelessWidget {
                             backgroundColor: Colors.grey.shade400,
                             radius: 16,
                             child: CircleAvatar(
-                              backgroundColor: theme,
+                              backgroundColor: Colors.white,
                               radius: 15,
                               child: Text(
                                 (membersLeft > 100) ? "+99" : "+$membersLeft",
                                 style: TextStyle(
                                   fontSize: 13.0,
-                                  color: context.isDarkMode() ? CustomColors.gray2 : Colors.white,
+                                  color: theme,
                                   fontWeight: FontWeight.w600
                                 ),
                               ),
@@ -112,9 +112,9 @@ class TaskItem extends StatelessWidget {
                             backgroundColor: Colors.grey.shade400,
                             radius: 16,
                             child: CircleAvatar(
-                              backgroundColor: context.isDarkMode() ? CustomColors.gray2 : Colors.white,
+                              backgroundColor: theme,
                               radius: 15,
-                              child: Icon(Icons.person, color: theme, size: 20.0)
+                              child: Icon(Icons.person, color: Colors.white, size: 20.0)
                             ),
                           );
                         }

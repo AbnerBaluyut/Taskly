@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/int_extension.dart';
 
 import '../../../../../core/styles/custom_colors.dart';
@@ -15,7 +16,7 @@ class TabBarHeaderDelegate extends SliverPersistentHeaderDelegate {
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent)  {
 
     return Container(
-      color: Colors.white,
+      color: context.isDarkMode() ? CustomColors.gray2 : Colors.white,
       padding: EdgeInsets.symmetric(horizontal: Dimension.paddingMedium),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,7 +24,7 @@ class TabBarHeaderDelegate extends SliverPersistentHeaderDelegate {
           Text(
             "Tasks",
             style: TextStyle(
-              color: CustomColors.gray,
+              color: context.isDarkMode() ? Colors.white : CustomColors.gray ,
               fontSize: 18.0,
               fontWeight: FontWeight.w500
             ),
@@ -43,6 +44,9 @@ class TabBarHeaderDelegate extends SliverPersistentHeaderDelegate {
             isScrollable: true,
             physics: NeverScrollableScrollPhysics(),
             tabAlignment: TabAlignment.start,
+            labelPadding: EdgeInsets.symmetric(
+              horizontal: Dimension.paddingMedium
+            ),
             onTap: (value) {},
             dividerColor: CustomColors.lightGray3,
             labelStyle: TextStyle(
@@ -51,7 +55,7 @@ class TabBarHeaderDelegate extends SliverPersistentHeaderDelegate {
               fontWeight: FontWeight.w600
             ),
             unselectedLabelStyle: TextStyle(
-              color: CustomColors.gray2,
+              color: context.isDarkMode() ? Colors.white : CustomColors.gray2,
               fontSize: 16.0,
               fontWeight: FontWeight.w400
             ),
@@ -62,10 +66,10 @@ class TabBarHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 84;
+  double get maxExtent => 80;
 
   @override
-  double get minExtent => 84;
+  double get minExtent => 80;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) => true;

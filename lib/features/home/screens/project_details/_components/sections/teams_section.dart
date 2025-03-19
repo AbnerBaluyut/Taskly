@@ -17,7 +17,7 @@ class TeamsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    int memberItemsLength = 50;
+    int memberItemsLength = 20;
     int itemSize = 40; 
     int minimumMembers = (context.screenWidth() / itemSize).floor();
     int membersLeft = (memberItemsLength - minimumMembers);
@@ -30,7 +30,7 @@ class TeamsSection extends StatelessWidget {
           Text(
             "Teams",
             style: TextStyle(
-              color: CustomColors.gray,
+              color: context.isDarkMode() ? Colors.white :CustomColors.gray,
               fontSize: 18.0,
               fontWeight: FontWeight.w500
             ),
@@ -47,13 +47,13 @@ class TeamsSection extends StatelessWidget {
                     backgroundColor: Colors.grey.shade400,
                     radius: 24,
                     child: CircleAvatar(
-                      backgroundColor: theme,
+                      backgroundColor: Colors.white,
                       radius: 23,
                       child: Text(
                         (membersLeft > 100) ? "+99" : "+$membersLeft",
                         style: TextStyle(
                           fontSize: 13.0,
-                          color: context.isDarkMode() ? CustomColors.gray2 : Colors.white,
+                          color: theme,
                           fontWeight: FontWeight.w600
                         ),
                       ),
@@ -64,9 +64,9 @@ class TeamsSection extends StatelessWidget {
                       backgroundColor: Colors.grey.shade400,
                       radius: 24,
                       child: CircleAvatar(
-                        backgroundColor: context.isDarkMode() ? CustomColors.gray2 : Colors.white,
+                        backgroundColor: theme,
                         radius: 23,
-                        child: Icon(Icons.person, color: CustomColors.gray2, size: 20.0)
+                        child: Icon(Icons.person, color: Colors.white, size: 20.0)
                       ),
                     );
                   }
