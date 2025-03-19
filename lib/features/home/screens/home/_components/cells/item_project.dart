@@ -129,6 +129,7 @@ class ItemProject extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: Dimension.spacingSmall,
                     children: [
                       Text('Teams:', style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w400, color: context.isDarkMode() ? Colors.white :CustomColors.gray)),
                       RowSuper(

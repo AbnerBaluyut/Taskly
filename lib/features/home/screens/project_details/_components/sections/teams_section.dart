@@ -18,7 +18,7 @@ class TeamsSection extends StatelessWidget {
   Widget build(BuildContext context) {
 
     int memberItemsLength = 20;
-    int itemSize = 40; 
+    int itemSize = 50; 
     int minimumMembers = (context.screenWidth() / itemSize).floor();
     int membersLeft = (memberItemsLength - minimumMembers);
 

@@ -64,6 +64,7 @@ class CommonElevatedButton extends ElevatedButton {
           side: borderSide
         ),
         padding: padding,
+        disabledBackgroundColor: Colors.grey.shade500,
       )
   );
 

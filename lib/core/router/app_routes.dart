@@ -10,4 +10,5 @@ class AppRoutes {
   static const String editProfile = '/edit_profile';
   static const String projectDetails = '/project_details';
   static const String changePassword = '/change_password';
+  static const String taskDetails = '/task_details';
 }

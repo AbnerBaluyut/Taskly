@@ -57,6 +57,9 @@ dependencies:
   # Fab
   flutter_expandable_fab: ^2.3.0
 
+  # Dropdown
+  dropdown_button2: ^2.3.9
+
 flutter_native_splash:
   android: true
   ios: true
