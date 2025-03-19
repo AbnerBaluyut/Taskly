@@ -65,7 +65,7 @@ class _ProfileContentState extends State<ProfileContent> {
               icon: Assets.icLock, 
               title: "Change Password", 
               tintColor: (context.isDarkMode() ? Colors.white : CustomColors.gray2),
-              onButtonPressed: () {}
+              onButtonPressed: () => context.push(AppRoutes.changePassword)
             ),
             MenuSection(
               icon: Assets.icSupport, 

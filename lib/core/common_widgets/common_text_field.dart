@@ -8,6 +8,7 @@ import '../styles/custom_colors.dart';
 class CommonTextField extends StatefulWidget {
 
   final TextEditingController? controller;
+  final FocusNode? focusNode;
   final String? helperText;
   final String? hintText;
   final TextInputType keyboardType;
@@ -16,6 +17,7 @@ class CommonTextField extends StatefulWidget {
   final Widget? suffixIcon;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
+  final void Function(String)? onFieldSubmitted;
   final int maxLines;
   final Color? fillColor;
   final bool filled;
@@ -35,6 +37,7 @@ class CommonTextField extends StatefulWidget {
     this.helperText,
     this.hintText,
     this.controller,
+    this.focusNode,
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
     this.prefixIcon,
@@ -51,7 +54,8 @@ class CommonTextField extends StatefulWidget {
     this.focusedBorder,
     this.errorBorder,
     this.focusedErrorBorder,
-    this.textInputAction
+    this.textInputAction,
+    this.onFieldSubmitted
   });
 
   @override
@@ -98,6 +102,7 @@ class CommonTextFieldState extends State<CommonTextField> {
           },
           child: TextFormField(
             controller: widget.controller,
+            focusNode: widget.focusNode,
             keyboardType: widget.keyboardType,
             textInputAction: widget.textInputAction ?? TextInputAction.done,
             obscureText: _isPasswordVisible,
@@ -165,6 +170,7 @@ class CommonTextFieldState extends State<CommonTextField> {
             ),
             validator: widget.validator,
             onChanged: widget.onChanged,
+            onFieldSubmitted: widget.onFieldSubmitted,
           ),
         ),
       ],

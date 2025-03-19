@@ -65,7 +65,7 @@ class DashboardDrawer extends StatelessWidget {
                         height: 24.0,
                         width: 24.0,
                       ),
-                      SizedBox(width: Dimension.paddingSmall),
+                      Dimension.paddingSmall.width(),
                       Text(
                         "Upgrade to PRO",
                         style: TextStyle(

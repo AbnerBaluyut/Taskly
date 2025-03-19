@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
+import 'package:taskly/core/extensions/double_extension.dart';
 
 import '../../../../../core/common_widgets/common_image.dart';
 import '../../../../../core/styles/assets.dart';
@@ -13,7 +14,7 @@ class InfoSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(width: Dimension.spacingMedium),
+        Dimension.spacingMedium.width(),
         CommonImage(
           path: Assets.face,
           height: 80.0,
@@ -21,7 +22,7 @@ class InfoSection extends StatelessWidget {
           fit: BoxFit.contain,
           radius: 40.0
         ),
-        const SizedBox(width: Dimension.spacingMedium),
+        Dimension.spacingMedium.width(),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +50,7 @@ class InfoSection extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(width: Dimension.spacingMedium),
+        Dimension.spacingMedium.width()
       ],
     );
   }

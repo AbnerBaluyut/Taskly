@@ -111,7 +111,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               helperText: "Name",
                               hintText: "Ex. Juan Dela Cruz",
                               keyboardType: TextInputType.text,
-                              textInputAction: TextInputAction.next,
+                              textInputAction: TextInputAction.done,
                               validator: (value) {
                                 var getValue = (value ?? "").trim();
                                 if (getValue.isEmpty) {

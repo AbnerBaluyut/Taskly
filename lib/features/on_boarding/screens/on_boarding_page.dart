@@ -35,9 +35,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
-          SizedBox(
-            height: Dimension.spacingSmall,
-          ),
+          Dimension.spacingSmall.height(),
           Expanded(
             child: PageView(
               controller: pageController,

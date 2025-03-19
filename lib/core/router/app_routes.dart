@@ -9,4 +9,5 @@ class AppRoutes {
   static const String moreProjects = '/more_projects';
   static const String editProfile = '/edit_profile';
   static const String projectDetails = '/project_details';
+  static const String changePassword = '/change_password';
 }
