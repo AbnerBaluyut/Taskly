@@ -23,17 +23,18 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
 
   final _formKey = GlobalKey<FormState>();
 
-  final _focusNode = FocusNode();
+  
   final _currentPasswordKey = GlobalKey<CommonTextFieldState>();
-  final _currentPasswordField = TextEditingController();
-
-  final _focusNode2 = FocusNode();
   final _newPasswordKey = GlobalKey<CommonTextFieldState>();
-  final _newPasswordField = TextEditingController();
-
-  final _focusNode3 = FocusNode();
   final _confirmPasswordKey = GlobalKey<CommonTextFieldState>();
+  
+  final _currentPasswordField = TextEditingController();
+  final _newPasswordField = TextEditingController();
   final _confirmPasswordField = TextEditingController();
+
+  final _focusNode = FocusNode();
+  final _focusNode2 = FocusNode();
+  final _focusNode3 = FocusNode();
 
   @override
   Widget build(BuildContext context) {

@@ -24,6 +24,11 @@ class _RegisterContentState extends State<RegisterContent> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController = TextEditingController();
 
+  final _focusNode = FocusNode();
+  final _focusNode2 = FocusNode();
+  final _focusNode3 = FocusNode();
+  final _focusNode4 = FocusNode();
+
   @override
   Widget build(BuildContext context) {
   
@@ -38,6 +43,7 @@ class _RegisterContentState extends State<RegisterContent> {
         children: [
           CommonTextField(
             key: _nameFieldKey,
+            focusNode: _focusNode,
             controller: _nameController,
             helperText: "Name",
             hintText: "Ex. Juan Dela Cruz",
@@ -51,9 +57,13 @@ class _RegisterContentState extends State<RegisterContent> {
               }
               return null;
             },
+            onFieldSubmitted: (_) {
+              _focusNode2.requestFocus();
+            },
           ),
           CommonTextField(
             key: _emailFieldKey,
+            focusNode: _focusNode2,
             controller: _emailController,
             helperText: "Email",
             hintText: "juandelacruz@gmail.com",
@@ -70,9 +80,13 @@ class _RegisterContentState extends State<RegisterContent> {
               }
               return null;
             },
+            onFieldSubmitted: (_) {
+              _focusNode3.requestFocus();
+            },
           ),
           CommonTextField(
             key: _passwordFieldKey,
+            focusNode: _focusNode3,
             controller: _passwordController,
             helperText: "Password",
             hintText: "**********",
@@ -89,9 +103,13 @@ class _RegisterContentState extends State<RegisterContent> {
               }
               return null;
             },
+            onFieldSubmitted: (_) {
+              _focusNode4.requestFocus();
+            },
           ),
           CommonTextField(
             key: _confirmPasswordFieldKey,
+            focusNode: _focusNode4,
             controller: _confirmPasswordController,
             helperText: "Confirm Password",
             hintText: "**********",
