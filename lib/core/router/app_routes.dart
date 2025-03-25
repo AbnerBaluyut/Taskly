@@ -11,4 +11,5 @@ class AppRoutes {
   static const String projectDetails = '/project_details';
   static const String changePassword = '/change_password';
   static const String taskDetails = '/task_details';
+  static const String viewNotifications = '/view_notifications';
 }

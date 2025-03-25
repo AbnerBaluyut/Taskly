@@ -7,7 +7,7 @@ import '../../../../../core/styles/assets.dart';
 
 class HomeAppBar extends AppBar {
 
-  HomeAppBar({super.key, required this.onTapSideMenu}) : super(
+  HomeAppBar({super.key, required this.onTapSideMenu, required this.onTapNotifications}) : super(
     leading: Builder(
       builder: (context) {
         return IconButton(
@@ -55,7 +55,7 @@ class HomeAppBar extends AppBar {
           ],
         ),
         iconSize: 25.0,
-        onPressed: () {},
+        onPressed: onTapNotifications,
       ),
       IconButton(
         style: IconButton.styleFrom(
@@ -80,4 +80,5 @@ class HomeAppBar extends AppBar {
   );
 
   final VoidCallback onTapSideMenu;
+  final VoidCallback onTapNotifications;
 }

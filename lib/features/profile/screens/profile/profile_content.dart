@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 
 import '../../../../core/common_widgets/common_scaffold.dart';
+import '../../../../core/global/dark_mode_bloc.dart';
 import '../../../../core/router/app_routes.dart';
 import '../../../../core/styles/assets.dart';
 import '../../../../core/styles/custom_colors.dart';
@@ -20,6 +22,14 @@ class ProfileContent extends StatefulWidget {
 }
 
 class _ProfileContentState extends State<ProfileContent> {
+
+  void _logOut() {
+    bool isDarkMode = context.read<DarkModeBloc>().state == true;
+    if (isDarkMode) {
+      context.read<DarkModeBloc>().toggleDarkMode();
+    }
+    context.go(AppRoutes.login);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +93,7 @@ class _ProfileContentState extends State<ProfileContent> {
                   iconColor: Colors.red,
                   tintColor: Colors.red,
                   overlayColor: Colors.red,
-                  onButtonPressed: () => context.go(AppRoutes.login),
+                  onButtonPressed: _logOut,
                 ),
                 Dimension.spacingLarge.height()
               ],
