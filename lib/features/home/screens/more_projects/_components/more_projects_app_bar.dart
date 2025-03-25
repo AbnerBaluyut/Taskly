@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
+import '../../../../../core/common_widgets/common_back_button.dart';
 import '../../../../../core/styles/custom_colors.dart';
 
 class MoreProjectsAppBar extends SliverAppBar {
@@ -7,9 +8,9 @@ class MoreProjectsAppBar extends SliverAppBar {
   MoreProjectsAppBar({super.key, required this.onBackPressed}) : super(
     leading: Builder(
       builder: (context) {
-        return IconButton(
-          icon: Icon(Icons.arrow_back, color: context.isDarkMode() ? Colors.white : Colors.black),
-          onPressed: onBackPressed,
+        return CommonBackButton(
+          color: context.isDarkMode() ? Colors.white : Colors.black,
+          onBackPressed: onBackPressed,
         );
       }
     ),

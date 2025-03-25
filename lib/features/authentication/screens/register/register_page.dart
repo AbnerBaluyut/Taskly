@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 import '../../../../core/common_widgets/common_alert_dialog.dart';
+import '../../../../core/common_widgets/common_back_button.dart';
 import '../../../../core/common_widgets/common_scaffold.dart';
 import '../../../../core/styles/custom_colors.dart';
 import '../../../../core/styles/dimension.dart';
@@ -29,9 +30,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
     return CommonScaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => context.pop(false),
+        leading: CommonBackButton(
+          onBackPressed: () => context.pop(false),
         ),
         surfaceTintColor: Colors.transparent,
       ),

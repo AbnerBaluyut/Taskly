@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 
+import '../../../../core/common_widgets/common_back_button.dart';
 import '../../../../core/styles/custom_colors.dart';
 import '../../../../core/styles/dimension.dart';
 import '_components/tab_contents/completed_content.dart';
@@ -43,9 +44,8 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> with SingleTick
       child: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () => context.pop(false),
+            leading: CommonBackButton(
+              onBackPressed: () => context.pop(false),
             ),
             centerTitle: true,
             title: Text(

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 
+import '../../../../core/common_widgets/common_back_button.dart';
 import '../../../../core/common_widgets/common_elevated_button.dart';
 import '../../../../core/common_widgets/common_scaffold.dart';
 import '../../../../core/common_widgets/common_text_field.dart';
@@ -46,9 +47,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
   Widget build(BuildContext context) {
     return CommonScaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => context.pop(false),
+        leading: CommonBackButton(
+          onBackPressed: () => context.pop(false),
         ),
         title: Text(
           "Edit Profile",

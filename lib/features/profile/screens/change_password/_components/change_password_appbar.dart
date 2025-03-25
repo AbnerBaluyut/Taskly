@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
 
+import '../../../../../core/common_widgets/common_back_button.dart';
+
 class ChangePasswordAppBar extends AppBar {
 
   ChangePasswordAppBar({super.key, required this.onBackPressed}) : super(
@@ -19,9 +21,9 @@ class ChangePasswordAppBar extends AppBar {
     centerTitle: false,
     leading: Builder(
       builder: (context) {
-        return IconButton(
-          icon: Icon(Icons.arrow_back, color: context.isDarkMode() ? Colors.white : Colors.black),
-          onPressed: onBackPressed,
+        return CommonBackButton(
+          color: context.isDarkMode() ? Colors.white : Colors.black,
+          onBackPressed: onBackPressed,
         );
       }
     ),

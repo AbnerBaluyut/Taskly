@@ -32,7 +32,10 @@ class MenuSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return CommonElevatedButton(
       onButtonPressed: onButtonPressed,
-      padding: EdgeInsets.all(Dimension.paddingMedium),
+      padding: EdgeInsets.symmetric(
+        horizontal: Dimension.paddingMedium,
+        vertical: Dimension.paddingSmall
+      ),
       backgroundColor: context.isDarkMode() ? CustomColors.gray2 : Colors.white,
       elevation: 0.0,
       borderRadius: BorderRadius.circular(0.0),

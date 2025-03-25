@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/common_widgets/common_back_button.dart';
 import '../../../../../core/styles/custom_colors.dart';
 
 class TaskDetailsAppBar extends SliverAppBar {
 
    TaskDetailsAppBar({super.key, required this.onBackPressed}) : super(
-    leading: IconButton(
-      icon: Icon(Icons.arrow_back, color: Colors.white),
-      onPressed: onBackPressed,
+    leading: CommonBackButton(
+      color: Colors.white,
+      onBackPressed: onBackPressed,
     ),
     title: Text(
       'UI Enhancement: Task Details',

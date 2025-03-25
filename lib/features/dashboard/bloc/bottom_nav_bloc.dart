@@ -4,7 +4,7 @@ class BottomNavBloc extends Cubit<bool> {
 
   BottomNavBloc() : super(true);
 
-  void setIsHideBottomNav(bool value) {
+  void setIsVisibleBottomNav(bool value) {
     emit(value);
   }
 }
