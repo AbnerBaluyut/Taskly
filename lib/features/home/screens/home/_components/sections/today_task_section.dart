@@ -5,7 +5,7 @@ import 'package:taskly/core/extensions/int_extension.dart';
 
 import '../../../../../../core/styles/custom_colors.dart';
 import '../../../../../../core/styles/dimension.dart';
-import '../cells/item_task.dart';
+import '../../../../../../core/common_widgets/common_item_task.dart';
 
 class TodayTaskSection extends StatelessWidget {
   
@@ -63,21 +63,21 @@ class TodayTaskSection extends StatelessWidget {
           itemBuilder: (ctx, index) {
 
             if (index == 0) {
-              return ItemTask(
+              return CommonItemTask(
                 status: "In Progress",
                 statusColor: Colors.red,
                 label: "Low",
                 labelColor: Colors.green.shade900,
               );  
             } else if (index == 1) {
-              return ItemTask(
+              return CommonItemTask(
                 status: "Done",
                 statusColor: Colors.green.shade900,
                 label: "Mid",
                 labelColor: Colors.blue.shade900,
               );
             } else {
-              return ItemTask(
+              return CommonItemTask(
                 status: "To Do",
                 statusColor: Colors.blue.shade900,
                 label: "High",

@@ -4,19 +4,19 @@ import 'package:taskly/core/common_widgets/common_elevated_button.dart';
 import '../../../../../../core/styles/custom_colors.dart';
 import '../../../../../../core/styles/dimension.dart';
 
-class SubtaskItem extends StatefulWidget {
+class ItemSubTask extends StatefulWidget {
 
-  const SubtaskItem({super.key, required this.title, required this.isSelected, required this.onChanged});
+  const ItemSubTask({super.key, required this.title, required this.isSelected, required this.onChanged});
 
   final String title;
   final bool isSelected;
   final void Function(bool) onChanged;
 
   @override
-  State<SubtaskItem> createState() => _SubtaskItemState();
+  State<ItemSubTask> createState() => _ItemSubTaskState();
 }
 
-class _SubtaskItemState extends State<SubtaskItem> {
+class _ItemSubTaskState extends State<ItemSubTask> {
 
 
   @override

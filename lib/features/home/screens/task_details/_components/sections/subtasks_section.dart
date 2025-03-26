@@ -4,7 +4,7 @@ import 'package:taskly/core/extensions/double_extension.dart';
 
 import '../../../../../../core/styles/custom_colors.dart';
 import '../../../../../../core/styles/dimension.dart';
-import '../cells/subtask_item.dart';
+import '../cells/item_subtask.dart';
 
 class SubtasksSection extends StatelessWidget {
 
@@ -34,7 +34,7 @@ class SubtasksSection extends StatelessWidget {
           shrinkWrap: true,
           padding: EdgeInsets.zero,
           itemBuilder: (ctx, index) {
-            return SubtaskItem(
+            return ItemSubTask(
               title: "Add item $index",
               isSelected: substasks[index],
               onChanged: (value) => onChanged(index, value),
