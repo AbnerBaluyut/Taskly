@@ -16,7 +16,8 @@ class CommonImage extends StatelessWidget {
     this.borderColor = Colors.black,
     this.border = 0.0,
     this.errorWidget,
-    this.file
+    this.file,
+    this.padding
   });
 
   final File? file;
@@ -31,6 +32,7 @@ class CommonImage extends StatelessWidget {
   final double border;
   final Color borderColor;
   final Widget? errorWidget;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +41,7 @@ class CommonImage extends StatelessWidget {
       alignment: Alignment.center,
       height: height,
       width: width,
+      padding: padding,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
         border: border == 0.0 ? null : Border.fromBorderSide(

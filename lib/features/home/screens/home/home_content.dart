@@ -51,7 +51,6 @@ class _HomeContentState extends State<HomeContent> {
     return CommonScaffold(
       appBar: HomeAppBar(
         onTapSideMenu: () => context.read<DashboardBloc>().add(OpenSideMenuEvent()),
-        onTapNotifications: () => context.push(AppRoutes.viewNotifications),
       ),
       body: SingleChildScrollView(
         controller: _scrollController,

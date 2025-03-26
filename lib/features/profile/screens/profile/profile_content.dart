@@ -51,7 +51,7 @@ class _ProfileContentState extends State<ProfileContent> {
                   child: Text(
                     "Account Settings",
                     style: TextStyle(
-                      color: CustomColors.gray,
+                      color: context.isDarkMode() ? Colors.white54 : CustomColors.gray,
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500
                     ),
