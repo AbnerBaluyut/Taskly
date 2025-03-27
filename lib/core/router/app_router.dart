@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/authentication/screens/login/login_page.dart';
 import '../../features/authentication/screens/register/register_page.dart';
 import '../../features/dashboard/screens/dashboard_page.dart';
+import '../../features/home/screens/create_project/create_project_page.dart';
 import '../../features/home/screens/more_projects/more_projects_page.dart';
 import '../../features/home/screens/project_details/project_details_page.dart';
 import '../../features/home/screens/task_details/task_details_page.dart';
@@ -90,7 +91,13 @@ class AppRouter {
         builder: (context, state) {
           return const ViewNotificationsPage();
         }
-      )
+      ),
+      GoRoute(
+        path: AppRoutes.createProject,
+        builder: (context, state) {
+          return const CreateProjectPage();
+        }
+      ),
     ],
   );
 }

@@ -19,6 +19,8 @@ class CommonTextField extends StatefulWidget {
   final void Function(String)? onChanged;
   final void Function(String)? onFieldSubmitted;
   final int maxLines;
+  final int? minLines;
+  final int? maxLength;
   final Color? fillColor;
   final bool filled;
   final TextStyle? style;
@@ -28,9 +30,8 @@ class CommonTextField extends StatefulWidget {
   final InputBorder? focusedBorder;
   final InputBorder? errorBorder;
   final InputBorder? focusedErrorBorder;
-  
-  
   final TextInputAction? textInputAction;
+  final bool showScrollbar;
 
   const CommonTextField({
     super.key,
@@ -45,6 +46,8 @@ class CommonTextField extends StatefulWidget {
     this.validator,
     this.onChanged,
     this.maxLines = 1,
+    this.minLines,
+    this.maxLength,
     this.fillColor,
     this.filled = true,
     this.style,
@@ -55,7 +58,8 @@ class CommonTextField extends StatefulWidget {
     this.errorBorder,
     this.focusedErrorBorder,
     this.textInputAction,
-    this.onFieldSubmitted
+    this.onFieldSubmitted,
+    this.showScrollbar = false
   });
 
   @override
@@ -100,80 +104,92 @@ class CommonTextFieldState extends State<CommonTextField> {
           controller: (animation) {
             _animationController = animation;
           },
-          child: TextFormField(
-            controller: widget.controller,
-            focusNode: widget.focusNode,
-            keyboardType: widget.keyboardType,
-            textInputAction: widget.textInputAction ?? TextInputAction.done,
-            obscureText: _isPasswordVisible,
-            maxLines: widget.maxLines,
-            style: widget.style ?? TextStyle(
-              fontSize: 14.0,
-              color: Colors.black,
-              fontWeight: FontWeight.w400
-            ),
-            decoration: InputDecoration(
-              fillColor: widget.fillColor ?? Color(0xFFF1F1F1),
-              filled: widget.filled,
-              hintText: widget.hintText,
-              hintStyle: widget.hintStyle ?? TextStyle(
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.w400,
-                fontSize: 14.0
-              ),
-              enabledBorder: widget.enabledBorder ?? widget.border ?? OutlineInputBorder(
-                borderRadius: BorderRadius.circular(3),
-                borderSide: BorderSide(
-                  color:Color(0xFFE8E8E8),
-                  width: 0.5
-                ),
-              ),
-              border: widget.border ?? OutlineInputBorder(
-                borderRadius: BorderRadius.circular(3),
-                borderSide: BorderSide(
-                  color: Color(0xFFE8E8E8),
-                  width: 0.5
-                ),
-              ),
-              focusedBorder: widget.focusedBorder ?? widget.border ?? OutlineInputBorder(
-                borderRadius: BorderRadius.circular(3),
-                borderSide: BorderSide(
-                  color: Color(0xFFE8E8E8),
-                  width: 0.5
-                ),
-              ),
-              errorBorder: widget.errorBorder ?? widget.border ?? OutlineInputBorder(
-                borderRadius: BorderRadius.circular(3),
-                borderSide: BorderSide(
-                  color: Colors.red.shade400,
-                  width: 2.0
-                ),
-              ),
-              focusedErrorBorder: widget.focusedErrorBorder ?? widget.border ?? OutlineInputBorder(
-                borderRadius: BorderRadius.circular(3),
-                borderSide: BorderSide(
-                  color: Colors.red.shade400,
-                  width: 2.0
-                ),
-              ),
-              errorStyle: TextStyle(
-                fontSize: 14.0,
-                fontWeight: FontWeight.w500,
-                color: Colors.red.shade400,
-              ),
-              prefix: (widget.prefixIcon != null) ? null : Padding(
-                padding: EdgeInsets.only(left: 20.0),
-              ),
-              prefixIcon: widget.prefixIcon,
-              suffixIcon: (widget.obscureText == true) ? _togglePasswordVisibility() : widget.suffixIcon,
-              contentPadding: const EdgeInsets.only(bottom: 0.0, top: 15.0, right: 6.0),
-            ),
-            validator: widget.validator,
-            onChanged: widget.onChanged,
-            onFieldSubmitted: widget.onFieldSubmitted,
-          ),
+          child: (widget.showScrollbar) 
+          ? Scrollbar(
+            trackVisibility: true,
+              child: _buildTextFormField(),
+            ) 
+          : _buildTextFormField()
         ),
       ],
+    );
+  }
+
+  Widget _buildTextFormField() {
+
+    return TextFormField(
+      controller: widget.controller,
+      focusNode: widget.focusNode,
+      keyboardType: widget.keyboardType,
+      textInputAction: widget.textInputAction ?? TextInputAction.done,
+      obscureText: _isPasswordVisible,
+      maxLength: widget.maxLength,
+      maxLines: widget.maxLines,
+      minLines: widget.minLines,
+      style: widget.style ?? TextStyle(
+        fontSize: 14.0,
+        color: Colors.black,
+        fontWeight: FontWeight.w400
+      ),
+      decoration: InputDecoration(
+        fillColor: widget.fillColor ?? Color(0xFFF1F1F1),
+        filled: widget.filled,
+        hintText: widget.hintText,
+        hintStyle: widget.hintStyle ?? TextStyle(
+          color: Colors.grey.shade500,
+          fontWeight: FontWeight.w400,
+          fontSize: 14.0
+        ),
+        enabledBorder: widget.enabledBorder ?? widget.border ?? OutlineInputBorder(
+          borderRadius: BorderRadius.circular(3),
+          borderSide: BorderSide(
+            color:Color(0xFFE8E8E8),
+            width: 0.5
+          ),
+        ),
+        border: widget.border ?? OutlineInputBorder(
+          borderRadius: BorderRadius.circular(3),
+          borderSide: BorderSide(
+            color: Color(0xFFE8E8E8),
+            width: 0.5
+          ),
+        ),
+        focusedBorder: widget.focusedBorder ?? widget.border ?? OutlineInputBorder(
+          borderRadius: BorderRadius.circular(3),
+          borderSide: BorderSide(
+            color: Color(0xFFE8E8E8),
+            width: 0.5
+          ),
+        ),
+        errorBorder: widget.errorBorder ?? widget.border ?? OutlineInputBorder(
+          borderRadius: BorderRadius.circular(3),
+          borderSide: BorderSide(
+            color: Colors.red.shade400,
+            width: 2.0
+          ),
+        ),
+        focusedErrorBorder: widget.focusedErrorBorder ?? widget.border ?? OutlineInputBorder(
+          borderRadius: BorderRadius.circular(3),
+          borderSide: BorderSide(
+            color: Colors.red.shade400,
+            width: 2.0
+          ),
+        ),
+        errorStyle: TextStyle(
+          fontSize: 14.0,
+          fontWeight: FontWeight.w500,
+          color: Colors.red.shade400,
+        ),
+        prefix: (widget.prefixIcon != null) ? null : Padding(
+          padding: EdgeInsets.only(left: 20.0),
+        ),
+        prefixIcon: widget.prefixIcon,
+        suffixIcon: (widget.obscureText == true) ? _togglePasswordVisibility() : widget.suffixIcon,
+        contentPadding: const EdgeInsets.only(bottom: 0.0, top: 15.0, right: 6.0),
+      ),
+      validator: widget.validator,
+      onChanged: widget.onChanged,
+      onFieldSubmitted: widget.onFieldSubmitted,
     );
   }
 

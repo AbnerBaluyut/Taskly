@@ -7,7 +7,7 @@ import '../../../../core/common_widgets/common_scaffold.dart';
 import '../../../../core/router/app_routes.dart';
 import '../../../../core/styles/dimension.dart';
 import '_components/login_content.dart';
-import '_components/login_divider.dart';
+// import '_components/login_divider.dart';
 import '_components/login_footer.dart';
 import '_components/login_header.dart';
 
@@ -40,7 +40,8 @@ class LoginPage extends StatelessWidget {
                       },
                       onTapLogin: () => context.go(AppRoutes.dashboard),
                     ),
-                    LoginDivider(),
+                    // LoginDivider(),
+                    Spacer(),
                     LoginFooter(
                       onTapSocial: (social) {
                         log("Social: ${social.name}");

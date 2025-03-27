@@ -1,10 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
+import 'package:go_router/go_router.dart';
 import 'package:taskly/core/extensions/int_extension.dart';
 import '../../../core/common_widgets/common_scaffold.dart';
+import '../../../core/router/app_routes.dart';
 import '../../calendar/screens/calendar_content.dart';
 import '../../chat/screens/chat_content.dart';
 import '../../home/screens/home/home_content.dart';
@@ -80,10 +80,10 @@ class _DashboardPageState  extends State<DashboardPage> with SingleTickerProvide
             child: DashboardFab(
               key: UniqueKey(),
               onTapAddProject: () {
-                log("ADD PROJECT");
+                context.push(AppRoutes.createProject);
               },
               onTapAddTask: () {
-                log("ADD TASK");
+                context.push(AppRoutes.createTask);
               },
             ),
           ),

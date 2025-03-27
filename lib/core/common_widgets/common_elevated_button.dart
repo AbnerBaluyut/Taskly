@@ -14,6 +14,8 @@ class CommonElevatedButton extends ElevatedButton {
     Color overlayColor = Colors.black45,
     Widget? icon,
     OutlinedBorder? shape,
+    MaterialTapTargetSize? targetSize,
+    Size? minimumSize
   }) {
     return CommonElevatedButton(
       key: key,
@@ -25,6 +27,8 @@ class CommonElevatedButton extends ElevatedButton {
       shadowColor: shadowColor,
       overlayColor: overlayColor,
       shape: shape,
+      targetSize: targetSize,
+      minSize: minimumSize,
     );
   }
 
@@ -44,7 +48,9 @@ class CommonElevatedButton extends ElevatedButton {
     this.shadowColor = Colors.transparent,
     this.overlayColor = Colors.black45,
     this.shape,
-  }) : assert(text != null || custom != null), super(
+    this.targetSize,
+    this.minSize
+  }) : super(
       onPressed: onButtonPressed,
       child: (text != null) ? Text(
         text,
@@ -53,7 +59,7 @@ class CommonElevatedButton extends ElevatedButton {
           fontWeight: fontWeight,
           color: fontColor,
         ),
-      ) : custom,
+      ) : custom ?? const SizedBox.shrink(),
       style: ElevatedButton.styleFrom(
         shadowColor: shadowColor,
         backgroundColor: backgroundColor,
@@ -63,6 +69,8 @@ class CommonElevatedButton extends ElevatedButton {
           borderRadius: borderRadius,
           side: borderSide
         ),
+        tapTargetSize: targetSize,
+        minimumSize: minSize,
         padding: padding,
         disabledBackgroundColor: Colors.grey.shade500,
       )
@@ -82,4 +90,6 @@ class CommonElevatedButton extends ElevatedButton {
   final double elevation;
   final EdgeInsetsGeometry? padding;
   final OutlinedBorder? shape;
+  final MaterialTapTargetSize? targetSize;
+  final Size? minSize;
 }

@@ -79,7 +79,6 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> with SingleTick
         ],
         body: TabBarView(
           controller: tabController,
-          physics: NeverScrollableScrollPhysics(),
           children: [
             TodoContent(),
             InProgressContent(),
