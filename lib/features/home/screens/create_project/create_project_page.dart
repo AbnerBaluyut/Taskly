@@ -65,7 +65,10 @@ class _CreateProjectPageState extends State<CreateProjectPage> {
                         },
                       ),
                       Spacer(),
-                      SizedBox(
+                      Container(
+                        margin: const EdgeInsets.only(
+                          top: Dimension.marginMedium
+                        ),
                         height: 50.0,
                         width: context.screenWidth(),
                         child: CommonElevatedButton(
