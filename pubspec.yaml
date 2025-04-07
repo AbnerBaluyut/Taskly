@@ -45,8 +45,8 @@ dependencies:
   
   # Page Indicator
   smooth_page_indicator: ^1.2.1
-  shared_preferences: ^2.5.2
-  flutter_native_splash: ^2.4.5
+  shared_preferences: ^2.5.3
+  flutter_native_splash: ^2.4.6
   font_awesome_flutter: ^10.8.0
 
   # SVG
@@ -59,6 +59,13 @@ dependencies:
 
   # Dropdown
   dropdown_button2: ^2.3.9
+
+  # Calendar
+  table_calendar: ^3.2.0
+
+  # Intl
+  intl: ^0.20.2
+
 
 flutter_native_splash:
   android: true
