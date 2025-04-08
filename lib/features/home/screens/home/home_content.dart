@@ -36,12 +36,12 @@ class _HomeContentState extends State<HomeContent> {
   void _scrollListener() {
 
     final currentScroll = _scrollController.offset;
-    final isVisible = context.read<BottomNavBloc>().state;
+    final isVisible = context.read<BottomNavCubit>().state;
 
     if (currentScroll >= _scrollThreshold && isVisible) {
-      context.read<BottomNavBloc>().setIsVisibleBottomNav(false);
+      context.read<BottomNavCubit>().setIsVisibleBottomNav(false);
     } else if (currentScroll < _scrollThreshold && !isVisible) {
-      context.read<BottomNavBloc>().setIsVisibleBottomNav(true);
+      context.read<BottomNavCubit>().setIsVisibleBottomNav(true);
     }
   }
 

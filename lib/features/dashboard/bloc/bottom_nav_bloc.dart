@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BottomNavBloc extends Cubit<bool> {
+class BottomNavCubit extends Cubit<bool> {
 
-  BottomNavBloc() : super(true);
+  BottomNavCubit() : super(true);
 
   void setIsVisibleBottomNav(bool value) {
     emit(value);

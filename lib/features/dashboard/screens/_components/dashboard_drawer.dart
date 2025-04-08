@@ -80,10 +80,10 @@ class DashboardDrawer extends StatelessWidget {
               ],
             ),
           ),
-          BlocBuilder<DarkModeBloc, bool>(
+          BlocBuilder<DarkModeCubit, bool>(
             builder: (context, state) {
               return CommonElevatedButton(
-                onButtonPressed: () => context.read<DarkModeBloc>().toggleDarkMode(),
+                onButtonPressed: () => context.read<DarkModeCubit>().toggleDarkMode(),
                 padding: EdgeInsets.zero,
                 borderRadius: BorderRadius.zero,
                 backgroundColor: Colors.transparent,
@@ -100,7 +100,7 @@ class DashboardDrawer extends StatelessWidget {
                     horizontal: Dimension.paddingMedium
                   ),
                   trailing: CommonSwitch(
-                    value: context.read<DarkModeBloc>().state,
+                    value: context.read<DarkModeCubit>().state,
                     size: 40.0,
                   ),
                 ),

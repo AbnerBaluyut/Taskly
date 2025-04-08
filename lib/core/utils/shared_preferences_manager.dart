@@ -1,24 +1,42 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPrefsManager {
+import '../../features/authentication/domain/entities/user_entity.dart';
 
-  static const String _isDarkModeKey = "isDarkModeKey";
+class SharedPreferenceManager {
 
-  static final SharedPrefsManager _instance = SharedPrefsManager._internal();
-  static SharedPreferences? _prefs;
+  final String _isDarkModeKey = "isDarkModeKey";
+  final String _isLoggedInKey = "isLoggedInKey";
+  final String _isSkipOnBoardingKey = "isSkipOnBoardingKey";
+  final String _userKey = "userKey";
 
-  factory SharedPrefsManager() {
-    return _instance;
+  final SharedPreferences _prefs;
+
+  SharedPreferenceManager._(this._prefs);
+
+  factory SharedPreferenceManager(SharedPreferences prefs) => SharedPreferenceManager._(prefs);
+
+  bool get isDarkMode => _prefs.getBool(_isDarkModeKey) ?? false;
+  Future<void> setIsDarkMode(bool value) async {
+    await _prefs.setBool(_isDarkModeKey, value);
+  }
+  
+  UserEntity get getUser => UserEntity.fromJsonString(_prefs.getString(_userKey) ?? "");
+  Future<void> setUser(UserEntity user) async {
+    await _prefs.setString(_userKey, user.toJsonString());
   }
 
-  SharedPrefsManager._internal();
-
-  /// Initialize SharedPreferences (Call this in `main` before running the app)
-  static Future<void> init() async {
-    _prefs = await SharedPreferences.getInstance();
+  bool get isLoggedIn => _prefs.getBool(_isLoggedInKey) ?? false;
+  Future<void> setIsLoggedIn(bool value) async {
+    await _prefs.setBool(_isLoggedInKey, value);
   }
 
-  /// Toggle the dark mode state
-  static bool get isDarkMode => _prefs?.getBool(_isDarkModeKey) ?? false;
-  static setIsDarkMode(bool value) => _prefs?.setBool(_isDarkModeKey, value);
+  bool get isSkipOnBoarding => _prefs.getBool(_isSkipOnBoardingKey) ?? false;
+  Future<void> setIsSkipOnBoarding(bool value) async {
+    await _prefs.setBool(_isSkipOnBoardingKey, value);
+  }
+  Future<void> clear() async {
+    _prefs.remove(_isDarkModeKey);
+    _prefs.remove(_isLoggedInKey);
+    _prefs.remove(_userKey);
+  }
 }

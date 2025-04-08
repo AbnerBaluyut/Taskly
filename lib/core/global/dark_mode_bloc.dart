@@ -1,24 +1,29 @@
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 import '../utils/shared_preferences_manager.dart';
 
-class DarkModeBloc  extends Cubit<bool> {
+class DarkModeCubit  extends Cubit<bool> {
+
+   final SharedPreferenceManager _sharedPrefsManager;
   
-  DarkModeBloc() : super(false) {
-    _loadState();
-  }
+  DarkModeCubit() :
+    _sharedPrefsManager = GetIt.instance<SharedPreferenceManager>(), 
+    super(false) {
+      _loadState();
+    }
 
   void _loadState() async {
-    final isDarkMode = SharedPrefsManager.isDarkMode;
+    final isDarkMode = _sharedPrefsManager.isDarkMode;
     emit(isDarkMode);
   }
 
   void toggleDarkMode() {
     log("IS DARK MODE: ${!state}");
     var isDarkMode = !state;
-    SharedPrefsManager.setIsDarkMode(isDarkMode);
+    _sharedPrefsManager.setIsDarkMode(isDarkMode);
     emit(isDarkMode);
   }
 }

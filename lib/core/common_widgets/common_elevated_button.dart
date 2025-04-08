@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../styles/custom_colors.dart';
 
@@ -34,6 +35,7 @@ class CommonElevatedButton extends ElevatedButton {
 
   CommonElevatedButton({
     super.key, 
+    this.isLoading,
     this.onButtonPressed, 
     this.text,
     this.custom,
@@ -52,7 +54,7 @@ class CommonElevatedButton extends ElevatedButton {
     this.minSize
   }) : super(
       onPressed: onButtonPressed,
-      child: (text != null) ? Text(
+      child: (isLoading != null && isLoading) ? LoadingAnimationWidget.discreteCircle(color: CustomColors.primaryColor, size: 24.0) :  (text != null) ? Text(
         text,
         style: TextStyle(
           fontSize: fontSize, 
@@ -76,6 +78,7 @@ class CommonElevatedButton extends ElevatedButton {
       )
   );
 
+  final bool? isLoading;
   final VoidCallback? onButtonPressed;
   final String? text;
   final Widget? custom;

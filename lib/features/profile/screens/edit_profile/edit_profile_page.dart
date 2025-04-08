@@ -9,7 +9,7 @@ import '../../../../core/common_widgets/common_scaffold.dart';
 import '../../../../core/common_widgets/common_text_field.dart';
 import '../../../../core/styles/custom_colors.dart';
 import '../../../../core/styles/dimension.dart';
-import '../../../authentication/screens/register/_components/select_media_bottom_sheet.dart';
+import '../../../authentication/presentation/screens/register/_components/select_media_bottom_sheet.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});

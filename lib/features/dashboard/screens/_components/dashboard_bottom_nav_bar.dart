@@ -23,7 +23,7 @@ class _DashboardBottomNavBarState extends State<DashboardBottomNavBar> {
   @override
   Widget build(BuildContext context) {
 
-    return BlocBuilder<BottomNavBloc, bool>(
+    return BlocBuilder<BottomNavCubit, bool>(
       builder: (ctx, isVisible) {
         return AnimatedSize(
           duration: Duration(milliseconds: 300),

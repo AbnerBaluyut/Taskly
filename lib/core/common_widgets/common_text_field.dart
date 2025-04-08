@@ -32,9 +32,11 @@ class CommonTextField extends StatefulWidget {
   final InputBorder? focusedErrorBorder;
   final TextInputAction? textInputAction;
   final bool showScrollbar;
+  final bool? enabled;
 
   const CommonTextField({
     super.key,
+    this.enabled,
     this.helperText,
     this.hintText,
     this.controller,
@@ -118,6 +120,7 @@ class CommonTextFieldState extends State<CommonTextField> {
   Widget _buildTextFormField() {
 
     return TextFormField(
+      enabled: widget.enabled,
       controller: widget.controller,
       focusNode: widget.focusNode,
       keyboardType: widget.keyboardType,
