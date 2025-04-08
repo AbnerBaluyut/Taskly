@@ -5,7 +5,7 @@ import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 
 import '../../../../core/common_widgets/common_scaffold.dart';
-import '../../../../core/global/dark_mode_bloc.dart';
+import '../../../home/bloc/dark_mode_bloc.dart';
 import '../../../../core/router/app_routes.dart';
 import '../../../../core/styles/assets.dart';
 import '../../../../core/styles/custom_colors.dart';

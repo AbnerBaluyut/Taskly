@@ -8,7 +8,7 @@ import '../../features/authentication/data/_datasources/auth_remote_source_impl.
 import '../../features/authentication/data/repositories/auth_repository_impl.dart';
 import '../../features/authentication/domain/usecases/login_usecase_impl.dart';
 import '../constants/endpoints.dart';
-import '../network/dio_client.dart';
+import '../services/dio_client.dart';
 import '../utils/shared_preferences_manager.dart';
 
 final _inject = GetIt.instance;

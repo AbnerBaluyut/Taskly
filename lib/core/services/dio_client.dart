@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
-import '../error/network_exception.dart';
-import '../error/not_found_exception.dart';
-import '../error/server_exception.dart';
-import '../error/time_out_exception.dart';
-import '../error/unauthorized_exception.dart';
-import '../error/unknown_exception.dart';
+import '../errors/network_exception.dart';
+import '../errors/not_found_exception.dart';
+import '../errors/server_exception.dart';
+import '../errors/time_out_exception.dart';
+import '../errors/unauthorized_exception.dart';
+import '../errors/unknown_exception.dart';
 
 class DioClient {
 

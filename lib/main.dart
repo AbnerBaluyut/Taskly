@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/_di/injection.dart';
 import 'core/router/app_router.dart';
-import 'core/global/dark_mode_bloc.dart';
+import 'features/home/bloc/dark_mode_bloc.dart';
 import 'core/styles/theme.dart';
 import 'features/authentication/presentation/bloc/auth_bloc.dart';
 import 'features/dashboard/bloc/bottom_nav_bloc.dart';

@@ -3,9 +3,9 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
-import '../utils/shared_preferences_manager.dart';
+import '../../../core/utils/shared_preferences_manager.dart';
 
-class DarkModeCubit  extends Cubit<bool> {
+class DarkModeCubit extends Cubit<bool> {
 
    final SharedPreferenceManager _sharedPrefsManager;
   

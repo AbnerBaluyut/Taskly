@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
-import 'package:taskly/core/global/dark_mode_bloc.dart';
+import 'package:taskly/features/home/bloc/dark_mode_bloc.dart';
 
 import '../../../../../core/styles/custom_colors.dart';
 import '../../../../core/common_widgets/common_elevated_button.dart';

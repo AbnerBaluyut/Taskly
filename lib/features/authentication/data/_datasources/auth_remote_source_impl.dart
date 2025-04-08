@@ -3,8 +3,8 @@
 import 'package:dio/dio.dart';
 
 import '../../../../core/constants/endpoints.dart';
-import '../../../../core/error/unknown_exception.dart';
-import '../../../../core/network/dio_client.dart';
+import '../../../../core/errors/unknown_exception.dart';
+import '../../../../core/services/dio_client.dart';
 import '../../../../core/styles/strings.dart';
 import '../../../../data/_datasources/auth_remote_source.dart';
 import '../models/login/login_response_model.dart';
