@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../data/models/social_model.dart';
+import '../../../data/models/social_model.dart';
 
 class ItemSocialButton extends StatelessWidget {
 

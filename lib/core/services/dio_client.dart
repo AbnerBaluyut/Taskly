@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
@@ -7,6 +9,7 @@ import '../errors/server_exception.dart';
 import '../errors/time_out_exception.dart';
 import '../errors/unauthorized_exception.dart';
 import '../errors/unknown_exception.dart';
+import '../styles/strings.dart';
 
 class DioClient {
 
@@ -40,6 +43,13 @@ class DioClient {
         onRequest: (options, handler) {
           // Add any custom headers or authentication tokens here
           // options.headers['Authorization'] = 'Bearer YOUR_TOKEN';
+
+          if (options.data is FormData) {
+            var formData = options.data as FormData;
+            _logFormData(formData);
+          } else {
+            log("Params: ${options.data}");
+          }
           return handler.next(options);
         },
         onResponse: (response, handler) {
@@ -60,6 +70,15 @@ class DioClient {
 
   Dio get instance => _dio;
 
+  void _logFormData(FormData formData) {
+
+    final Map<String, dynamic> formDataMap = {};
+    for (var field in formData.fields) {
+      formDataMap[field.key] = field.value;
+    }
+    log("Params: ${formDataMap.toString()}");
+  }
+
   DioException _mapError(DioException e) {
     if (e.type == DioExceptionType.connectionTimeout || e.type == DioExceptionType.receiveTimeout || e.type == DioExceptionType.sendTimeout) {
       return DioException(requestOptions: e.requestOptions, error: TimeoutException());
@@ -78,14 +97,14 @@ class DioClient {
         case 404:
           return DioException(requestOptions: e.requestOptions, error: NotFoundException());
         default:
-          return DioException(requestOptions: e.requestOptions, error: ServerException(data['message'] ?? "Server Error", code: code));
+          return DioException(requestOptions: e.requestOptions, error: ServerException(data['message'] ?? Strings.errorMessage, code: code));
       }
     }
 
     if (e.type == DioExceptionType.unknown) {
-      return DioException(requestOptions: e.requestOptions, error: NetworkException("No internet connection"));
+      return DioException(requestOptions: e.requestOptions, error: NetworkException(Strings.noInternetConnection));
     }
 
-    return DioException(requestOptions: e.requestOptions, error: UnknownException(e.message ?? "Unknown error"));
+    return DioException(requestOptions: e.requestOptions, error: UnknownException(e.message ?? Strings.errorMessage));
   }
 }

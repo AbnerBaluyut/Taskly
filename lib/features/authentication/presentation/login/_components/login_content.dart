@@ -4,13 +4,13 @@ import 'package:go_router/go_router.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 import 'package:taskly/core/extensions/string_extension.dart';
-import '../../../../../../core/common_widgets/common_elevated_button.dart';
-import '../../../../../../core/common_widgets/common_text_field.dart';
-import '../../../../../../core/router/app_routes.dart';
-import '../../../../../../core/styles/custom_colors.dart';
-import '../../../../../../core/styles/dimension.dart';
-import '../../../bloc/auth_bloc.dart';
-import '../../../bloc/auth_state.dart';
+import '../../../../../core/common_widgets/common_elevated_button.dart';
+import '../../../../../core/common_widgets/common_text_field.dart';
+import '../../../../../core/router/app_routes.dart';
+import '../../../../../core/styles/custom_colors.dart';
+import '../../../../../core/styles/dimension.dart';
+import '../../bloc/auth_bloc.dart';
+import '../../bloc/auth_state.dart';
 
 class LoginContent extends StatefulWidget {
 
@@ -119,7 +119,7 @@ class _LoginContentState extends State<LoginContent> {
                   width: context.screenWidth(),
                   child: CommonElevatedButton(
                     isLoading: (state is AuthLoading),
-                    onButtonPressed: (state is AuthLoading) ? null : () {
+                    onButtonPressed: () {
                       if (_formKey.currentState?.validate() ?? false) {
                         widget.onTapLogin.call(_nameController.text.trim(), _passwordController.text.trim());
                       }

@@ -15,25 +15,27 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<SplashBloc>().add(LoadSplashEvent());
-    return BlocListener<SplashBloc, SplashState>(
-      listener: (context, state) {
-        if (state is SplashLoadedState) {
-
-          if (state.isOnBoardingCompleted) {
-            if (state.isUserLoggedIn) {
-              context.go(AppRoutes.dashboard);
+    return BlocProvider(
+      create: (_) => SplashBloc()..add(LoadSplashEvent()),
+      child: BlocListener<SplashBloc, SplashState>(
+        listener: (context, state) {
+          if (state is SplashLoadedState) {
+      
+            if (state.isOnBoardingCompleted) {
+              if (state.isUserLoggedIn) {
+                context.go(AppRoutes.dashboard);
+              } else {
+                context.go(AppRoutes.login);
+              }
             } else {
-              context.go(AppRoutes.login);
+               context.go(AppRoutes.onBoarding);
             }
-          } else {
-             context.go(AppRoutes.onBoarding);
           }
-        }
-      },
-      child: CommonScaffold(
-        body: Logo()
-      )
+        },
+        child: CommonScaffold(
+          body: Logo()
+        )
+      ),
     );
   }
 }

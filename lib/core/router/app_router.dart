@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 
-import '../../features/authentication/presentation/screens/login/login_page.dart';
-import '../../features/authentication/presentation/screens/register/register_page.dart';
+import '../../features/authentication/presentation/login/login_page.dart';
+import '../../features/authentication/presentation/register/register_page.dart';
 import '../../features/dashboard/screens/dashboard_page.dart';
 import '../../features/home/screens/create_project/create_project_page.dart';
 import '../../features/home/screens/more_projects/more_projects_page.dart';
@@ -9,8 +9,8 @@ import '../../features/home/screens/project_details/project_details_page.dart';
 import '../../features/home/screens/task_details/task_details_page.dart';
 import '../../features/home/screens/view_notifications/view_notifications_page.dart';
 import '../../features/on_boarding/screens/on_boarding_page.dart';
-import '../../features/profile/screens/change_password/change_password_page.dart';
-import '../../features/profile/screens/edit_profile/edit_profile_page.dart';
+import '../../features/profile/presentation/change_password/change_password_page.dart';
+import '../../features/profile/presentation/edit_profile/edit_profile_page.dart';
 import '../../features/splash/splash_page.dart';
 import '../../features/welcome/screens/welcome_page.dart';
 import 'app_routes.dart';

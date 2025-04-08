@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:taskly/core/extensions/string_extension.dart';
 
-import '../../../../../../core/common_widgets/common_text_field.dart';
-import '../../../../../../core/styles/dimension.dart';
+import '../../../../../core/common_widgets/common_text_field.dart';
+import '../../../../../core/styles/dimension.dart';
 
 class RegisterContent extends StatefulWidget {
 

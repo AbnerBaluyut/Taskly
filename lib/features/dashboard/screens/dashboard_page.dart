@@ -8,7 +8,7 @@ import '../../../core/router/app_routes.dart';
 import '../../calendar/screens/calendar_content.dart';
 import '../../chat/screens/chat_content.dart';
 import '../../home/screens/home/home_content.dart';
-import '../../profile/screens/profile/profile_content.dart';
+import '../../profile/presentation/profile/profile_content.dart';
 import '../bloc/dashboard_bloc.dart';
 import '../bloc/dashboard_state.dart';
 import '_components/dashboard_bottom_nav_bar.dart';

@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../core/common_widgets/common_scaffold.dart';
-import '../../../../../core/router/app_routes.dart';
-import '../../../../../core/styles/dimension.dart';
-import '../../bloc/auth_bloc.dart';
-import '../../bloc/auth_event.dart';
+import '../../../../core/common_widgets/common_scaffold.dart';
+import '../../../../core/router/app_routes.dart';
+import '../../../../core/styles/dimension.dart';
+import '../bloc/auth_bloc.dart';
+import '../bloc/auth_event.dart';
 import '_components/login_content.dart';
 // import '_components/login_divider.dart';
 import '_components/login_footer.dart';

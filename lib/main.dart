@@ -7,9 +7,7 @@ import 'core/styles/theme.dart';
 import 'features/authentication/presentation/bloc/auth_bloc.dart';
 import 'features/dashboard/bloc/bottom_nav_bloc.dart';
 import 'features/dashboard/bloc/dashboard_bloc.dart';
-import 'features/profile/bloc/profile_bloc.dart';
-import 'features/splash/bloc/splash_bloc.dart';
-import 'features/welcome/bloc/welcome_bloc.dart';
+import 'features/profile/presentation/profile/bloc/profile_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,12 +17,6 @@ void main() async {
       providers: [
         BlocProvider(
           create: (_) => DarkModeCubit()
-        ),
-        BlocProvider(
-          create: (_) => SplashBloc()
-        ),
-        BlocProvider(
-          create: (_) => WelcomeBloc()
         ),
         BlocProvider(
           create: (_) => ProfileBloc()

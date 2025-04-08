@@ -53,8 +53,8 @@ class CommonElevatedButton extends ElevatedButton {
     this.targetSize,
     this.minSize
   }) : super(
-      onPressed: onButtonPressed,
-      child: (isLoading != null && isLoading) ? LoadingAnimationWidget.discreteCircle(color: CustomColors.primaryColor, size: 24.0) :  (text != null) ? Text(
+      onPressed: (isLoading != null && isLoading) ? null : onButtonPressed,
+      child: (isLoading != null && isLoading) ? LoadingAnimationWidget.discreteCircle(color: Colors.white, size: 24.0) :  (text != null) ? Text(
         text,
         style: TextStyle(
           fontSize: fontSize, 

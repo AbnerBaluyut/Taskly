@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 // import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 
-import '../../../../../../core/styles/custom_colors.dart';
-import '../../../../../../core/styles/dimension.dart';
-import '../../../../../../core/enums/social.dart';
+import '../../../../../core/styles/custom_colors.dart';
+import '../../../../../core/styles/dimension.dart';
+import '../../../../../core/enums/social.dart';
 // import '../../../models/social_model.dart';
 // import 'item_social_button.dart';
 

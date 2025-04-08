@@ -18,35 +18,40 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return BlocListener<WelcomeBloc, WelcomeState>(
-      listener: (ctx, state) {
-        if (state is OnTapGetStartedState) {
-          context.push(AppRoutes.register);
-        } else if (state is OnTapLoginState) {
-          context.push(AppRoutes.login);
-        }
-      },
-      child: CommonScaffold(
-        body: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: Dimension.spacingLarge
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: WelcomeHeader()
+    return BlocProvider(
+      create: (context) => WelcomeBloc(),
+      child: BlocConsumer<WelcomeBloc, WelcomeState>(
+        listener: (context, state) {
+          if (state is OnTapGetStartedState) {
+            context.push(AppRoutes.register);
+          } else if (state is OnTapLoginState) {
+            context.push(AppRoutes.login);
+          }
+        },
+        builder: (context, state) {
+          return CommonScaffold(
+            body: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: Dimension.spacingLarge
               ),
-              WelcomeFooter(
-                onTapGetStarted: () => context.read<WelcomeBloc>().add(OnTapGetStarted()),
-                onTapLogin: () => context.read<WelcomeBloc>().add(OnTapLogin()),
-              )
-            ],
-          ),
-        )
-      )
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(
+                    child: WelcomeHeader()
+                  ),
+                  WelcomeFooter(
+                    onTapGetStarted: () => context.read<WelcomeBloc>().add(OnTapGetStarted()),
+                    onTapLogin: () => context.read<WelcomeBloc>().add(OnTapLogin()),
+                  )
+                ],
+              ),
+            )
+          );
+        },
+      ),
     );
   }
 }

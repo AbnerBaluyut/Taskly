@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../core/styles/custom_colors.dart';
-import '../../../../../../core/styles/dimension.dart';
+import '../../../../../core/styles/custom_colors.dart';
+import '../../../../../core/styles/dimension.dart';
 
 class LoginDivider extends StatelessWidget {
 
