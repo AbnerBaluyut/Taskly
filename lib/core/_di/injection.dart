@@ -11,7 +11,7 @@ import '../constants/endpoints.dart';
 import '../services/dio_client.dart';
 import '../utils/shared_preferences_manager.dart';
 
-final _inject = GetIt.instance;
+final _inject = GetIt.I;
 
 Future<void> initDependency() async {
 

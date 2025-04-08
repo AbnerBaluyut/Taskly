@@ -25,7 +25,7 @@ class WelcomePage extends StatelessWidget {
           if (state is OnTapGetStartedState) {
             context.push(AppRoutes.register);
           } else if (state is OnTapLoginState) {
-            context.push(AppRoutes.login);
+            context.go(AppRoutes.login);
           }
         },
         builder: (context, state) {

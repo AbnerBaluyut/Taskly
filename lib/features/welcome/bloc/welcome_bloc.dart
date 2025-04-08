@@ -10,7 +10,7 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
   final SharedPreferenceManager _sharedPreferenceManager;
 
   WelcomeBloc() : 
-    _sharedPreferenceManager = GetIt.instance<SharedPreferenceManager>(),
+    _sharedPreferenceManager = GetIt.I<SharedPreferenceManager>(),
     super(WelcomeInitial()) {
       on<OnTapGetStarted>(_getStarted);
       on<OnTapLogin>(_login);

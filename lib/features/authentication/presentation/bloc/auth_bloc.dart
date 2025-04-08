@@ -15,8 +15,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   CancelToken _cancelToken = CancelToken();
 
   AuthBloc() : 
-    loginUseCase = GetIt.instance<LoginUseCase>(),
-    sharedPrefsManager = GetIt.instance<SharedPreferenceManager>(),
+    loginUseCase = GetIt.I<LoginUseCase>(),
+    sharedPrefsManager = GetIt.I<SharedPreferenceManager>(),
     super(AuthInitial()) {
       on<LoginEvent>(_login);
       on<CancelEvent>(_cancelRequest);

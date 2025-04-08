@@ -11,7 +11,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
   final SharedPreferenceManager _sharedPreferenceManager;
 
   EditProfileBloc() : 
-    _sharedPreferenceManager = GetIt.instance<SharedPreferenceManager>(),
+    _sharedPreferenceManager = GetIt.I<SharedPreferenceManager>(),
     super(InitialState()) {
       on<LoadUserDataEvent>(_loadData);
       on<UpdateProfileEvent>(_updateProfile);

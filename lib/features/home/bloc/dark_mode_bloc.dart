@@ -10,7 +10,7 @@ class DarkModeCubit extends Cubit<bool> {
    final SharedPreferenceManager _sharedPrefsManager;
   
   DarkModeCubit() :
-    _sharedPrefsManager = GetIt.instance<SharedPreferenceManager>(), 
+    _sharedPrefsManager = GetIt.I<SharedPreferenceManager>(), 
     super(false) {
       _loadState();
     }

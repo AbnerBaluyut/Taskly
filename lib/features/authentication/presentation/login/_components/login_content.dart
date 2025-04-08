@@ -37,7 +37,7 @@ class _LoginContentState extends State<LoginContent> {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccess) {
-          context.push(AppRoutes.dashboard);
+          context.go(AppRoutes.dashboard);
         } else if (state is AuthFailure) {
           context.showAnimatedErrorDialog(
             title: state.errorMessage,

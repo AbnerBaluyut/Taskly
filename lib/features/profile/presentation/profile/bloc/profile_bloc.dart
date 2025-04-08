@@ -10,7 +10,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final SharedPreferenceManager _sharedPreferenceManager;
 
   ProfileBloc() : 
-    _sharedPreferenceManager = GetIt.instance<SharedPreferenceManager>(),
+    _sharedPreferenceManager = GetIt.I<SharedPreferenceManager>(),
     super(
       ProfileInitial()
     ) {

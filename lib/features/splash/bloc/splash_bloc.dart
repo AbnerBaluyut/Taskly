@@ -11,7 +11,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   final SharedPreferenceManager _sharedPreferenceManager;
   
   SplashBloc() : 
-    _sharedPreferenceManager = GetIt.instance<SharedPreferenceManager>(),
+    _sharedPreferenceManager = GetIt.I<SharedPreferenceManager>(),
     super(SplashInitialState()) {
       on<SplashEvent>(_init);
     }
