@@ -23,7 +23,7 @@ class ItemChat extends StatelessWidget {
         spacing: Dimension.spacingMedium,
         children: [
           CommonImage(
-            path: Assets.face,
+            Assets.face,
             height: 50.0,
             width: 50.0,
             fit: BoxFit.contain,

@@ -5,14 +5,15 @@ import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 
 import '../../../../core/common_widgets/common_scaffold.dart';
+import '../../../authentication/domain/entities/user_entity.dart';
 import '../../../home/bloc/dark_mode_bloc.dart';
 import '../../../../core/router/app_routes.dart';
 import '../../../../core/styles/assets.dart';
 import '../../../../core/styles/custom_colors.dart';
 import '../../../../core/styles/dimension.dart';
-import 'bloc/profile_bloc.dart';
-import 'bloc/profile_event.dart';
-import 'bloc/profile_state.dart';
+import '../bloc/profile_bloc.dart';
+import '../bloc/profile_event.dart';
+import '../bloc/profile_state.dart';
 import '_components/menu_section.dart';
 import '_components/info_section.dart';
 import '_components/profile_appbar.dart';
@@ -26,12 +27,20 @@ class ProfileContent extends StatefulWidget {
 
 class _ProfileContentState extends State<ProfileContent> {
 
+  UserEntity? user;
+
+  @override
+  void initState() {
+    context.read<ProfileBloc>().add(LoadUserDataEvent());
+    super.initState();
+  }
+
   void _logOut() {
     bool isDarkMode = context.read<DarkModeCubit>().state == true;
     if (isDarkMode) {
       context.read<DarkModeCubit>().toggleDarkMode();
     }
-    context.read<ProfileBloc>().add(LogoutEvent());
+    context.read<ProfileBloc>().add(LogOutEvent());
   }
 
   @override
@@ -40,9 +49,16 @@ class _ProfileContentState extends State<ProfileContent> {
       listener: (context, state) {
         if (state is LogoutSuccessState) {
           context.go(AppRoutes.login);
+        } else if (state is GetUserDataState) {
+          user = state.user;
         }
       },
       builder: (context, state) {
+
+        if (state is GetUserDataState) {
+          user = state.user;
+        }
+
         return CommonScaffold(
           body: CustomScrollView(
             slivers: [
@@ -51,7 +67,9 @@ class _ProfileContentState extends State<ProfileContent> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    InfoSection(),
+                    InfoSection(
+                      user: user,
+                    ),
                     Dimension.spacingMedium.height(),
                     Padding(
                       padding: const EdgeInsets.symmetric(

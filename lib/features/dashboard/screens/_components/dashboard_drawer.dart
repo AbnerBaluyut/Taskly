@@ -61,7 +61,7 @@ class DashboardDrawer extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       CommonImage(
-                        path: Assets.icMedalStar,
+                        Assets.icMedalStar,
                         height: 24.0,
                         width: 24.0,
                       ),

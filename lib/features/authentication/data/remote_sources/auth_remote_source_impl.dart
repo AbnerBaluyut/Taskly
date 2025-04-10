@@ -1,12 +1,14 @@
 
 
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 
 import '../../../../core/constants/endpoints.dart';
 import '../../../../core/errors/unknown_exception.dart';
 import '../../../../core/services/dio_client.dart';
 import '../../../../core/styles/strings.dart';
-import '../../../../data/_datasources/auth_remote_source.dart';
+import '../../../../data/remote_sources/auth_remote_source.dart';
 import '../models/login/login_response_model.dart';
 
 class AuthRemoteSourceImpl implements AuthRemoteSource {
@@ -18,13 +20,13 @@ class AuthRemoteSourceImpl implements AuthRemoteSource {
   });
 
   @override
-  Future<LoginResponseModel> login(Map<String, dynamic> param, CancelToken? cancelToken) async {
+  Future<LoginResponseModel> login(body, CancelToken? cancelToken) async {
     
     try {
       
       final response = await client.instance.post(
         Endpoints.login,
-        data: FormData.fromMap(param),
+        data: body,
         cancelToken: cancelToken
       );
 
@@ -33,7 +35,8 @@ class AuthRemoteSourceImpl implements AuthRemoteSource {
     } on DioException catch (e) {
       throw e.error ?? UnknownException(Strings.errorMessage);
     } catch (e) {
-      throw Exception('Failed to login: $e');
+      log("login err: $e");
+      throw Exception(Strings.errorMessage);
     }
   }
 }

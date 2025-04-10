@@ -3,12 +3,15 @@ import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 
 import '../../../../../core/common_widgets/common_image.dart';
-import '../../../../../core/styles/assets.dart';
 import '../../../../../core/styles/custom_colors.dart';
 import '../../../../../core/styles/dimension.dart';
+import '../../../../authentication/domain/entities/user_entity.dart';
 
 class InfoSection extends StatelessWidget {
-  const InfoSection({super.key});
+
+  const InfoSection({super.key, required this.user});
+
+  final UserEntity? user;
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +19,10 @@ class InfoSection extends StatelessWidget {
       children: [
         Dimension.spacingMedium.width(),
         CommonImage(
-          path: Assets.face,
+          user?.image ?? "",
           height: 80.0,
           width: 80.0,
-          fit: BoxFit.contain,
+          fit: BoxFit.cover,
           radius: 40.0
         ),
         Dimension.spacingMedium.width(),
@@ -28,7 +31,7 @@ class InfoSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "John Doe",
+                user?.name ?? "",
                 style: TextStyle(
                   color: context.isDarkMode() ? Colors.white : CustomColors.gray2,
                   fontSize: 18.0,
@@ -38,7 +41,7 @@ class InfoSection extends StatelessWidget {
                 overflow: TextOverflow.ellipsis
               ),
               Text(
-                "johndoe@gmail.com",
+                user?.email ?? "",
                 style: TextStyle(
                   color: context.isDarkMode() ? Colors.white : CustomColors.gray,
                   fontSize: 14.0,

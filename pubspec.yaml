@@ -79,6 +79,12 @@ dependencies:
   # Loading
   loading_animation_widget: ^1.3.0
 
+  # HTTP Image
+  cached_network_image: ^3.4.1
+
+  # Image Picker
+  image_picker: ^1.1.2
+
 flutter_native_splash:
   android: true
   ios: true

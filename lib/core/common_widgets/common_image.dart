@@ -1,27 +1,32 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:taskly/core/extensions/string_extension.dart';
+
+import '../enums/image_source_type.dart';
 
 class CommonImage extends StatelessWidget {
   
-  const CommonImage({
-    super.key, 
-    this.path = "",
-    this.height,
-    this.width, 
-    this.fit,
-    this.radius = 0.0,
-    this.backgroundColor,
-    this.color,
-    this.borderColor = Colors.black,
-    this.border = 0.0,
-    this.errorWidget,
-    this.file,
-    this.padding
-  });
+  const CommonImage(
+    this.name,
+    {
+      super.key, 
+      this.height,
+      this.width, 
+      this.fit,
+      this.radius = 0.0,
+      this.backgroundColor,
+      this.color,
+      this.borderColor = Colors.black,
+      this.border = 0.0,
+      this.errorWidget,
+      this.padding
+    }
+  );
 
-  final File? file;
-  final String path;
+  final String name;
   final double? height;
   final double? width;
   final BoxFit? fit;
@@ -58,59 +63,73 @@ class CommonImage extends StatelessWidget {
           alignment: Alignment.center,
           height: height,
           width: width,
-          child: file != null
-          ? Image.file(
-            file!,
-            height: height, 
-            width: width, 
-            fit: fit,
-            color: color,
-            errorBuilder: (context, error, stackTrace) {
-              return errorWidget ?? Container(
-                height: height,
-                width: width,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(radius),
-                  color: Colors.grey.shade200,
-                ),
-                child: const CommonImage(
-                  path: "", //insert error image
-                  height: 30.0,
-                  width: 30.0,
-                  color: Colors.grey,
-                  fit: BoxFit.cover
-                ),
-              );
-            },
-          ) 
-          : Image.asset(
-            path, 
-            height: height, 
-            width: width, 
-            fit: fit,
-            color: color,
-            errorBuilder: (context, error, stackTrace) {
-              return errorWidget ?? Container(
-                height: height,
-                width: width,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(radius),
-                  color: Colors.grey.shade200,
-                ),
-                child: const CommonImage(
-                  path: "", //insert error image
-                  height: 30.0,
-                  width: 30.0,
-                  color: Colors.grey,
-                  fit: BoxFit.cover
-                ),
-              );
-            },
-          ),
+          child: _buildImage()
         )
       ),
+    );
+  }
+
+  Widget _buildImage() {
+
+    switch (name.imageSourceType) {
+      case ImageSourceType.network:
+        return CachedNetworkImage(
+          imageUrl: name,
+          height: height, 
+          width: width, 
+          fit: fit,
+          color: color,
+          errorWidget: (context, url, error) {
+            return errorWidget ?? _errorWidget();
+          },
+        );
+      case ImageSourceType.file:
+        return Image.file(
+          File(name),
+          height: height, 
+          width: width, 
+          fit: fit,
+          color: color,
+          errorBuilder: errorWidget == null ? null : (context, error, stackTrace) {
+            return errorWidget ?? _errorWidget();
+          }
+        );
+      case ImageSourceType.base64:
+        return Image.memory(
+          base64.decode(name),
+          height: height, 
+          width: width, 
+          fit: fit,
+          color: color,
+          errorBuilder: errorWidget == null ? null : (context, error, stackTrace) {
+            return errorWidget ?? _errorWidget();
+          }
+        );
+      case ImageSourceType.unknown:
+        return Image.asset(
+          name,
+          height: height, 
+          width: width, 
+          fit: fit,
+          color: color,
+          errorBuilder: errorWidget == null ? null : (context, error, stackTrace) {
+            return errorWidget ?? _errorWidget();
+          }
+        );
+    }
+  }
+
+  Widget _errorWidget() {
+
+    return Container(
+      height: height,
+      width: width,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(radius),
+        color: Colors.grey.shade200,
+      ),
+      child: Icon(Icons.error_rounded, color: Colors.red, size: 24.0)
     );
   }
 }

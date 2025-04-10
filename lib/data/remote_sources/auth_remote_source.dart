@@ -4,5 +4,5 @@ import '../../features/authentication/data/models/login/login_response_model.dar
 
 abstract class AuthRemoteSource {
 
-  Future<LoginResponseModel> login(Map<String, dynamic> param, CancelToken? cancelToken);
+  Future<LoginResponseModel> login(body, CancelToken? cancelToken);
 }

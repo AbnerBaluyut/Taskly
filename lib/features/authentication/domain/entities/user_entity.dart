@@ -28,6 +28,20 @@ class UserEntity extends BaseEntity {
     'session_id': sessionId,
   };
 
+  UserEntity copyWith({
+    int? id,
+    String? email,
+    String? name,
+    String? image,
+    String? sessionId
+  }) => UserEntity(
+    id: id ?? this.id,
+    email: email ?? this.email,
+    name: name ?? this.name,
+    image:  image ?? this.image,
+    sessionId:  sessionId ?? this.sessionId
+  );
+  
   factory UserEntity.fromJson(Map<String, dynamic> json) => UserEntity(
     id: json['user_id'],
     email: json['user_email'],

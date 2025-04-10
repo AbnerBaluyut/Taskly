@@ -30,9 +30,9 @@ class DioClient {
     if (kDebugMode) {
       _dio.interceptors.add(
         LogInterceptor(
-          request: true,
-          responseBody: true,
-          requestBody: true,
+          request: false,
+          responseBody: false,
+          requestBody: false,
           error: true,
         ),
       );
@@ -97,7 +97,7 @@ class DioClient {
         case 404:
           return DioException(requestOptions: e.requestOptions, error: NotFoundException());
         default:
-          return DioException(requestOptions: e.requestOptions, error: ServerException(data['message'] ?? Strings.errorMessage, code: code));
+          return DioException(requestOptions: e.requestOptions, error: ServerException(Strings.errorMessage, code: code));
       }
     }
 
@@ -105,6 +105,6 @@ class DioClient {
       return DioException(requestOptions: e.requestOptions, error: NetworkException(Strings.noInternetConnection));
     }
 
-    return DioException(requestOptions: e.requestOptions, error: UnknownException(e.message ?? Strings.errorMessage));
+    return DioException(requestOptions: e.requestOptions, error: UnknownException(Strings.errorMessage));
   }
 }

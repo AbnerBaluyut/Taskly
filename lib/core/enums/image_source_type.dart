@@ -1,0 +1,1 @@
+enum ImageSourceType { network, file, base64, unknown }

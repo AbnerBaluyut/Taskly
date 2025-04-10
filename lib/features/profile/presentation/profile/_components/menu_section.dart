@@ -46,7 +46,7 @@ class MenuSection extends StatelessWidget {
           CircleAvatar(
             backgroundColor: CustomColors.neutral200,
             child: CommonImage(
-              path: icon,
+              icon,
               height: 20.0,
               width: 20.0,
               color: iconColor,

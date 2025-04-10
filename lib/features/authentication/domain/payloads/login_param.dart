@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+
 class LoginParam {
 
   final String email;
@@ -12,4 +14,6 @@ class LoginParam {
     'email': email,
     'password': password,
   };
+
+  FormData toFormData() => FormData.fromMap(toJson());
 }
