@@ -91,6 +91,9 @@ class DioClient {
 
       switch (code) {
         case 400:
+          if (data['old_password'] != null) {
+            return DioException(requestOptions: e.requestOptions, error: ServerException("Your current password is incorrect", code: code));
+          } 
           return DioException(requestOptions: e.requestOptions, error: ServerException(data['message'] ?? "Bad Request", code: code));
         case 401:
           return DioException(requestOptions: e.requestOptions, error: UnauthorizedException(data?['messages']?["message"] ?? data['message'] ?? "Unauthorized", code: code));
