@@ -30,9 +30,9 @@ class DioClient {
     if (kDebugMode) {
       _dio.interceptors.add(
         LogInterceptor(
-          request: false,
-          responseBody: false,
-          requestBody: false,
+          request: true,
+          responseBody: true,
+          requestBody: true,
           error: true,
         ),
       );
@@ -93,7 +93,7 @@ class DioClient {
         case 400:
           return DioException(requestOptions: e.requestOptions, error: ServerException(data['message'] ?? "Bad Request", code: code));
         case 401:
-          return DioException(requestOptions: e.requestOptions, error: UnauthorizedException(data['message'] ?? "Unauthorized", code: code));
+          return DioException(requestOptions: e.requestOptions, error: UnauthorizedException(data?['messages']?["message"] ?? data['message'] ?? "Unauthorized", code: code));
         case 404:
           return DioException(requestOptions: e.requestOptions, error: NotFoundException());
         default:

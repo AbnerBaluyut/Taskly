@@ -10,10 +10,12 @@ _EditProfileResponseModel _$EditProfileResponseModelFromJson(
         Map<String, dynamic> json) =>
     _EditProfileResponseModel(
       message: json['message'] as String,
+      data: UserModel.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$EditProfileResponseModelToJson(
         _EditProfileResponseModel instance) =>
     <String, dynamic>{
       'message': instance.message,
+      'data': instance.data,
     };

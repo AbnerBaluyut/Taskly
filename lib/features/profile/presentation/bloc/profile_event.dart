@@ -11,6 +11,14 @@ class UpdateProfileEvent extends ProfileEvent {
     this.file
   });
 }
+class UpdatePasswordEvent extends ProfileEvent {
+  final String currentPassword;
+  final String newPassword;
+  UpdatePasswordEvent({
+    required this.currentPassword,
+    required this.newPassword
+  });
+}
 class OpenGalleryEvent extends ProfileEvent {}
 class OpenCameraEvent extends ProfileEvent {}
 class LogOutEvent extends ProfileEvent {}

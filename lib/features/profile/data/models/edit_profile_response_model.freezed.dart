@@ -15,7 +15,10 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$EditProfileResponseModel {
+  @JsonKey(name: 'message')
   String get message;
+  @JsonKey(name: 'data')
+  UserModel get data;
 
   /// Create a copy of EditProfileResponseModel
   /// with the given fields replaced by the non-null parameter values.
@@ -33,16 +36,17 @@ mixin _$EditProfileResponseModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is EditProfileResponseModel &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.data, data) || other.data == data));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(runtimeType, message, data);
 
   @override
   String toString() {
-    return 'EditProfileResponseModel(message: $message)';
+    return 'EditProfileResponseModel(message: $message, data: $data)';
   }
 }
 
@@ -52,7 +56,11 @@ abstract mixin class $EditProfileResponseModelCopyWith<$Res> {
           $Res Function(EditProfileResponseModel) _then) =
       _$EditProfileResponseModelCopyWithImpl;
   @useResult
-  $Res call({String message});
+  $Res call(
+      {@JsonKey(name: 'message') String message,
+      @JsonKey(name: 'data') UserModel data});
+
+  $UserModelCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -69,25 +77,46 @@ class _$EditProfileResponseModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? message = null,
+    Object? data = null,
   }) {
     return _then(_self.copyWith(
       message: null == message
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      data: null == data
+          ? _self.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as UserModel,
     ));
+  }
+
+  /// Create a copy of EditProfileResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserModelCopyWith<$Res> get data {
+    return $UserModelCopyWith<$Res>(_self.data, (value) {
+      return _then(_self.copyWith(data: value));
+    });
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _EditProfileResponseModel implements EditProfileResponseModel {
-  const _EditProfileResponseModel({required this.message});
+  const _EditProfileResponseModel(
+      {@JsonKey(name: 'message') required this.message,
+      @JsonKey(name: 'data') required this.data});
   factory _EditProfileResponseModel.fromJson(Map<String, dynamic> json) =>
       _$EditProfileResponseModelFromJson(json);
 
   @override
+  @JsonKey(name: 'message')
   final String message;
+  @override
+  @JsonKey(name: 'data')
+  final UserModel data;
 
   /// Create a copy of EditProfileResponseModel
   /// with the given fields replaced by the non-null parameter values.
@@ -110,16 +139,17 @@ class _EditProfileResponseModel implements EditProfileResponseModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _EditProfileResponseModel &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.data, data) || other.data == data));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(runtimeType, message, data);
 
   @override
   String toString() {
-    return 'EditProfileResponseModel(message: $message)';
+    return 'EditProfileResponseModel(message: $message, data: $data)';
   }
 }
 
@@ -131,7 +161,12 @@ abstract mixin class _$EditProfileResponseModelCopyWith<$Res>
       __$EditProfileResponseModelCopyWithImpl;
   @override
   @useResult
-  $Res call({String message});
+  $Res call(
+      {@JsonKey(name: 'message') String message,
+      @JsonKey(name: 'data') UserModel data});
+
+  @override
+  $UserModelCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -148,13 +183,28 @@ class __$EditProfileResponseModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? message = null,
+    Object? data = null,
   }) {
     return _then(_EditProfileResponseModel(
       message: null == message
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      data: null == data
+          ? _self.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as UserModel,
     ));
+  }
+
+  /// Create a copy of EditProfileResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserModelCopyWith<$Res> get data {
+    return $UserModelCopyWith<$Res>(_self.data, (value) {
+      return _then(_self.copyWith(data: value));
+    });
   }
 }
 

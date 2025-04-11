@@ -31,6 +31,14 @@ class UpdateUserImageErrorState extends ProfileState {
   UpdateUserImageErrorState(this.errorMessage);
 }
 
+// Change Password
+class UpdatePasswordLoadingState extends ProfileState {}
+class UpdatePasswordSuccessState extends ProfileState {}
+class UpdatePasswordErrorState extends ProfileState {
+  final String errorMessage;
+  UpdatePasswordErrorState(this.errorMessage);
+}
+
 
 
 

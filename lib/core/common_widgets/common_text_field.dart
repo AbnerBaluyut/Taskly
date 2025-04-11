@@ -33,6 +33,7 @@ class CommonTextField extends StatefulWidget {
   final TextInputAction? textInputAction;
   final bool showScrollbar;
   final bool? enabled;
+  final int? errorMaxLines; 
 
   const CommonTextField({
     super.key,
@@ -61,7 +62,8 @@ class CommonTextField extends StatefulWidget {
     this.focusedErrorBorder,
     this.textInputAction,
     this.onFieldSubmitted,
-    this.showScrollbar = false
+    this.showScrollbar = false,
+    this.errorMaxLines
   });
 
   @override
@@ -143,6 +145,7 @@ class CommonTextFieldState extends State<CommonTextField> {
           fontWeight: FontWeight.w400,
           fontSize: 14.0
         ),
+        errorMaxLines: widget.errorMaxLines,
         enabledBorder: widget.enabledBorder ?? widget.border ?? OutlineInputBorder(
           borderRadius: BorderRadius.circular(3),
           borderSide: BorderSide(

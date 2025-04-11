@@ -32,7 +32,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   final TextEditingController _nameController = TextEditingController();
 
-  String? _imagePath;
+  String? _userImage;
+  File? _filePath;
 
   @override
   void initState() {
@@ -44,7 +45,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     await showModalBottomSheet(
       context: context, 
       backgroundColor: Colors.transparent,
-      barrierColor: Colors.transparent,
+      barrierColor: Colors.black12,
       builder: (ctx) {
         return SelectMediaBottomSheet(
           onTapCamera: () {
@@ -64,7 +65,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
       listener: (context, state) {
         if (state is SubmitProfileErrorState) {
           context.showAnimatedErrorDialog(
-            title: state.errorMessage
+            title: state.errorMessage,
+            onButtonPressed: () => context.popSafely()
           );
         } else if (state is SubmitProfileSuccessState) {
           context.showAnimatedSuccessDialog(
@@ -72,10 +74,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
             onButtonPressed: () => context.popSafely(closeOverlay: true)
           );
         } else if (state is UpdateUserImageSuccessState) {
-          _imagePath = state.imagePath;
+          _filePath = File(state.imagePath);
         } else if (state is UpdateUserImageErrorState) {
           context.showAnimatedErrorDialog(
-            title: state.errorMessage
+            title: state.errorMessage,
+            onButtonPressed: () => context.popSafely()
           );
         } else if (state is OpeningMediaState) {
           context.popSafely(); 
@@ -85,7 +88,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     
         if (state is GetUserDataState) {
           _nameController.text = state.user.name;
-          _imagePath = state.user.image;
+          _userImage = state.user.image;
         }
         
         return CommonScaffold(
@@ -129,7 +132,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   clipBehavior: Clip.none,
                                   children: [
                                     CommonImage(
-                                      _imagePath ?? "",
+                                      _filePath?.path ?? _userImage ?? "",
                                       height: 100,
                                       width:100,
                                       radius: 80.0,
@@ -188,7 +191,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 if (_formKey.currentState?.validate() ?? false) {
                                   context.read<ProfileBloc>().add(UpdateProfileEvent(
                                     name: _nameController.text.trim(),
-                                    file: File(_imagePath ?? "")
+                                    file: _filePath
                                   ));
                                 }
                               },

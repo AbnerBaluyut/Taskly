@@ -55,7 +55,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           await showModalBottomSheet(
                             context: context, 
                             backgroundColor: Colors.transparent,
-                            barrierColor: Colors.transparent,
+                            barrierColor: Colors.black12,
                             builder: (ctx) {
                              return SelectMediaBottomSheet(
                               onTapCamera: () {

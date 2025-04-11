@@ -7,18 +7,20 @@ part of 'user_model.dart';
 // **************************************************************************
 
 _UserModel _$UserModelFromJson(Map<String, dynamic> json) => _UserModel(
-      userId: (json['user_id'] as num).toInt(),
-      userEmail: json['user_email'] as String,
-      userName: json['user_name'] as String,
-      userImage: json['user_image'] as String,
-      userSessionId: json['user_session_id'] as String,
+      userId: (json['user_id'] as num?)?.toInt(),
+      userEmail: json['user_email'] as String?,
+      userName: json['user_name'] as String?,
+      userImage: json['user_image'] as String?,
+      accessToken: json['access'] as String?,
+      refreshToken: json['refresh'] as String?,
     );
 
 Map<String, dynamic> _$UserModelToJson(_UserModel instance) =>
     <String, dynamic>{
-      'user_id': instance.userId,
-      'user_email': instance.userEmail,
-      'user_name': instance.userName,
-      'user_image': instance.userImage,
-      'user_session_id': instance.userSessionId,
+      if (instance.userId case final value?) 'user_id': value,
+      if (instance.userEmail case final value?) 'user_email': value,
+      if (instance.userName case final value?) 'user_name': value,
+      if (instance.userImage case final value?) 'user_image': value,
+      if (instance.accessToken case final value?) 'access': value,
+      if (instance.refreshToken case final value?) 'refresh': value,
     };

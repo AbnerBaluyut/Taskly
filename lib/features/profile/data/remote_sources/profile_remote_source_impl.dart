@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import '../../../../core/constants/endpoints.dart';
 import '../../../../core/errors/unknown_exception.dart';
 import '../../../../core/services/dio_client.dart';
+import '../../../../core/styles/keys.dart';
 import '../../../../core/styles/strings.dart';
 import '../../../../core/utils/shared_preferences_manager.dart';
 import '../../../../data/remote_sources/profile_remote_source.dart';
@@ -25,9 +26,14 @@ class ProfileRemoteSourceImpl implements ProfileRemoteSource {
 
     try {
       
-      final response = await client.instance.post(
-        "${Endpoints.editProfile}/${sharedPreferenceManager.getUser.id}/",
+      final response = await client.instance.patch(
+        "${Endpoints.editProfile}${sharedPreferenceManager.getUser.id}/",
         data: body,
+        options: Options(
+          headers: {
+            Keys.authorization: "Bearer ${sharedPreferenceManager.getUser.accessToken}"
+          }
+        ),
         cancelToken: cancelToken
       );
 
@@ -37,6 +43,32 @@ class ProfileRemoteSourceImpl implements ProfileRemoteSource {
       throw e.error ?? UnknownException(Strings.errorMessage);
     } catch (e) {
       log("editProfile err: $e");
+      throw Exception(Strings.errorMessage);
+    }
+  }
+  
+  @override
+  Future<bool> changePassword(body, CancelToken? cancelToken) async {
+
+    try {
+      
+      final response = await client.instance.patch(
+        Endpoints.changePassword,
+        data: body,
+        options: Options(
+          headers: {
+            Keys.authorization: "Bearer ${sharedPreferenceManager.getUser.accessToken}"
+          }
+        ),
+        cancelToken: cancelToken
+      );
+
+      return response.statusCode == 200;
+
+    } on DioException catch (e) {
+      throw e.error ?? UnknownException(Strings.errorMessage);
+    } catch (e) {
+      log("changePassword err: $e");
       throw Exception(Strings.errorMessage);
     }
   }

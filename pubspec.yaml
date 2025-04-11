@@ -85,6 +85,9 @@ dependencies:
   # Image Picker
   image_picker: ^1.1.2
 
+  # Environment
+  flutter_dotenv: ^5.2.1
+
 flutter_native_splash:
   android: true
   ios: true
@@ -125,6 +128,7 @@ flutter:
     - assets/fonts/
     - assets/svg/
     - assets/gif/
+    - .env.development
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

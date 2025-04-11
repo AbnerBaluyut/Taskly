@@ -5,21 +5,30 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "taskly",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "taskly (profile mode)",
+            "name": "Taskly (Dev)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "args": [
+                "--dart-define-from-file=.env.development"
+            ]
         },
         {
-            "name": "taskly (release mode)",
+            "name": "Taskly (Profile Mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "flutterMode": "profile",
+            "args": [
+                "--dart-define-from-file=.env.development"
+            ]
+        },
+        {
+            "name": "Taskly (Release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "args": [
+                "--dart-define-from-file=.env.development"
+            ]
         }
     ]
 }

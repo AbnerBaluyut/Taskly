@@ -1,5 +1,8 @@
-class Endpoints {
-  static const String baseUrl = 'http://192.168.1.98:8000';
-  static const String login = '/login/';
-  static const String editProfile = '/edit-profile/';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+abstract class Endpoints {
+  static String baseUrl = dotenv.env["BASE_URL"] ?? "";
+  static String login = dotenv.env["LOGIN"] ?? "";
+  static String editProfile = dotenv.env["EDIT_PROFILE"] ?? "";
+  static String changePassword = dotenv.env["CHANGE_PASSWORD"] ?? "";
 }

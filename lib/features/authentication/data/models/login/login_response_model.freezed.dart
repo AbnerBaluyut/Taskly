@@ -15,6 +15,8 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$LoginResponseModel {
+  @JsonKey(name: 'status')
+  int get status;
   @JsonKey(name: 'message')
   String get message;
   @JsonKey(name: 'data')
@@ -36,17 +38,18 @@ mixin _$LoginResponseModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is LoginResponseModel &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.data, data) || other.data == data));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, message, data);
+  int get hashCode => Object.hash(runtimeType, status, message, data);
 
   @override
   String toString() {
-    return 'LoginResponseModel(message: $message, data: $data)';
+    return 'LoginResponseModel(status: $status, message: $message, data: $data)';
   }
 }
 
@@ -57,7 +60,8 @@ abstract mixin class $LoginResponseModelCopyWith<$Res> {
       _$LoginResponseModelCopyWithImpl;
   @useResult
   $Res call(
-      {@JsonKey(name: 'message') String message,
+      {@JsonKey(name: 'status') int status,
+      @JsonKey(name: 'message') String message,
       @JsonKey(name: 'data') UserModel data});
 
   $UserModelCopyWith<$Res> get data;
@@ -76,10 +80,15 @@ class _$LoginResponseModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? status = null,
     Object? message = null,
     Object? data = null,
   }) {
     return _then(_self.copyWith(
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int,
       message: null == message
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -106,11 +115,15 @@ class _$LoginResponseModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _LoginResponseModel implements LoginResponseModel {
   const _LoginResponseModel(
-      {@JsonKey(name: 'message') required this.message,
+      {@JsonKey(name: 'status') required this.status,
+      @JsonKey(name: 'message') required this.message,
       @JsonKey(name: 'data') required this.data});
   factory _LoginResponseModel.fromJson(Map<String, dynamic> json) =>
       _$LoginResponseModelFromJson(json);
 
+  @override
+  @JsonKey(name: 'status')
+  final int status;
   @override
   @JsonKey(name: 'message')
   final String message;
@@ -138,17 +151,18 @@ class _LoginResponseModel implements LoginResponseModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _LoginResponseModel &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.data, data) || other.data == data));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, message, data);
+  int get hashCode => Object.hash(runtimeType, status, message, data);
 
   @override
   String toString() {
-    return 'LoginResponseModel(message: $message, data: $data)';
+    return 'LoginResponseModel(status: $status, message: $message, data: $data)';
   }
 }
 
@@ -161,7 +175,8 @@ abstract mixin class _$LoginResponseModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'message') String message,
+      {@JsonKey(name: 'status') int status,
+      @JsonKey(name: 'message') String message,
       @JsonKey(name: 'data') UserModel data});
 
   @override
@@ -181,10 +196,15 @@ class __$LoginResponseModelCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
+    Object? status = null,
     Object? message = null,
     Object? data = null,
   }) {
     return _then(_LoginResponseModel(
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int,
       message: null == message
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable

@@ -10,14 +10,16 @@ class UserEntity extends BaseEntity {
     required this.email,
     required this.name,
     required this.image,
-    required this.sessionId,
+    required this.accessToken,
+    required this.refreshToken
   });
 
   final int id;
   final String email;
   final String name;
   final String image;
-  final String sessionId;
+  final String accessToken;
+  final String refreshToken;
  
   @override
   Map<String, dynamic> toJson() => {
@@ -25,7 +27,8 @@ class UserEntity extends BaseEntity {
     'user_email': email,
     'user_name': name,
     'user_image': image,
-    'session_id': sessionId,
+    'access': accessToken,
+    'refresh': refreshToken
   };
 
   UserEntity copyWith({
@@ -33,13 +36,16 @@ class UserEntity extends BaseEntity {
     String? email,
     String? name,
     String? image,
-    String? sessionId
+    String? sessionId,
+    String? accessToken,
+    String? refreshToken
   }) => UserEntity(
     id: id ?? this.id,
     email: email ?? this.email,
     name: name ?? this.name,
     image:  image ?? this.image,
-    sessionId:  sessionId ?? this.sessionId
+    accessToken: accessToken ?? this.accessToken,
+    refreshToken: refreshToken ?? this.refreshToken
   );
   
   factory UserEntity.fromJson(Map<String, dynamic> json) => UserEntity(
@@ -47,7 +53,8 @@ class UserEntity extends BaseEntity {
     email: json['user_email'],
     name: json['user_name'],
     image: json['user_image'],
-    sessionId: json['user_image'],
+    accessToken: json['access'],
+    refreshToken: json['refresh']
   );
 
   factory UserEntity.fromJsonString(String source) => UserEntity.fromJson(json.decode(source));

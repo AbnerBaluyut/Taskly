@@ -4,20 +4,28 @@ import 'package:dio/dio.dart';
 class EditProfileParam {
 
   final String name;
-  final File imageFile;
+  final File? imageFile;
 
   EditProfileParam({
     required this.name,
-    required this.imageFile
+    this.imageFile
   });
 
   FormData toFormData() {
 
-    String filename = imageFile.path.split('/').last;
+    Map<String, dynamic> map = {
+      'user_name': name
+    };
 
-    return FormData.fromMap({
-      'name': name,
-      'picture': MultipartFile.fromFile(imageFile.path, filename: filename)
-    });
+    if (imageFile != null) {
+      map.addAll({
+        'picture': MultipartFile.fromFileSync(
+          imageFile!.path, 
+          filename: (imageFile!.path).split('/').last
+        )
+      });
+    }
+
+    return FormData.fromMap(map);
   }
 }

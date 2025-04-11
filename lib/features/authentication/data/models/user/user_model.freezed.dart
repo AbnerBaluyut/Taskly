@@ -15,16 +15,18 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$UserModel {
-  @JsonKey(name: 'user_id')
-  int get userId;
-  @JsonKey(name: 'user_email')
-  String get userEmail;
-  @JsonKey(name: 'user_name')
-  String get userName;
-  @JsonKey(name: 'user_image')
-  String get userImage;
-  @JsonKey(name: 'user_session_id')
-  String get userSessionId;
+  @JsonKey(name: 'user_id', includeIfNull: false)
+  int? get userId;
+  @JsonKey(name: 'user_email', includeIfNull: false)
+  String? get userEmail;
+  @JsonKey(name: 'user_name', includeIfNull: false)
+  String? get userName;
+  @JsonKey(name: 'user_image', includeIfNull: false)
+  String? get userImage;
+  @JsonKey(name: "access", includeIfNull: false)
+  String? get accessToken;
+  @JsonKey(name: "refresh", includeIfNull: false)
+  String? get refreshToken;
 
   /// Create a copy of UserModel
   /// with the given fields replaced by the non-null parameter values.
@@ -48,18 +50,20 @@ mixin _$UserModel {
                 other.userName == userName) &&
             (identical(other.userImage, userImage) ||
                 other.userImage == userImage) &&
-            (identical(other.userSessionId, userSessionId) ||
-                other.userSessionId == userSessionId));
+            (identical(other.accessToken, accessToken) ||
+                other.accessToken == accessToken) &&
+            (identical(other.refreshToken, refreshToken) ||
+                other.refreshToken == refreshToken));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, userId, userEmail, userName, userImage, userSessionId);
+  int get hashCode => Object.hash(runtimeType, userId, userEmail, userName,
+      userImage, accessToken, refreshToken);
 
   @override
   String toString() {
-    return 'UserModel(userId: $userId, userEmail: $userEmail, userName: $userName, userImage: $userImage, userSessionId: $userSessionId)';
+    return 'UserModel(userId: $userId, userEmail: $userEmail, userName: $userName, userImage: $userImage, accessToken: $accessToken, refreshToken: $refreshToken)';
   }
 }
 
@@ -69,11 +73,12 @@ abstract mixin class $UserModelCopyWith<$Res> {
       _$UserModelCopyWithImpl;
   @useResult
   $Res call(
-      {@JsonKey(name: 'user_id') int userId,
-      @JsonKey(name: 'user_email') String userEmail,
-      @JsonKey(name: 'user_name') String userName,
-      @JsonKey(name: 'user_image') String userImage,
-      @JsonKey(name: 'user_session_id') String userSessionId});
+      {@JsonKey(name: 'user_id', includeIfNull: false) int? userId,
+      @JsonKey(name: 'user_email', includeIfNull: false) String? userEmail,
+      @JsonKey(name: 'user_name', includeIfNull: false) String? userName,
+      @JsonKey(name: 'user_image', includeIfNull: false) String? userImage,
+      @JsonKey(name: "access", includeIfNull: false) String? accessToken,
+      @JsonKey(name: "refresh", includeIfNull: false) String? refreshToken});
 }
 
 /// @nodoc
@@ -88,33 +93,38 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userId = null,
-    Object? userEmail = null,
-    Object? userName = null,
-    Object? userImage = null,
-    Object? userSessionId = null,
+    Object? userId = freezed,
+    Object? userEmail = freezed,
+    Object? userName = freezed,
+    Object? userImage = freezed,
+    Object? accessToken = freezed,
+    Object? refreshToken = freezed,
   }) {
     return _then(_self.copyWith(
-      userId: null == userId
+      userId: freezed == userId
           ? _self.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as int,
-      userEmail: null == userEmail
+              as int?,
+      userEmail: freezed == userEmail
           ? _self.userEmail
           : userEmail // ignore: cast_nullable_to_non_nullable
-              as String,
-      userName: null == userName
+              as String?,
+      userName: freezed == userName
           ? _self.userName
           : userName // ignore: cast_nullable_to_non_nullable
-              as String,
-      userImage: null == userImage
+              as String?,
+      userImage: freezed == userImage
           ? _self.userImage
           : userImage // ignore: cast_nullable_to_non_nullable
-              as String,
-      userSessionId: null == userSessionId
-          ? _self.userSessionId
-          : userSessionId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      accessToken: freezed == accessToken
+          ? _self.accessToken
+          : accessToken // ignore: cast_nullable_to_non_nullable
+              as String?,
+      refreshToken: freezed == refreshToken
+          ? _self.refreshToken
+          : refreshToken // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -123,29 +133,33 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
 @JsonSerializable()
 class _UserModel implements UserModel {
   const _UserModel(
-      {@JsonKey(name: 'user_id') required this.userId,
-      @JsonKey(name: 'user_email') required this.userEmail,
-      @JsonKey(name: 'user_name') required this.userName,
-      @JsonKey(name: 'user_image') required this.userImage,
-      @JsonKey(name: 'user_session_id') required this.userSessionId});
+      {@JsonKey(name: 'user_id', includeIfNull: false) this.userId,
+      @JsonKey(name: 'user_email', includeIfNull: false) this.userEmail,
+      @JsonKey(name: 'user_name', includeIfNull: false) this.userName,
+      @JsonKey(name: 'user_image', includeIfNull: false) this.userImage,
+      @JsonKey(name: "access", includeIfNull: false) this.accessToken,
+      @JsonKey(name: "refresh", includeIfNull: false) this.refreshToken});
   factory _UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
 
   @override
-  @JsonKey(name: 'user_id')
-  final int userId;
+  @JsonKey(name: 'user_id', includeIfNull: false)
+  final int? userId;
   @override
-  @JsonKey(name: 'user_email')
-  final String userEmail;
+  @JsonKey(name: 'user_email', includeIfNull: false)
+  final String? userEmail;
   @override
-  @JsonKey(name: 'user_name')
-  final String userName;
+  @JsonKey(name: 'user_name', includeIfNull: false)
+  final String? userName;
   @override
-  @JsonKey(name: 'user_image')
-  final String userImage;
+  @JsonKey(name: 'user_image', includeIfNull: false)
+  final String? userImage;
   @override
-  @JsonKey(name: 'user_session_id')
-  final String userSessionId;
+  @JsonKey(name: "access", includeIfNull: false)
+  final String? accessToken;
+  @override
+  @JsonKey(name: "refresh", includeIfNull: false)
+  final String? refreshToken;
 
   /// Create a copy of UserModel
   /// with the given fields replaced by the non-null parameter values.
@@ -174,18 +188,20 @@ class _UserModel implements UserModel {
                 other.userName == userName) &&
             (identical(other.userImage, userImage) ||
                 other.userImage == userImage) &&
-            (identical(other.userSessionId, userSessionId) ||
-                other.userSessionId == userSessionId));
+            (identical(other.accessToken, accessToken) ||
+                other.accessToken == accessToken) &&
+            (identical(other.refreshToken, refreshToken) ||
+                other.refreshToken == refreshToken));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, userId, userEmail, userName, userImage, userSessionId);
+  int get hashCode => Object.hash(runtimeType, userId, userEmail, userName,
+      userImage, accessToken, refreshToken);
 
   @override
   String toString() {
-    return 'UserModel(userId: $userId, userEmail: $userEmail, userName: $userName, userImage: $userImage, userSessionId: $userSessionId)';
+    return 'UserModel(userId: $userId, userEmail: $userEmail, userName: $userName, userImage: $userImage, accessToken: $accessToken, refreshToken: $refreshToken)';
   }
 }
 
@@ -198,11 +214,12 @@ abstract mixin class _$UserModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'user_id') int userId,
-      @JsonKey(name: 'user_email') String userEmail,
-      @JsonKey(name: 'user_name') String userName,
-      @JsonKey(name: 'user_image') String userImage,
-      @JsonKey(name: 'user_session_id') String userSessionId});
+      {@JsonKey(name: 'user_id', includeIfNull: false) int? userId,
+      @JsonKey(name: 'user_email', includeIfNull: false) String? userEmail,
+      @JsonKey(name: 'user_name', includeIfNull: false) String? userName,
+      @JsonKey(name: 'user_image', includeIfNull: false) String? userImage,
+      @JsonKey(name: "access", includeIfNull: false) String? accessToken,
+      @JsonKey(name: "refresh", includeIfNull: false) String? refreshToken});
 }
 
 /// @nodoc
@@ -217,33 +234,38 @@ class __$UserModelCopyWithImpl<$Res> implements _$UserModelCopyWith<$Res> {
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? userId = null,
-    Object? userEmail = null,
-    Object? userName = null,
-    Object? userImage = null,
-    Object? userSessionId = null,
+    Object? userId = freezed,
+    Object? userEmail = freezed,
+    Object? userName = freezed,
+    Object? userImage = freezed,
+    Object? accessToken = freezed,
+    Object? refreshToken = freezed,
   }) {
     return _then(_UserModel(
-      userId: null == userId
+      userId: freezed == userId
           ? _self.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as int,
-      userEmail: null == userEmail
+              as int?,
+      userEmail: freezed == userEmail
           ? _self.userEmail
           : userEmail // ignore: cast_nullable_to_non_nullable
-              as String,
-      userName: null == userName
+              as String?,
+      userName: freezed == userName
           ? _self.userName
           : userName // ignore: cast_nullable_to_non_nullable
-              as String,
-      userImage: null == userImage
+              as String?,
+      userImage: freezed == userImage
           ? _self.userImage
           : userImage // ignore: cast_nullable_to_non_nullable
-              as String,
-      userSessionId: null == userSessionId
-          ? _self.userSessionId
-          : userSessionId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      accessToken: freezed == accessToken
+          ? _self.accessToken
+          : accessToken // ignore: cast_nullable_to_non_nullable
+              as String?,
+      refreshToken: freezed == refreshToken
+          ? _self.refreshToken
+          : refreshToken // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
