@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 
-import '../../../../../core/styles/custom_colors.dart';
-import '../../../../../core/styles/dimension.dart';
+import '../styles/custom_colors.dart';
+import '../styles/dimension.dart';
 
-class SelectMediaBottomSheet extends StatelessWidget {
+class CommonSelectMediaBottomSheet extends StatelessWidget {
 
-  const SelectMediaBottomSheet({super.key, required this.onTapCamera, required this.onTapGallery});
+  const CommonSelectMediaBottomSheet({super.key, required this.onTapCamera, required this.onTapGallery});
 
   final VoidCallback onTapCamera;
   final VoidCallback onTapGallery;

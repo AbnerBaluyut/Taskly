@@ -11,3 +11,23 @@ class AuthFailure extends AuthState {
 }
 
 class AuthCancel extends AuthState {}
+
+
+class RegisterInitialState extends AuthState {}
+class RegisterLoadingState extends AuthState {}
+class RegisterSuccessState extends AuthState {}
+class RegisterFailureState extends AuthState {
+  final String errorMessage;
+  RegisterFailureState(this.errorMessage);
+}
+class RegisterCancelState extends AuthState {}
+
+class OpeningMediaState extends AuthState {}
+class UploadImageSuccessState extends AuthState {
+  final String imagePath;
+  UploadImageSuccessState({required this.imagePath});
+}
+class UploadImageErrorState extends AuthState {
+  final String errorMessage;
+  UploadImageErrorState(this.errorMessage);
+}

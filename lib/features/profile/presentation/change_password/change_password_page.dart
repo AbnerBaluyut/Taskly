@@ -117,8 +117,11 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                                 if (getValue.isEmpty) {
                                   _newPasswordKey.currentState?.shake();
                                   return "New Password is required.";
+                                } else if (getValue.validatePassword != null) {
+                                  _newPasswordKey.currentState?.shake();
+                                  return getValue.validatePassword;
                                 }
-                                return value?.validatePassword;
+                                return null;
                               },
                               onFieldSubmitted: (_) {
                                 _focusNode3.requestFocus();

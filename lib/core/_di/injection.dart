@@ -9,9 +9,11 @@ import '../../data/repositories/profile_repository.dart';
 import '../../data/usecases/change_password_usecase.dart';
 import '../../data/usecases/edit_profile_usecase.dart';
 import '../../data/usecases/login_usecase.dart';
+import '../../data/usecases/register_usecase.dart';
 import '../../features/authentication/data/remote_sources/auth_remote_source_impl.dart';
 import '../../features/authentication/data/repositories/auth_repository_impl.dart';
 import '../../features/authentication/domain/usecases/login_usecase_impl.dart';
+import '../../features/authentication/domain/usecases/register_usecase_impl.dart';
 import '../../features/profile/data/remote_sources/profile_remote_source_impl.dart';
 import '../../features/profile/data/repositories/profile_repository_impl.dart';
 import '../../features/profile/domain/usecases/change_password_usecase_impl.dart';
@@ -37,21 +39,30 @@ Future<void> initDependency() async {
   //* ========= AUTHENTICATION
 
     // Remote Source //
-    _inject.registerLazySingleton<AuthRemoteSource>(() {
-      return AuthRemoteSourceImpl(
+    _inject.registerLazySingleton<AuthRemoteSource>(
+      () => AuthRemoteSourceImpl(
         client: _inject(),
-      );
-    });
+      )
+    );
 
     // Repositories //
-    _inject.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(
-      remoteSource: _inject()
-    ));
+    _inject.registerLazySingleton<AuthRepository>(
+      () => AuthRepositoryImpl(
+        remoteSource: _inject()
+      )
+    );
 
     // Usecases //
-    _inject.registerLazySingleton<LoginUseCase>(() => LoginUseCaseImpl(
-      repository: _inject()
-    ));
+    _inject.registerLazySingleton<LoginUseCase>(
+      () => LoginUseCaseImpl(
+        repository: _inject()
+      )
+    );
+    _inject.registerLazySingleton<RegisterUseCase>(
+      () => RegisterUseCaseImpl(
+        repository: _inject() 
+      )
+    );
 
   //* ========= AUTHENTICATION
 
@@ -75,12 +86,16 @@ Future<void> initDependency() async {
     );
 
     // Usecases //
-    _inject.registerLazySingleton<EditProfileUseCase>(() => EditProfileUseCaseImpl(
-      repository: _inject()
-    ));
-    _inject.registerLazySingleton<ChangePasswordUseCase>(() => ChangePasswordUseCaseImpl(
-      repository: _inject()
-    ));
+    _inject.registerLazySingleton<EditProfileUseCase>(
+      () => EditProfileUseCaseImpl(
+        repository: _inject()
+      )
+    );
+    _inject.registerLazySingleton<ChangePasswordUseCase>(
+      () => ChangePasswordUseCaseImpl(
+        repository: _inject()
+      )
+    );
 
   //* ========= PROFILE
 }

@@ -13,7 +13,7 @@ import '../../../../core/common_widgets/common_scaffold.dart';
 import '../../../../core/common_widgets/common_text_field.dart';
 import '../../../../core/styles/custom_colors.dart';
 import '../../../../core/styles/dimension.dart';
-import '../../../authentication/presentation/register/_components/select_media_bottom_sheet.dart';
+import '../../../../core/common_widgets/common_select_media_bottom_sheet.dart';
 import '../bloc/profile_bloc.dart';
 import '../bloc/profile_event.dart';
 import '../bloc/profile_state.dart';
@@ -47,7 +47,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       backgroundColor: Colors.transparent,
       barrierColor: Colors.black12,
       builder: (ctx) {
-        return SelectMediaBottomSheet(
+        return CommonSelectMediaBottomSheet(
           onTapCamera: () {
             context.read<ProfileBloc>().add(OpenCameraEvent());
           },
