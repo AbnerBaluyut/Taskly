@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
 
 import '../../../../../core/common_widgets/common_back_button.dart';
@@ -11,7 +10,7 @@ class CreateProjectAppBar extends AppBar {
     leading: Builder(
       builder: (context) {
         return CommonBackButton(
-          onBackPressed: () => context.pop(),
+          onBackPressed: () => context.popSafely(),
         );
       }
     ),

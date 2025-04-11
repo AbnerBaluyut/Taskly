@@ -69,7 +69,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         } else if (state is SubmitProfileSuccessState) {
           context.showAnimatedSuccessDialog(
             title: "Profile Updated successfully.",
-            onButtonPressed: () => context.pop()
+            onButtonPressed: () => context.popSafely(closeOverlay: true)
           );
         } else if (state is UpdateUserImageSuccessState) {
           _imagePath = state.imagePath;
@@ -78,7 +78,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             title: state.errorMessage
           );
         } else if (state is OpeningMediaState) {
-          context.pop(); 
+          context.popSafely(); 
         }
       },
       builder: (context, state) {
@@ -119,29 +119,35 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           Dimension.spacingExtraLarge.height(),
                           Column(
                             children: [
-                              Stack(
-                                alignment: Alignment.bottomRight,
-                                clipBehavior: Clip.none,
-                                children: [
-                                  CommonImage(
-                                    _imagePath ?? "",
-                                    height: 100,
-                                    width:100,
-                                    radius: 80.0,
-                                    fit: BoxFit.cover,
-                                    backgroundColor: Colors.grey.shade200,
-                                    errorWidget: Icon(Icons.person, size: 50.0, color: Colors.grey.shade700),
-                                  ),
-                                  SizedBox(
-                                    height: 30,
-                                    width: 30,
-                                    child: CommonElevatedButton.circleIcon(
-                                      onPressed: (state is SubmitProfileLoadingState) ? null : _onTapCamera,
-                                      padding: EdgeInsets.zero,
-                                      icon: Icon(Icons.camera_alt, color: Colors.white, size: 20),
+                              CommonElevatedButton(
+                                onButtonPressed: (state is SubmitProfileLoadingState) ? null : _onTapCamera,
+                                padding: EdgeInsets.zero,
+                                backgroundColor: Colors.grey.shade200,
+                                borderRadius: BorderRadius.circular(80.0),
+                                custom: Stack(
+                                  alignment: Alignment.bottomRight,
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    CommonImage(
+                                      _imagePath ?? "",
+                                      height: 100,
+                                      width:100,
+                                      radius: 80.0,
+                                      fit: BoxFit.cover,
+                                      backgroundColor: Colors.grey.shade200,
+                                      errorWidget: Icon(Icons.person, size: 50.0, color: Colors.grey.shade700),
                                     ),
-                                  )
-                                ],
+                                    SizedBox(
+                                      height: 30,
+                                      width: 30,
+                                      child: CircleAvatar(
+                                        backgroundColor: (state is SubmitProfileLoadingState) ? Colors.grey : CustomColors.primaryColor,
+                                        radius: 20.0,
+                                        child: Icon(Icons.camera_alt, color: Colors.white, size: 20),
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(

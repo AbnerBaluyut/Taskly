@@ -3,11 +3,10 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:taskly/core/extensions/string_extension.dart';
 
 import '../enums/image_source_type.dart';
-import '../styles/custom_colors.dart';
+import 'common_shimmer.dart';
 
 class CommonImage extends StatelessWidget {
   
@@ -82,12 +81,7 @@ class CommonImage extends StatelessWidget {
           fit: fit,
           color: color,
           progressIndicatorBuilder: (context, url, progress) {
-            return LoadingAnimationWidget.discreteCircle(
-              color: Colors.white, 
-              size: 24.0,
-              secondRingColor: CustomColors.primaryColor,
-              thirdRingColor: Colors.blue.shade200,
-            );
+            return _loading();
           },
           errorWidget: (context, url, error) {
             return errorWidget ?? _errorWidget();
@@ -104,14 +98,7 @@ class CommonImage extends StatelessWidget {
             if (wasSynchronouslyLoaded || frame != null) {
               return child;
             }
-            return Center(
-              child: LoadingAnimationWidget.discreteCircle(
-                color: Colors.white, 
-                size: 24.0,
-                secondRingColor: CustomColors.primaryColor,
-                thirdRingColor: Colors.blue.shade200,
-              )
-            );
+            return _loading();
           },
           errorBuilder: (context, error, stackTrace) {
             return errorWidget ?? _errorWidget();
@@ -128,14 +115,7 @@ class CommonImage extends StatelessWidget {
             if (wasSynchronouslyLoaded || frame != null) {
               return child;
             }
-            return Center(
-              child: LoadingAnimationWidget.discreteCircle(
-                color: Colors.white, 
-                size: 24.0,
-                secondRingColor: CustomColors.primaryColor,
-                thirdRingColor: Colors.blue.shade200,
-              )
-            );
+            return _loading();
           },
           errorBuilder: (context, error, stackTrace) {
             return errorWidget ?? _errorWidget();
@@ -152,22 +132,40 @@ class CommonImage extends StatelessWidget {
             if (wasSynchronouslyLoaded || frame != null) {
               return child;
             }
-            return Center(
-              child: LoadingAnimationWidget.discreteCircle(
-                color: Colors.white, 
-                size: 24.0,
-                secondRingColor: CustomColors.primaryColor,
-                thirdRingColor: Colors.blue.shade200,
-              )
-            );
+            return _loading();
           },
           errorBuilder: (context, error, stackTrace) {
             return errorWidget ?? _errorWidget();
           }
         );
       case ImageSourceType.unknown:
-        return _errorWidget();
+        return Image.asset(
+          name,
+          height: height, 
+          width: width, 
+          fit: fit,
+          color: color,
+          frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+            if (wasSynchronouslyLoaded || frame != null) {
+              return child;
+            }
+            return _loading();
+          },
+          errorBuilder: (context, error, stackTrace) {
+            return errorWidget ?? _errorWidget();
+          }
+        );
     }
+  }
+
+  Widget _loading() {
+    return Center(
+      child: CommonShimmer(
+        height: height ?? 0.0,
+        width: width,
+        borderRadius: BorderRadius.circular(radius),
+      )
+    );
   }
 
   Widget _errorWidget() {

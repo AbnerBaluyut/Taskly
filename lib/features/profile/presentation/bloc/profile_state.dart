@@ -3,7 +3,6 @@ import '../../../authentication/domain/entities/user_entity.dart';
 abstract class ProfileState {}
 
 // Profile
-class ProfileInitialState extends ProfileState {}
 class GetUserDataState extends ProfileState {
   final UserEntity user;
   GetUserDataState({

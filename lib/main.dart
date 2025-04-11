@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'core/_di/injection.dart';
 import 'core/router/app_router.dart';
+import 'core/utils/shared_preferences_manager.dart';
 import 'features/home/bloc/dark_mode_bloc.dart';
 import 'core/styles/theme.dart';
 import 'features/authentication/presentation/bloc/auth_bloc.dart';
@@ -19,7 +21,9 @@ void main() async {
           create: (_) => DarkModeCubit()
         ),
         BlocProvider(
-          create: (_) => ProfileBloc()
+          create: (_) => ProfileBloc(
+            sharedPreferenceManager: GetIt.I<SharedPreferenceManager>()
+          )
         ),
         BlocProvider(
           create: (_) => BottomNavCubit()

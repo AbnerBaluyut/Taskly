@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:taskly/core/extensions/int_extension.dart';
 import 'package:taskly/core/utils/shared_preferences_manager.dart';
 import '../../../../core/utils/image_picker_manager.dart';
@@ -10,13 +9,10 @@ import 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
-  final SharedPreferenceManager _sharedPreferenceManager;
+  final SharedPreferenceManager sharedPreferenceManager;
 
-  ProfileBloc() : 
-    _sharedPreferenceManager = GetIt.I<SharedPreferenceManager>(),
-    super(
-      ProfileInitialState()
-    ) {
+  ProfileBloc({required this.sharedPreferenceManager}) : 
+    super(GetUserDataState(user: sharedPreferenceManager.getUser)) {
       on<LoadUserDataEvent>(_loadData);
       on<UpdateProfileEvent>(_updateProfile);
       on<OpenGalleryEvent>(_openGallery);
@@ -26,7 +22,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   _loadData(LoadUserDataEvent event, Emitter<ProfileState> emit) {
     emit(GetUserDataState(
-      user: _sharedPreferenceManager.getUser
+      user: sharedPreferenceManager.getUser
     ));
   }
 
@@ -68,8 +64,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   _updateProfile(UpdateProfileEvent event, Emitter<ProfileState> emit) async {
     
-    var updateUser = _sharedPreferenceManager.getUser.copyWith(name: event.name, image: event.file?.path);
-    _sharedPreferenceManager.setUser(updateUser);
+    var updateUser = sharedPreferenceManager.getUser.copyWith(name: event.name, image: event.file?.path);
+    sharedPreferenceManager.setUser(updateUser);
 
     emit(SubmitProfileLoadingState());
     await Future.delayed(2.seconds());
@@ -78,7 +74,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   _logOut(LogOutEvent event, Emitter<ProfileState> emit) {
-    _sharedPreferenceManager.clear();
+    sharedPreferenceManager.clear();
     emit(LogoutSuccessState());
   }
 }

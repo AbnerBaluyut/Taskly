@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:taskly/core/enums/status.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
@@ -35,7 +34,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
       body: CustomScrollView(
         slivers: [
           TaskDetailsAppBar(
-            onBackPressed: () => context.pop(),
+            onBackPressed: () => context.popSafely(),
           ),
           SliverPadding(
             padding: const EdgeInsets.symmetric(
@@ -75,7 +74,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
                       padding: EdgeInsets.symmetric(
                         vertical: Dimension.paddingMedium
                       ),
-                      onButtonPressed: () => context.pop(),
+                      onButtonPressed: () => context.popSafely(),
                     ),
                   ),
                 ],

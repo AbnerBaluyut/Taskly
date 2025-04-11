@@ -59,10 +59,10 @@ class _RegisterPageState extends State<RegisterPage> {
                             builder: (ctx) {
                              return SelectMediaBottomSheet(
                               onTapCamera: () {
-                                context.pop();
+                                context.popSafely();
                               },
                               onTapGallery: () {
-                                context.pop();
+                                context.popSafely();
                               },
                              );
                             },
@@ -81,7 +81,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             } else {
                               context.showAnimatedAlertDialog(
                                 title: "Please agree to the terms and conditions",
-                                onButtonPressed: () => context.pop()
+                                onButtonPressed: () => context.popSafely()
                               );
                             }
                           }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 import '../../../../core/styles/dimension.dart';
 import '_components/cells/item_project.dart';
@@ -22,7 +22,7 @@ class _MoreProjectsPageState extends State<MoreProjectsPage> {
       body: CustomScrollView(
         slivers: [
           MoreProjectsAppBar(
-            onBackPressed: () => context.pop(),
+            onBackPressed: () => context.popSafely(),
           ),
           SliverPersistentHeader(
             delegate: SearchHeaderDelegate(),

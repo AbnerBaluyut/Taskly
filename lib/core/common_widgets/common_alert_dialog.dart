@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:taskly/core/extensions/context_extension.dart';
 
 import 'common_elevated_button.dart';
 
@@ -28,7 +28,7 @@ class CommonAlertDialog extends StatelessWidget {
           text: "OK",
           fontWeight: FontWeight.w500,
           onButtonPressed: () {
-            context.pop();
+            context.popSafely();
           },
         ),
       ],

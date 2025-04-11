@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/double_extension.dart';
 
@@ -41,7 +40,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
 
     return CommonScaffold(
       appBar: ChangePasswordAppBar(
-        onBackPressed: () => context.pop(),
+        onBackPressed: () => context.popSafely(),
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
