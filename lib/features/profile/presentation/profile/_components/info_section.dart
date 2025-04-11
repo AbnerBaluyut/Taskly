@@ -23,7 +23,8 @@ class InfoSection extends StatelessWidget {
           height: 80.0,
           width: 80.0,
           fit: BoxFit.cover,
-          radius: 40.0
+          radius: 40.0,
+          backgroundColor: Colors.grey.shade200,
         ),
         Dimension.spacingMedium.width(),
         Expanded(

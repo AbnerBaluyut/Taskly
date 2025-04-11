@@ -123,21 +123,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 alignment: Alignment.bottomRight,
                                 clipBehavior: Clip.none,
                                 children: [
-                                  Container(
+                                  CommonImage(
+                                    _imagePath ?? "",
                                     height: 100,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey.shade200,
-                                      borderRadius: BorderRadius.circular(80)
-                                    ),
-                                    child: CommonImage(
-                                      _imagePath ?? "",
-                                      height: 100,
-                                      width:100,
-                                      radius: 80.0,
-                                      fit: BoxFit.cover,
-                                      errorWidget: Icon(Icons.person, size: 50.0, color: Colors.grey.shade700),
-                                    )
+                                    width:100,
+                                    radius: 80.0,
+                                    fit: BoxFit.cover,
+                                    backgroundColor: Colors.grey.shade200,
+                                    errorWidget: Icon(Icons.person, size: 50.0, color: Colors.grey.shade700),
                                   ),
                                   SizedBox(
                                     height: 30,

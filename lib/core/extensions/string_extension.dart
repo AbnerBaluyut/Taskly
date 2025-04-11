@@ -22,26 +22,28 @@ extension StringExtension on String {
   }
 
   bool get isLocalFilePath {
-    if (Platform.isAndroid && (startsWith('/storage/') || startsWith('/data/'))) {
-      return true;
-    }
-
-    // iOS file path
-    if (Platform.isIOS && (startsWith('/var/') || startsWith('/private/var/'))) {
-      return true;
-    }
-
-    return startsWith('file://');
+    final lower = toLowerCase();
+    final isAndroid = Platform.isAndroid && (lower.startsWith('/storage/') || lower.startsWith('/data/') ||  lower.contains("/storage/emulated/"));
+    final isiOS = Platform.isIOS && (lower.startsWith('/var/') || lower.startsWith('/private/var/') ||  lower.contains("/users/") && lower.contains("/library/developer/coresimulator/devices/"));
+    return isiOS || isAndroid || startsWith('file://');
   }
 
   bool get isBase64Image {
     return startsWith('data:image');
   }
 
+
+  bool get isAssetPath => startsWith('assets/');
+
   ImageSourceType get imageSourceType {
-    if (isHttpUrl) return ImageSourceType.network;
-    if (isBase64Image) return ImageSourceType.base64;
-    if (isLocalFilePath) return ImageSourceType.file;
-    return ImageSourceType.unknown;
+    if (isHttpUrl) {
+      return ImageSourceType.network;
+    }  else if (isLocalFilePath) {
+      return ImageSourceType.file;
+    } else if (isAssetPath)  {
+      return ImageSourceType.assset;
+    } else {
+      return ImageSourceType.unknown;
+    }
   }
 }
