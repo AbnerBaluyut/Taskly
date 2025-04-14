@@ -15,6 +15,8 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$RegisterResponseModel {
+  @JsonKey(name: 'status', defaultValue: 0)
+  int get status;
   @JsonKey(name: 'message')
   String get message;
   @JsonKey(name: 'data')
@@ -36,17 +38,18 @@ mixin _$RegisterResponseModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is RegisterResponseModel &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.data, data) || other.data == data));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, message, data);
+  int get hashCode => Object.hash(runtimeType, status, message, data);
 
   @override
   String toString() {
-    return 'RegisterResponseModel(message: $message, data: $data)';
+    return 'RegisterResponseModel(status: $status, message: $message, data: $data)';
   }
 }
 
@@ -57,7 +60,8 @@ abstract mixin class $RegisterResponseModelCopyWith<$Res> {
       _$RegisterResponseModelCopyWithImpl;
   @useResult
   $Res call(
-      {@JsonKey(name: 'message') String message,
+      {@JsonKey(name: 'status', defaultValue: 0) int status,
+      @JsonKey(name: 'message') String message,
       @JsonKey(name: 'data') UserModel data});
 
   $UserModelCopyWith<$Res> get data;
@@ -76,10 +80,15 @@ class _$RegisterResponseModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? status = null,
     Object? message = null,
     Object? data = null,
   }) {
     return _then(_self.copyWith(
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int,
       message: null == message
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -106,11 +115,15 @@ class _$RegisterResponseModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _RegisterResponseModel implements RegisterResponseModel {
   const _RegisterResponseModel(
-      {@JsonKey(name: 'message') required this.message,
+      {@JsonKey(name: 'status', defaultValue: 0) required this.status,
+      @JsonKey(name: 'message') required this.message,
       @JsonKey(name: 'data') required this.data});
   factory _RegisterResponseModel.fromJson(Map<String, dynamic> json) =>
       _$RegisterResponseModelFromJson(json);
 
+  @override
+  @JsonKey(name: 'status', defaultValue: 0)
+  final int status;
   @override
   @JsonKey(name: 'message')
   final String message;
@@ -139,17 +152,18 @@ class _RegisterResponseModel implements RegisterResponseModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _RegisterResponseModel &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.data, data) || other.data == data));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, message, data);
+  int get hashCode => Object.hash(runtimeType, status, message, data);
 
   @override
   String toString() {
-    return 'RegisterResponseModel(message: $message, data: $data)';
+    return 'RegisterResponseModel(status: $status, message: $message, data: $data)';
   }
 }
 
@@ -162,7 +176,8 @@ abstract mixin class _$RegisterResponseModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'message') String message,
+      {@JsonKey(name: 'status', defaultValue: 0) int status,
+      @JsonKey(name: 'message') String message,
       @JsonKey(name: 'data') UserModel data});
 
   @override
@@ -182,10 +197,15 @@ class __$RegisterResponseModelCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
+    Object? status = null,
     Object? message = null,
     Object? data = null,
   }) {
     return _then(_RegisterResponseModel(
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int,
       message: null == message
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable

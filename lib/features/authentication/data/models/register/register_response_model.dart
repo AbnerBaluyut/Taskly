@@ -9,6 +9,7 @@ part 'register_response_model.g.dart';
 abstract class RegisterResponseModel with _$RegisterResponseModel {
 
   const factory RegisterResponseModel({
+    @JsonKey(name: 'status', defaultValue: 0) required int status,
     @JsonKey(name: 'message') required String message,
     @JsonKey(name: 'data') required UserModel data,
   }) = _RegisterResponseModel;
