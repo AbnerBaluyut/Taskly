@@ -14,9 +14,20 @@ import '_components/login_content.dart';
 import '_components/login_footer.dart';
 import '_components/login_header.dart';
 
-class LoginPage extends StatelessWidget {
-  
+class LoginPage extends StatefulWidget {
+
   const LoginPage({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _LoginPageState();
+} 
+class _LoginPageState extends State<LoginPage> {
+
+  @override
+  void dispose() {
+    context.read<AuthBloc>().add(CancelEvent());
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

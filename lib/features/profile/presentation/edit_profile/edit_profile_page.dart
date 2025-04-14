@@ -41,6 +41,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    context.read<ProfileBloc>().add(CancelEvent());
+    super.dispose();
+  }
+
   void _onTapCamera() async {
     await showModalBottomSheet(
       context: context, 

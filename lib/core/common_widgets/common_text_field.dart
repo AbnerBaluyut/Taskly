@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:taskly/core/common_widgets/common_shake_widget.dart';
 import 'package:taskly/core/extensions/context_extension.dart';
 import 'package:taskly/core/extensions/int_extension.dart';
 
 import '../styles/custom_colors.dart';
+import 'common_shake_widget.dart';
 
 class CommonTextField extends StatefulWidget {
 

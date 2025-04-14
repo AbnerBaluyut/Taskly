@@ -39,6 +39,12 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   final _focusNode3 = FocusNode();
 
   @override
+  void dispose() {
+    context.read<ProfileBloc>().add(CancelEvent());
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
 
     return BlocConsumer<ProfileBloc, ProfileState>(

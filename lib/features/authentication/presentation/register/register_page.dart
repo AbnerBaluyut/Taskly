@@ -31,6 +31,12 @@ class _RegisterPageState extends State<RegisterPage> {
   bool _isChecked = false;
 
   @override
+  void dispose() {
+    context.read<AuthBloc>().add(CancelEvent());
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
 
     return BlocListener<AuthBloc, AuthState>(

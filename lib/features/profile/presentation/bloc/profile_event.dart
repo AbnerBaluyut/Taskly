@@ -21,4 +21,5 @@ class UpdatePasswordEvent extends ProfileEvent {
 }
 class OpenGalleryEvent extends ProfileEvent {}
 class OpenCameraEvent extends ProfileEvent {}
+class CancelEvent extends ProfileEvent {}
 class LogOutEvent extends ProfileEvent {}

@@ -3,9 +3,9 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:taskly/core/utils/shared_preferences_manager.dart';
 import '../../../../core/styles/strings.dart';
 import '../../../../core/utils/image_picker_manager.dart';
+import '../../../../core/utils/shared_preferences_manager.dart';
 import '../../../../data/usecases/change_password_usecase.dart';
 import '../../../../data/usecases/edit_profile_usecase.dart';
 import 'profile_event.dart';
@@ -17,8 +17,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final EditProfileUseCase _editProfileUseCase;
   final ChangePasswordUseCase _changePasswordUseCase;
 
-  final CancelToken _editProfileCancelToken = CancelToken();
-  final CancelToken _changePasswordCancelToken = CancelToken();
+  CancelToken _editProfileCancelToken = CancelToken();
+  CancelToken _changePasswordCancelToken = CancelToken();
 
   ProfileBloc({required this.sharedPreferenceManager}) :
     _editProfileUseCase = GetIt.instance<EditProfileUseCase>(),
@@ -30,6 +30,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       on<OpenGalleryEvent>(_openGallery);
       on<OpenCameraEvent>(_openCamera);
       on<LogOutEvent>(_logOut);
+      on<CancelEvent>(_cancelRequests);
     }
 
   _loadData(LoadUserDataEvent event, Emitter<ProfileState> emit) {
@@ -109,5 +110,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   _logOut(LogOutEvent event, Emitter<ProfileState> emit) {
     sharedPreferenceManager.clear();
     emit(LogoutSuccessState());
+  }
+
+  _cancelRequests(CancelEvent event, Emitter<ProfileState> emit) {
+
+    _changePasswordCancelToken.cancel();
+    _editProfileCancelToken.cancel();
+    
+    _changePasswordCancelToken = CancelToken();
+    _editProfileCancelToken = CancelToken();
   }
 }
