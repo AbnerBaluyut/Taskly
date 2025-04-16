@@ -3,9 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:taskly/core/extensions/context_extension.dart';
-import 'package:taskly/core/extensions/double_extension.dart';
+import 'package:taskly/core/extensions/context_ext.dart';
+import 'package:taskly/core/extensions/double_ext.dart';
 
+import '../../../../_di/injections.dart';
 import '../../../../core/common_widgets/common_back_button.dart';
 import '../../../../core/common_widgets/common_elevated_button.dart';
 import '../../../../core/common_widgets/common_image.dart';
@@ -14,9 +15,19 @@ import '../../../../core/common_widgets/common_text_field.dart';
 import '../../../../core/styles/custom_colors.dart';
 import '../../../../core/styles/dimension.dart';
 import '../../../../core/common_widgets/common_select_media_bottom_sheet.dart';
-import '../bloc/profile_bloc.dart';
-import '../bloc/profile_event.dart';
-import '../bloc/profile_state.dart';
+import 'bloc/edit_profile_bloc.dart';
+
+class EditProfilePageWrapper extends StatelessWidget {
+  const EditProfilePageWrapper({super.key});
+  
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => EditProfileBloc(getIt()),
+      child: EditProfilePage(),
+    );
+  }
+}
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});
@@ -37,14 +48,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   void initState() {
-    context.read<ProfileBloc>().add(LoadUserDataEvent());
+    context.read<EditProfileBloc>().add(LoadDataEvent());
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    context.read<ProfileBloc>().add(CancelEvent());
-    super.dispose();
   }
 
   void _onTapCamera() async {
@@ -55,10 +60,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
       builder: (ctx) {
         return CommonSelectMediaBottomSheet(
           onTapCamera: () {
-            context.read<ProfileBloc>().add(OpenCameraEvent());
+            context.read<EditProfileBloc>().add(OpenCameraEvent());
           },
           onTapGallery: () {
-            context.read<ProfileBloc>().add(OpenGalleryEvent());
+            context.read<EditProfileBloc>().add(OpenGalleryEvent());
           },
         );
       },
@@ -67,7 +72,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ProfileBloc, ProfileState>(
+    return BlocConsumer<EditProfileBloc, EditProfileState>(
       listener: (context, state) {
         if (state is SubmitProfileErrorState) {
           context.showAnimatedErrorDialog(
@@ -77,7 +82,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         } else if (state is SubmitProfileSuccessState) {
           context.showAnimatedSuccessDialog(
             title: "Profile Updated successfully.",
-            onButtonPressed: () => context.popSafely(closeOverlay: true)
+            onButtonPressed: () => context.popSafely<bool>(closeOverlay: true, result: true)
           );
         } else if (state is UpdateUserImageSuccessState) {
           _filePath = File(state.imagePath);
@@ -92,7 +97,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       },
       builder: (context, state) {
     
-        if (state is GetUserDataState) {
+        if (state is LoadDataState) {
           _nameController.text = state.user.name;
           _userImage = state.user.image;
         }
@@ -195,7 +200,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               isLoading: (state is SubmitProfileLoadingState),
                               onButtonPressed: () {
                                 if (_formKey.currentState?.validate() ?? false) {
-                                  context.read<ProfileBloc>().add(UpdateProfileEvent(
+                                  context.read<EditProfileBloc>().add(UpdateProfileEvent(
                                     name: _nameController.text.trim(),
                                     file: _filePath
                                   ));

@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:taskly/core/extensions/context_extension.dart';
-import 'package:taskly/core/extensions/double_extension.dart';
+import 'package:taskly/core/extensions/context_ext.dart';
+import 'package:taskly/core/extensions/double_ext.dart';
 
 import '../../../../core/common_widgets/common_scaffold.dart';
 import '../../../authentication/domain/entities/user_entity.dart';
-import '../../../home/bloc/dark_mode_bloc.dart';
+import '../../../_common_blocs/dark_mode_cubit.dart';
 import '../../../../core/router/app_routes.dart';
 import '../../../../core/styles/assets.dart';
 import '../../../../core/styles/custom_colors.dart';
 import '../../../../core/styles/dimension.dart';
-import '../bloc/profile_bloc.dart';
-import '../bloc/profile_event.dart';
-import '../bloc/profile_state.dart';
+import 'bloc/profile_bloc.dart';
 import '_components/menu_section.dart';
 import '_components/info_section.dart';
 import '_components/profile_appbar.dart';
@@ -31,7 +29,7 @@ class _ProfileContentState extends State<ProfileContent> {
 
   @override
   void initState() {
-    context.read<ProfileBloc>().add(LoadUserDataEvent());
+    context.read<ProfileBloc>().add(LoadDataEvent());
     super.initState();
   }
 
@@ -43,19 +41,24 @@ class _ProfileContentState extends State<ProfileContent> {
     context.read<ProfileBloc>().add(LogOutEvent());
   }
 
+  void _goToEditProfile(Function(bool) onSuccess) async {
+    bool isSuccess = await context.push<bool>(AppRoutes.editProfile) ?? false;
+    onSuccess.call(isSuccess == true);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ProfileBloc, ProfileState>(
       listener: (context, state) {
-        if (state is LogoutSuccessState) {
+        if (state is LogOutSuccessState) {
           context.go(AppRoutes.login);
-        } else if (state is GetUserDataState) {
+        } else if (state is LoadDataState) {
           user = state.user;
         }
       },
       builder: (context, state) {
 
-        if (state is GetUserDataState) {
+        if (state is LoadDataState) {
           user = state.user;
         }
 
@@ -89,7 +92,12 @@ class _ProfileContentState extends State<ProfileContent> {
                       icon: Assets.icEdit, 
                       title: "Edit Profile", 
                       tintColor: (context.isDarkMode() ? Colors.white : CustomColors.gray2),
-                      onButtonPressed: () => context.push(AppRoutes.editProfile),
+                      onButtonPressed: () {
+                        _goToEditProfile((isSuccess) {
+                          if (!isSuccess) return;
+                          context.read<ProfileBloc>().add(LoadDataEvent());
+                        });
+                      },
                     ),
                     MenuSection(
                       icon: Assets.icLock, 

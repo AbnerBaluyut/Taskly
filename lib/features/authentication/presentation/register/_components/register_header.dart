@@ -2,15 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:taskly/core/extensions/context_extension.dart';
-import 'package:taskly/core/extensions/double_extension.dart';
+import 'package:taskly/core/extensions/context_ext.dart';
+import 'package:taskly/core/extensions/double_ext.dart';
 
 import '../../../../../core/common_widgets/common_elevated_button.dart';
 import '../../../../../core/common_widgets/common_image.dart';
 import '../../../../../core/styles/custom_colors.dart';
 import '../../../../../core/styles/dimension.dart';
-import '../../bloc/auth_bloc.dart';
-import '../../bloc/auth_state.dart';
+import '../bloc/register_bloc.dart';
 
 class RegisterHeader extends StatefulWidget {
 
@@ -30,7 +29,7 @@ class RegisterHeaderState extends State<RegisterHeader> with AutomaticKeepAliveC
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return BlocConsumer<AuthBloc, AuthState>(
+    return BlocConsumer<RegisterBloc, RegisterState>(
       listener: (context, state) {
         if (state is OpeningMediaState) {
           context.popSafely();

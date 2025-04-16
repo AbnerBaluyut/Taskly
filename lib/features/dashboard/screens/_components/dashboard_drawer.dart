@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:taskly/core/extensions/context_extension.dart';
-import 'package:taskly/core/extensions/double_extension.dart';
-import 'package:taskly/features/home/bloc/dark_mode_bloc.dart';
+import 'package:taskly/core/extensions/context_ext.dart';
+import 'package:taskly/core/extensions/double_ext.dart';
+import 'package:taskly/features/_common_blocs/dark_mode_cubit.dart';
 
-import '../../../../../core/styles/custom_colors.dart';
+import '../../../../core/styles/custom_colors.dart';
 import '../../../../core/common_widgets/common_elevated_button.dart';
 import '../../../../core/common_widgets/common_image.dart';
 import '../../../../core/common_widgets/common_switch.dart';

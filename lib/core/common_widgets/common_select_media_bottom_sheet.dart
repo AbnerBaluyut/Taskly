@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:taskly/core/extensions/context_extension.dart';
-import 'package:taskly/core/extensions/double_extension.dart';
+import 'package:taskly/core/extensions/context_ext.dart';
+import 'package:taskly/core/extensions/double_ext.dart';
 
 import '../styles/custom_colors.dart';
 import '../styles/dimension.dart';

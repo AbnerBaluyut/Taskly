@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:taskly/core/extensions/double_extension.dart';
+import 'package:taskly/core/extensions/double_ext.dart';
 
 import '../../../../../../core/styles/dimension.dart';
 import '../../../../../../core/common_widgets/common_item_task.dart';

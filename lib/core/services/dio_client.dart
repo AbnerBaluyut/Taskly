@@ -3,16 +3,20 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
-import '../errors/network_exception.dart';
-import '../errors/not_found_exception.dart';
-import '../errors/server_exception.dart';
-import '../errors/time_out_exception.dart';
-import '../errors/unauthorized_exception.dart';
-import '../errors/unknown_exception.dart';
+import '../../_di/injections.dart';
+import '../styles/keys.dart';
+import '../utils/shared_preferences_manager.dart';
+import 'errors/network_exception.dart';
+import 'errors/not_found_exception.dart';
+import 'errors/server_exception.dart';
+import 'errors/time_out_exception.dart';
+import 'errors/unauthorized_exception.dart';
+import 'errors/unknown_exception.dart';
 import '../styles/strings.dart';
 
 class DioClient {
 
+  final SharedPreferenceManager _sharedPreferenceManager = getIt();
   final Dio _dio;
 
   DioClient({
@@ -43,13 +47,10 @@ class DioClient {
         onRequest: (options, handler) {
           // Add any custom headers or authentication tokens here
           // options.headers['Authorization'] = 'Bearer YOUR_TOKEN';
-
-          if (options.data is FormData) {
-            var formData = options.data as FormData;
-            _logFormData(formData);
-          } else {
-            log("Params: ${options.data}");
+          if (_sharedPreferenceManager.isLoggedIn) {
+            options.headers[Keys.authorization] = 'Bearer ${_sharedPreferenceManager.getUser.accessToken}';
           }
+          _logData(options.data);
           return handler.next(options);
         },
         onResponse: (response, handler) {
@@ -57,11 +58,9 @@ class DioClient {
           return handler.next(response);
         },
         onError: (e, handler) {
-          
           if (e.type == DioExceptionType.cancel) {
             return;
           }
-          
           return handler.reject(_mapError(e));
         },
       ),
@@ -70,13 +69,17 @@ class DioClient {
 
   Dio get instance => _dio;
 
-  void _logFormData(FormData formData) {
+  void _logData(dynamic data) {
 
-    final Map<String, dynamic> formDataMap = {};
-    for (var field in formData.fields) {
-      formDataMap[field.key] = field.value;
+    if (data is FormData) {
+      final Map<String, dynamic> formDataMap = {};
+      for (var field in data.fields) {
+        formDataMap[field.key] = field.value;
+      }
+      log("~~~ Params: ${formDataMap.toString()}");
+    } else {
+      log("~~~ Params: $data");
     }
-    log("Params: ${formDataMap.toString()}");
   }
 
   DioException _mapError(DioException e) {
@@ -96,6 +99,9 @@ class DioClient {
           } 
           return DioException(requestOptions: e.requestOptions, error: ServerException(data['message'] ?? "Bad Request", code: code));
         case 401:
+          if (data['code'] != null) {
+            return DioException(requestOptions: e.requestOptions, error: ServerException("Session Expired", code: code));
+          }
           return DioException(requestOptions: e.requestOptions, error: UnauthorizedException(data?['messages']?["message"] ?? data['message'] ?? "Unauthorized", code: code));
         case 404:
           return DioException(requestOptions: e.requestOptions, error: NotFoundException());

@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:taskly/core/extensions/context_extension.dart';
-import 'package:taskly/core/extensions/double_extension.dart';
-import 'package:taskly/core/extensions/string_extension.dart';
+import 'package:taskly/core/extensions/context_ext.dart';
+import 'package:taskly/core/extensions/double_ext.dart';
+import 'package:taskly/core/extensions/string_ext.dart';
 
 import '../../../../core/common_widgets/common_elevated_button.dart';
 import '../../../../core/common_widgets/common_scaffold.dart';
 import '../../../../core/common_widgets/common_text_field.dart';
 import '../../../../core/styles/dimension.dart';
-import '../bloc/profile_bloc.dart';
-import '../bloc/profile_event.dart';
-import '../bloc/profile_state.dart';
 import '_components/change_password_appbar.dart';
+import 'bloc/change_password_bloc.dart';
+
+class ChangePasswordPageWrapper extends StatelessWidget {
+  const ChangePasswordPageWrapper({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => ChangePasswordBloc(),
+      child: ChangePasswordPage(),
+    );
+  }
+}
 
 class ChangePasswordPage extends StatefulWidget {
 
@@ -39,15 +49,9 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   final _focusNode3 = FocusNode();
 
   @override
-  void dispose() {
-    context.read<ProfileBloc>().add(CancelEvent());
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
 
-    return BlocConsumer<ProfileBloc, ProfileState>(
+    return BlocConsumer<ChangePasswordBloc, ChangePasswordState>(
       listener: (context, state) {
         if (state is UpdatePasswordSuccessState) {
           context.showAnimatedSuccessDialog(
@@ -173,7 +177,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                                 ),
                                 onButtonPressed: () {
                                   if (_formKey.currentState?.validate() ?? false) {
-                                    context.read<ProfileBloc>().add(
+                                    context.read<ChangePasswordBloc>().add(
                                       UpdatePasswordEvent(
                                         currentPassword: _currentPasswordField.text, 
                                         newPassword: _newPasswordField.text

@@ -1,9 +1,10 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taskly/core/enums/status.dart';
-import 'package:taskly/core/extensions/context_extension.dart';
-import 'package:taskly/core/extensions/double_extension.dart';
+import 'package:taskly/core/extensions/context_ext.dart';
+import 'package:taskly/core/extensions/double_ext.dart';
 
 import '../../../../core/common_widgets/common_elevated_button.dart';
 import '../../../../core/common_widgets/common_scaffold.dart';
@@ -15,6 +16,20 @@ import '_components/sections/priority_section.dart';
 import '_components/sections/status_section.dart';
 import '_components/sections/subtasks_section.dart';
 import '_components/task_details_appbar.dart';
+import 'bloc/task_details_bloc.dart';
+
+class TaskDetailsPageWrapper extends StatelessWidget {
+  const TaskDetailsPageWrapper({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    
+    return BlocProvider(
+      create: (ctx) => TaskDetailsBloc(),
+      child: TaskDetailsPage(),
+    );
+  }
+}
 
 class TaskDetailsPage extends StatefulWidget {
 

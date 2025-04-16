@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:taskly/core/extensions/int_extension.dart';
+import 'package:taskly/core/extensions/int_ext.dart';
 
 import '../../../../core/styles/custom_colors.dart';
 import '../../../../core/styles/dimension.dart';

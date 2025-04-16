@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:taskly/core/extensions/context_extension.dart';
-import 'package:taskly/core/extensions/double_extension.dart';
-import 'package:taskly/core/extensions/string_extension.dart';
+import 'package:taskly/core/extensions/context_ext.dart';
+import 'package:taskly/core/extensions/double_ext.dart';
+import 'package:taskly/core/extensions/string_ext.dart';
 import '../../../../../core/common_widgets/common_elevated_button.dart';
 import '../../../../../core/common_widgets/common_text_field.dart';
 import '../../../../../core/router/app_routes.dart';
 import '../../../../../core/styles/custom_colors.dart';
 import '../../../../../core/styles/dimension.dart';
-import '../../bloc/auth_bloc.dart';
-import '../../bloc/auth_state.dart';
+import '../bloc/login_bloc.dart';
 
 class LoginContent extends StatefulWidget {
 
@@ -34,11 +33,11 @@ class _LoginContentState extends State<LoginContent> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthBloc, AuthState>(
+    return BlocConsumer<LoginBloc, LoginState>(
       listener: (context, state) {
-        if (state is AuthSuccess) {
+        if (state is LoginSuccessState) {
           context.go(AppRoutes.dashboard);
-        } else if (state is AuthFailure) {
+        } else if (state is LoginFailureState) {
           context.showAnimatedErrorDialog(
             title: state.errorMessage,
           );
@@ -58,7 +57,7 @@ class _LoginContentState extends State<LoginContent> {
               children: [
                 CommonTextField (
                   key: _nameFieldKey,
-                  enabled: (state is! AuthLoading),
+                  enabled: (state is! LoginLoadingState),
                   controller: _nameController,
                   helperText: "Email",
                   hintText: "Ex. juan@gmail.com",
@@ -79,7 +78,7 @@ class _LoginContentState extends State<LoginContent> {
                 Dimension.spacingLarge.height(),
                 CommonTextField(
                   key: _passwordFieldKey,
-                  enabled: (state is! AuthLoading),
+                  enabled: (state is! LoginLoadingState),
                   controller: _passwordController,
                   helperText: "Password",
                   hintText: "**********",
@@ -118,7 +117,7 @@ class _LoginContentState extends State<LoginContent> {
                 SizedBox(
                   width: context.screenWidth(),
                   child: CommonElevatedButton(
-                    isLoading: (state is AuthLoading),
+                    isLoading: (state is LoginLoadingState),
                     onButtonPressed: () {
                       if (_formKey.currentState?.validate() ?? false) {
                         widget.onTapLogin.call(_nameController.text.trim(), _passwordController.text.trim());

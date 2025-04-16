@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:taskly/core/extensions/context_extension.dart';
-import 'package:taskly/core/extensions/double_extension.dart';
+import 'package:taskly/core/extensions/context_ext.dart';
+import 'package:taskly/core/extensions/double_ext.dart';
 
 import '../../../../../core/styles/custom_colors.dart';
 import '../../../../../core/styles/dimension.dart';
@@ -15,7 +15,6 @@ class LoginHeader extends StatelessWidget{
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center, 
       children: [
-        Dimension.spacingUltraLarge.height(),
         Text(
           'Login',
           style: TextStyle(

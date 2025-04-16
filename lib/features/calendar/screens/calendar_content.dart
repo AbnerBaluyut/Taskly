@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:taskly/core/extensions/date_extension.dart';
+import 'package:taskly/core/extensions/date_ext.dart';
 
 import '../../../core/common_widgets/common_scaffold.dart';
 import '_components/calendar_appbar.dart';

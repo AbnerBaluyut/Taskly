@@ -1,8 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:taskly/core/extensions/context_extension.dart';
-import 'package:taskly/core/extensions/double_extension.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:taskly/core/extensions/context_ext.dart';
+import 'package:taskly/core/extensions/double_ext.dart';
 import '../../../../core/common_widgets/common_elevated_button.dart';
 import '../../../../core/common_widgets/common_scaffold.dart';
 import '../../../../core/common_widgets/common_text_field.dart';
@@ -10,6 +11,20 @@ import '../../../../core/styles/dimension.dart';
 import '_components/add_teams_section.dart';
 import '_components/color_theme_section.dart';
 import '_components/create_project_appbar.dart';
+import 'bloc/create_project_bloc.dart';
+
+class CreateProjectPageWrapper extends StatelessWidget {
+
+  const CreateProjectPageWrapper({super.key});
+  
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (ctx) => CreateProjectBloc(),
+      child: CreateProjectPage(),
+    );
+  }
+}
 
 class CreateProjectPage extends StatefulWidget {
 

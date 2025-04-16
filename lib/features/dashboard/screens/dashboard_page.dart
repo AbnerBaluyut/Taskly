@@ -2,20 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:go_router/go_router.dart';
-import 'package:taskly/core/extensions/int_extension.dart';
+import 'package:taskly/core/extensions/int_ext.dart';
+import '../../../_di/injections.dart';
 import '../../../core/common_widgets/common_scaffold.dart';
 import '../../../core/router/app_routes.dart';
+import '../../calendar/screens/bloc/calendar_bloc.dart';
 import '../../calendar/screens/calendar_content.dart';
+import '../../chat/screens/bloc/chat_bloc.dart';
 import '../../chat/screens/chat_content.dart';
+import '../../home/screens/home/bloc/home_bloc.dart';
 import '../../home/screens/home/home_content.dart';
+import '../../profile/presentation/profile/bloc/profile_bloc.dart';
 import '../../profile/presentation/profile/profile_content.dart';
-import '../bloc/dashboard_bloc.dart';
-import '../bloc/dashboard_state.dart';
+import 'bloc/dashboard_bloc.dart';
 import '_components/dashboard_bottom_nav_bar.dart';
 import '_components/dashboard_drawer.dart';
 import '_components/dashboard_fab.dart';
 
-class DashboardPage  extends StatefulWidget {
+class DashboardPageWrapper extends StatelessWidget {
+
+  const DashboardPageWrapper({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    
+    return BlocProvider(
+      create: (_) => DashboardBloc(),
+      child: DashboardPage(),
+    );
+  }
+}
+
+class DashboardPage extends StatefulWidget {
 
   const DashboardPage({super.key});
 
@@ -28,6 +46,11 @@ class _DashboardPageState  extends State<DashboardPage> with SingleTickerProvide
   TabController? _tabController;
 
   final _scaffoldKey = GlobalKey<CommonScaffoldState>();
+
+  final _homeBloc = HomeBloc();
+  final _calendarBloc = CalendarBloc();
+  final _chatBloc = ChatBloc();
+  final _profileBloc = ProfileBloc(getIt());
 
   @override
   void initState() {
@@ -57,10 +80,22 @@ class _DashboardPageState  extends State<DashboardPage> with SingleTickerProvide
           controller: _tabController,
           physics: const NeverScrollableScrollPhysics(),
           children: [
-            HomeContent(),
-            CalendarContent(),
-            ChatContent(),
-            ProfileContent()
+            BlocProvider.value(
+              value: _homeBloc,
+              child: HomeContent(),
+            ),
+            BlocProvider.value(
+              value: _calendarBloc,
+              child: CalendarContent(),
+            ),
+            BlocProvider.value(
+              value: _chatBloc,
+              child: ChatContent(),
+            ),
+            BlocProvider.value(
+              value: _profileBloc,
+              child: ProfileContent(),
+            )
           ]  
         ),
         drawer: DashboardDrawer(),

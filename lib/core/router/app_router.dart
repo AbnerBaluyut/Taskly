@@ -1,29 +1,32 @@
-import 'package:go_router/go_router.dart';
+import '../../_di/injections.dart';
+import '../utils/shared_preferences_manager.dart';
+import 'screens.dart';
 
-import '../../features/authentication/presentation/login/login_page.dart';
-import '../../features/authentication/presentation/register/register_page.dart';
-import '../../features/dashboard/screens/dashboard_page.dart';
-import '../../features/home/screens/create_project/create_project_page.dart';
-import '../../features/home/screens/more_projects/more_projects_page.dart';
-import '../../features/home/screens/project_details/project_details_page.dart';
-import '../../features/home/screens/task_details/task_details_page.dart';
-import '../../features/home/screens/view_notifications/view_notifications_page.dart';
-import '../../features/on_boarding/screens/on_boarding_page.dart';
-import '../../features/profile/presentation/change_password/change_password_page.dart';
-import '../../features/profile/presentation/edit_profile/edit_profile_page.dart';
-import '../../features/splash/splash_page.dart';
-import '../../features/welcome/screens/welcome_page.dart';
-import 'app_routes.dart';
+class AppRouter {
 
-class AppRouter { 
+  static SharedPreferenceManager get _sharedPres => getIt();
 
   static GoRouter router = GoRouter(
     initialLocation: AppRoutes.splash,
+    redirect: (context, state) {
+      
+      final isLoggedIn = _sharedPres.isLoggedIn;
+      final isCompleteOnBoarding = _sharedPres.isSkipOnBoarding;
+      final isGoingToOnBoarding = state.uri.path == AppRoutes.onBoarding;
+
+      if (isLoggedIn && isGoingToOnBoarding) {
+        return AppRoutes.dashboard;
+      } else if (!isLoggedIn && isCompleteOnBoarding && isGoingToOnBoarding) {
+        return AppRoutes.login;
+      }
+
+      return null;
+    },
     routes: [
       GoRoute(
         path: AppRoutes.splash, 
         builder: (context, state) {
-          return const SplashPage();
+          return const SplashPageWrapper();
         },
       ),
       GoRoute(
@@ -35,67 +38,67 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.welcome, 
         builder: (context, state) {
-          return const WelcomePage();
+          return const WelcomePageWrapper();
         },
       ),
       GoRoute(
         path: AppRoutes.login, 
         builder: (context, state) {
-          return const LoginPage();
+          return const LoginPageWrapper();
         },
       ),
       GoRoute(
         path: AppRoutes.register, 
         builder: (context, state) {
-          return const RegisterPage();
+          return const RegisterPageWrapper();
         },
       ),
       GoRoute(
         path: AppRoutes.dashboard, 
         builder: (context, state) {
-          return const DashboardPage();
+          return const DashboardPageWrapper();
         },
       ),
       GoRoute(
         path: AppRoutes.moreProjects, 
         builder: (context, state) {
-          return const MoreProjectsPage();
+          return const MoreProjectsPageWrapper();
         },
       ),
       GoRoute(
         path: AppRoutes.editProfile, 
         builder: (context, state) {
-          return const EditProfilePage();
+          return const EditProfilePageWrapper();
         },
       ),
       GoRoute(
         path: AppRoutes.projectDetails, 
         builder: (context, state) {
-          return const ProjectDetailsPage();
+          return const ProjectDetailsPageWrapper();
         },
       ),
       GoRoute(
         path: AppRoutes.changePassword, 
         builder: (context, state) {
-          return const ChangePasswordPage();
+          return const ChangePasswordPageWrapper();
         },
       ),
       GoRoute(
         path: AppRoutes.taskDetails, 
         builder: (context, state) {
-          return const TaskDetailsPage();
+          return const TaskDetailsPageWrapper();
         },
       ),
       GoRoute(
         path: AppRoutes.viewNotifications,
         builder: (context, state) {
-          return const ViewNotificationsPage();
+          return const ViewNotificationsPageWrapper();
         }
       ),
       GoRoute(
         path: AppRoutes.createProject,
         builder: (context, state) {
-          return const CreateProjectPage();
+          return const CreateProjectPageWrapper();
         }
       ),
     ],

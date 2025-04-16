@@ -1,0 +1,15 @@
+export '../../features/authentication/presentation/login/login_page.dart';
+export '../../features/authentication/presentation/register/register_page.dart';
+export '../../features/dashboard/screens/dashboard_page.dart';
+export '../../features/home/screens/create_project/create_project_page.dart';
+export '../../features/home/screens/more_projects/more_projects_page.dart';
+export '../../features/home/screens/project_details/project_details_page.dart';
+export '../../features/home/screens/task_details/task_details_page.dart';
+export '../../features/home/screens/view_notifications/view_notifications_page.dart';
+export '../../features/on_boarding/screens/on_boarding_page.dart';
+export '../../features/profile/presentation/change_password/change_password_page.dart';
+export '../../features/profile/presentation/edit_profile/edit_profile_page.dart';
+export '../../features/splash/splash_page.dart';
+export '../../features/welcome/screens/welcome_page.dart';
+export 'package:go_router/go_router.dart';
+export 'app_routes.dart';

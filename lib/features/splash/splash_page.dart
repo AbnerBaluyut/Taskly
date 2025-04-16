@@ -1,13 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:taskly/core/extensions/context_ext.dart';
+import 'package:taskly/core/extensions/double_ext.dart';
 
 import '../../core/router/app_routes.dart';
 import '../../core/common_widgets/common_scaffold.dart';
+import '../../core/styles/custom_colors.dart';
+import '../../core/styles/dimension.dart';
 import '_components/logo.dart';
 import 'bloc/splash_bloc.dart';
-import 'bloc/splash_event.dart';
-import 'bloc/splash_state.dart';
+
+class SplashPageWrapper extends StatelessWidget {
+  const SplashPageWrapper({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    
+    return BlocProvider(
+      create: (context) => SplashBloc()..add(LoadSplashEvent()),
+      child: SplashPage(),
+    );
+  }
+}
 
 class SplashPage extends StatelessWidget {
 
@@ -15,27 +31,40 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => SplashBloc()..add(LoadSplashEvent()),
-      child: BlocListener<SplashBloc, SplashState>(
-        listener: (context, state) {
-          if (state is SplashLoadedState) {
-      
-            if (state.isOnBoardingCompleted) {
-              if (state.isUserLoggedIn) {
-                context.go(AppRoutes.dashboard);
-              } else {
+    return BlocConsumer<SplashBloc, SplashState>(
+      listener: (context, state) {
+        if (state is SplashLoadedState) {
+          context.go(AppRoutes.onBoarding);
+        } else if (state is SplashErrorState) {
+          if (state.errorMessage == "session expired") {
+            context.showAnimatedErrorDialog(
+              title: "Your session has expired. Please login again.",
+              onButtonPressed: () {
+                context.read<SplashBloc>().add(ClearPrefsEvent());
                 context.go(AppRoutes.login);
               }
-            } else {
-               context.go(AppRoutes.onBoarding);
-            }
+            );
+          } else {
+            context.go(AppRoutes.onBoarding);
           }
-        },
-        child: CommonScaffold(
-          body: Logo()
-        )
-      ),
+        }
+      },
+      builder: (context, state) {
+        return CommonScaffold(
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Logo(),
+              if (state is! SplashErrorState) LoadingAnimationWidget.threeRotatingDots(
+                color: CustomColors.primaryColor,
+                size: 30.0,
+              ),
+              Dimension.spacingLarge.height()
+            ],
+          )
+        );
+      },
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:taskly/core/extensions/double_extension.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:taskly/core/extensions/double_ext.dart';
 
 import '../../../../core/common_widgets/common_scaffold.dart';
 import '../../../../core/styles/dimension.dart';
@@ -7,6 +8,19 @@ import '_components/contents/read_content.dart';
 import '_components/contents/unread_content.dart';
 import '_components/sections/tabs_section.dart';
 import '_components/view_notifications_appbar.dart';
+import 'bloc/view_notifications_bloc.dart';
+
+class ViewNotificationsPageWrapper extends StatelessWidget {
+  const ViewNotificationsPageWrapper({super.key});
+  
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (ctx) => ViewNotificationsBloc(),
+      child: ViewNotificationsPage(),
+    );
+  }
+}
 
 class ViewNotificationsPage extends StatefulWidget {
   const ViewNotificationsPage({super.key});

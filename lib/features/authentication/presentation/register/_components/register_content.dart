@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:taskly/core/extensions/string_extension.dart';
+import 'package:taskly/core/extensions/string_ext.dart';
 
 import '../../../../../core/common_widgets/common_text_field.dart';
 import '../../../../../core/styles/dimension.dart';
-import '../../bloc/auth_bloc.dart';
-import '../../bloc/auth_state.dart';
+import '../bloc/register_bloc.dart';
 
 class RegisterContent extends StatefulWidget {
 
@@ -39,7 +38,7 @@ class RegisterContentState extends State<RegisterContent> with AutomaticKeepAliv
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return BlocBuilder<AuthBloc, AuthState>(
+    return BlocBuilder<RegisterBloc, RegisterState>(
       builder: (context, state) {
         super.build(context);
         return Padding(
@@ -104,6 +103,7 @@ class RegisterContentState extends State<RegisterContent> with AutomaticKeepAliv
                 helperText: "Password",
                 hintText: "**********",
                 obscureText: true,
+                errorMaxLines: 5,
                 textInputAction: TextInputAction.next,
                 validator: (value) {
                   var getValue = (value ?? "").trim();

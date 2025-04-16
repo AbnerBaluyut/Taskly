@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:taskly/core/extensions/context_extension.dart';
-import 'package:taskly/core/extensions/int_extension.dart';
+import 'package:taskly/core/extensions/context_ext.dart';
+import 'package:taskly/core/extensions/int_ext.dart';
 
 import '../../../../../core/common_widgets/common_elevated_button.dart';
 import '../../../../../core/styles/dimension.dart';
-import '../../bloc/auth_bloc.dart';
-import '../../bloc/auth_state.dart';
+import '../bloc/register_bloc.dart';
 
 class RegisterFooter extends StatefulWidget {
 
@@ -25,7 +24,7 @@ class _RegisterFooterState extends State<RegisterFooter> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthBloc, AuthState>(
+    return BlocBuilder<RegisterBloc, RegisterState>(
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.symmetric(

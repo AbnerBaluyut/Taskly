@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:taskly/core/extensions/double_extension.dart';
-import 'package:taskly/core/extensions/int_extension.dart';
+import 'package:taskly/core/extensions/double_ext.dart';
+import 'package:taskly/core/extensions/int_ext.dart';
 
 import '../../../core/router/app_routes.dart';
 import '../../../core/styles/assets.dart';

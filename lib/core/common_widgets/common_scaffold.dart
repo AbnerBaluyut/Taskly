@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:taskly/core/extensions/context_extension.dart';
+import 'package:taskly/core/extensions/context_ext.dart';
 
 class CommonScaffold extends StatefulWidget {
 

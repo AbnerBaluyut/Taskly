@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:taskly/core/extensions/context_extension.dart';
-import 'package:taskly/core/extensions/double_extension.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:taskly/core/extensions/context_ext.dart';
+import 'package:taskly/core/extensions/double_ext.dart';
 import '../../../../core/styles/dimension.dart';
 import '_components/cells/item_project.dart';
 import '_components/more_projects_app_bar.dart';
 import '_components/search_header_delegate.dart';
+import 'bloc/more_projects_bloc.dart';
+
+class MoreProjectsPageWrapper extends StatelessWidget {
+  const MoreProjectsPageWrapper({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (ctx) => MoreProjectsBloc(),
+      child: MoreProjectsPage(),
+    );
+  }
+}
 
 class MoreProjectsPage extends StatefulWidget {
   const MoreProjectsPage({super.key});

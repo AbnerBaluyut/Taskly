@@ -1,19 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:taskly/core/extensions/context_extension.dart';
-import 'package:taskly/core/extensions/double_extension.dart';
+import 'package:taskly/core/extensions/context_ext.dart';
+import 'package:taskly/core/extensions/double_ext.dart';
 import '../../../../core/common_widgets/common_back_button.dart';
 import '../../../../core/common_widgets/common_scaffold.dart';
 import '../../../../core/router/app_routes.dart';
 import '../../../../core/styles/dimension.dart';
-import '../bloc/auth_bloc.dart';
-import '../bloc/auth_event.dart';
-import '../bloc/auth_state.dart';
 import '_components/register_content.dart';
 import '_components/register_footer.dart';
 import '_components/register_header.dart';
 import '../../../../core/common_widgets/common_select_media_bottom_sheet.dart';
+import 'bloc/register_bloc.dart';
+
+class RegisterPageWrapper extends StatelessWidget {
+
+  const RegisterPageWrapper({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => RegisterBloc(),
+      child: RegisterPage(),
+    );
+  }
+}
 
 class RegisterPage extends StatefulWidget {
 
@@ -31,15 +42,9 @@ class _RegisterPageState extends State<RegisterPage> {
   bool _isChecked = false;
 
   @override
-  void dispose() {
-    context.read<AuthBloc>().add(CancelEvent());
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
 
-    return BlocListener<AuthBloc, AuthState>(
+    return BlocListener<RegisterBloc, RegisterState>(
       listener: (context, state) {
         if (state is RegisterSuccessState) {
           context.showAnimatedSuccessDialog(
@@ -86,10 +91,10 @@ class _RegisterPageState extends State<RegisterPage> {
                               builder: (ctx) {
                                 return CommonSelectMediaBottomSheet(
                                 onTapCamera: () {
-                                  context.read<AuthBloc>().add(OpenCameraEvent());
+                                  context.read<RegisterBloc>().add(OpenCameraEvent());
                                 },
                                 onTapGallery: () {
-                                  context.read<AuthBloc>().add(OpenGalleryEvent());
+                                  context.read<RegisterBloc>().add(OpenGalleryEvent());
                                 },
                                 );
                               },
@@ -107,7 +112,7 @@ class _RegisterPageState extends State<RegisterPage> {
       
                               if (_isChecked) {
 
-                                context.read<AuthBloc>().add(RegisterEvent(
+                                context.read<RegisterBloc>().add(DoRegisterEvent(
                                   name: _registerContentKey.currentState?.name ?? "",
                                   email: _registerContentKey.currentState?.email ?? "",
                                   password: _registerContentKey.currentState?.password ?? "",

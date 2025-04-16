@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:taskly/core/extensions/context_extension.dart';
-import 'package:taskly/core/extensions/double_extension.dart';
+import 'package:taskly/core/extensions/context_ext.dart';
+import 'package:taskly/core/extensions/double_ext.dart';
 
 import '../../../../core/common_widgets/common_scaffold.dart';
 import '../../../../core/router/app_routes.dart';
 import '../../../../core/styles/custom_colors.dart';
 import '../../../../core/styles/dimension.dart';
-import '../../../dashboard/bloc/bottom_nav_bloc.dart';
-import '../../../dashboard/bloc/dashboard_bloc.dart';
-import '../../../dashboard/bloc/dashboard_event.dart';
+import '../../../_common_blocs/bottom_nav_cubit.dart';
+import '../../../dashboard/screens/bloc/dashboard_bloc.dart';
 import '_components/home_app_bar.dart';
 import '_components/sections/project_section.dart';
 import '_components/sections/today_task_section.dart';

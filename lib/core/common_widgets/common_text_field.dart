@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:taskly/core/extensions/context_extension.dart';
-import 'package:taskly/core/extensions/int_extension.dart';
+import 'package:taskly/core/extensions/context_ext.dart';
+import 'package:taskly/core/extensions/int_ext.dart';
 
 import '../styles/custom_colors.dart';
 import 'common_shake_widget.dart';

@@ -7,12 +7,23 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/common_widgets/common_scaffold.dart';
 import '../../../../core/router/app_routes.dart';
 import '../../../../core/styles/dimension.dart';
-import '../bloc/auth_bloc.dart';
-import '../bloc/auth_event.dart';
+import 'bloc/login_bloc.dart';
 import '_components/login_content.dart';
-// import '_components/login_divider.dart';
 import '_components/login_footer.dart';
 import '_components/login_header.dart';
+
+class LoginPageWrapper extends StatelessWidget {
+
+  const LoginPageWrapper({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => LoginBloc(),
+      child: LoginPage(),
+    );
+  }
+}
 
 class LoginPage extends StatefulWidget {
 
@@ -22,12 +33,6 @@ class LoginPage extends StatefulWidget {
   State<StatefulWidget> createState() => _LoginPageState();
 } 
 class _LoginPageState extends State<LoginPage> {
-
-  @override
-  void dispose() {
-    context.read<AuthBloc>().add(CancelEvent());
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,32 +50,30 @@ class _LoginPageState extends State<LoginPage> {
                   spacing: Dimension.spacingLarge,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     LoginHeader(),
                     LoginContent(
                       onTapLogin: (email, password) {
-                        context.read<AuthBloc>().add(
-                          LoginEvent(
+                        context.read<LoginBloc>().add(
+                          DoLoginEvent(
                             email: email,
                             password: password
                           )
                         );
                       },
                       onTapForgotPassword: () {
-                        context.read<AuthBloc>().add(CancelEvent());
+                        context.read<LoginBloc>().add(CancelEvent());
                         log("Forgot Password");
                       },
                     ),
-                    // LoginDivider(),
-                    Spacer(),
                     LoginFooter(
                       onTapSocial: (social) {
-                        context.read<AuthBloc>().add(CancelEvent());
+                        context.read<LoginBloc>().add(CancelEvent());
                         log("Social: ${social.name}");
                       },
                       onTapRegister: () {
-                        context.read<AuthBloc>().add(CancelEvent());
+                        context.read<LoginBloc>().add(CancelEvent());
                         context.push(AppRoutes.register);
                       },
                     )

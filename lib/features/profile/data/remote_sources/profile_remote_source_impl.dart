@@ -3,9 +3,8 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 
 import '../../../../core/constants/endpoints.dart';
-import '../../../../core/errors/unknown_exception.dart';
+import '../../../../core/services/errors/unknown_exception.dart';
 import '../../../../core/services/dio_client.dart';
-import '../../../../core/styles/keys.dart';
 import '../../../../core/styles/strings.dart';
 import '../../../../core/utils/shared_preferences_manager.dart';
 import '../../../../data/remote_sources/profile_remote_source.dart';
@@ -29,11 +28,6 @@ class ProfileRemoteSourceImpl implements ProfileRemoteSource {
       final response = await client.instance.patch(
         "${Endpoints.editProfile}${sharedPreferenceManager.getUser.id}/",
         data: body,
-        options: Options(
-          headers: {
-            Keys.authorization: "Bearer ${sharedPreferenceManager.getUser.accessToken}"
-          }
-        ),
         cancelToken: cancelToken
       );
 
@@ -55,11 +49,6 @@ class ProfileRemoteSourceImpl implements ProfileRemoteSource {
       final response = await client.instance.patch(
         Endpoints.changePassword,
         data: body,
-        options: Options(
-          headers: {
-            Keys.authorization: "Bearer ${sharedPreferenceManager.getUser.accessToken}"
-          }
-        ),
         cancelToken: cancelToken
       );
 

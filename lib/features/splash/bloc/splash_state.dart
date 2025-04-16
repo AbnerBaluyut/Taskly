@@ -1,14 +1,15 @@
-abstract class SplashState {}
+part of 'splash_bloc.dart';
+
+sealed class SplashState {}
 
 class SplashInitialState extends SplashState {}
 
 class SplashLoadingState extends SplashState {}
 
-class SplashLoadedState extends SplashState {
-  final bool isUserLoggedIn;
-  final bool isOnBoardingCompleted;
+class SplashLoadedState extends SplashState {}
 
-  SplashLoadedState({this.isUserLoggedIn = false, this.isOnBoardingCompleted = false});
+class SplashErrorState extends SplashState {
+
+  final String errorMessage;
+  SplashErrorState(this.errorMessage);
 }
-
-class IsUserLoggedInState extends SplashState {}

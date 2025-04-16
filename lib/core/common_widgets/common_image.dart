@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:taskly/core/extensions/string_extension.dart';
+import 'package:taskly/core/extensions/string_ext.dart';
 
 import '../enums/image_source_type.dart';
 import 'common_shimmer.dart';

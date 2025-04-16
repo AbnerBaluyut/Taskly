@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:taskly/core/extensions/context_extension.dart';
-import '../../../../../core/styles/custom_colors.dart';
+import 'package:taskly/core/extensions/context_ext.dart';
+import '../../../../core/styles/custom_colors.dart';
 
 class ChatAppBar extends SliverAppBar {
 

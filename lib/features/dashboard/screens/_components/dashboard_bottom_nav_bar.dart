@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:taskly/core/extensions/context_extension.dart';
+import 'package:taskly/core/extensions/context_ext.dart';
 import '../../../../core/styles/assets.dart';
 import '../../../../core/styles/custom_colors.dart';
-import '../../bloc/bottom_nav_bloc.dart';
+import '../../../_common_blocs/bottom_nav_cubit.dart';
 
 class DashboardBottomNavBar extends StatefulWidget {
 
