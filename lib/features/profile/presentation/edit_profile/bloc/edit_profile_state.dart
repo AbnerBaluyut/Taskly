@@ -15,7 +15,8 @@ class SubmitProfileErrorState extends EditProfileState {
   SubmitProfileErrorState(this.errorMessage);
 }
 
-class OpeningMediaState extends EditProfileState {}
+class LoadingImageState extends EditProfileState {}
+class DismissDialogState extends EditProfileState {}
 class UpdateUserImageSuccessState extends EditProfileState {
   final String imagePath;
   UpdateUserImageSuccessState({required this.imagePath});

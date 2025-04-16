@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:taskly/core/extensions/double_ext.dart';
 import 'package:taskly/core/extensions/int_ext.dart';
 import '../common_widgets/common_elevated_button.dart';
@@ -291,6 +292,62 @@ extension ContextExtension on BuildContext {
                       horizontal: Dimension.paddingExtraLarge
                     ),
                     onButtonPressed: onButtonPressed ?? () => popSafely(closeOverlay: true),
+                  ),
+                  Dimension.spacingMedium.height(),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+      transitionBuilder: (context, animation, secondaryAnimation, child) {
+        return ScaleTransition(
+          scale: Tween<double>(begin: 0.8, end: 1.0).animate(
+            CurvedAnimation(parent: animation, curve: Curves.easeOutBack),
+          ),
+          child: FadeTransition(
+            opacity: animation,
+            child: child,
+          ),
+        );
+      },
+    );
+  }
+
+  void showLoadingDialog() {
+    showGeneralDialog(
+      context: this,
+      barrierDismissible: false,
+      barrierLabel: MaterialLocalizations.of(this).modalBarrierDismissLabel,
+      transitionDuration: 400.milliseconds(),
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return Center(
+          child: Material(
+            color: Colors.transparent,
+            child: Container(
+              width: 200,
+              decoration: BoxDecoration(
+                color: context.isDarkMode() ? CustomColors.gray2 : Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Dimension.spacingMedium.height(),
+                  LoadingAnimationWidget.threeRotatingDots(
+                    color: CustomColors.primaryColor,
+                    size: 30.0,
+                  ),
+                  Dimension.spacingMedium.height(),
+                  Text(
+                    "Please wait...",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: isDarkMode() ? Colors.white : CustomColors.gray2,
+                    ),
                   ),
                   Dimension.spacingMedium.height(),
                 ],

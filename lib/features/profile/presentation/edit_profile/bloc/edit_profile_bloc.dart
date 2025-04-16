@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:taskly/core/extensions/int_ext.dart';
 
 import '../../../../../_di/injections.dart';
 import '../../../../../core/utils/image_picker_manager.dart';
@@ -37,10 +38,13 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
 
   _openGallery(OpenGalleryEvent event, Emitter<EditProfileState> emit) async {
 
-    emit(OpeningMediaState());
+    emit(DismissDialogState());
     try {
       var file = await ImagePickerManager.pickImage();
       if (file != null) {
+        emit(LoadingImageState());
+        await Future.delayed(2.seconds());
+        emit(DismissDialogState());
         emit(UpdateUserImageSuccessState(imagePath: file.path));
       }
     } catch (e) {
@@ -55,10 +59,14 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
   
   _openCamera(OpenCameraEvent event, Emitter<EditProfileState> emit) async {
     
-    emit(OpeningMediaState());
+    emit(DismissDialogState());
     try {
+      emit(LoadingImageState());
       var file = await ImagePickerManager.cameraPhoto();
       if (file != null) {
+        emit(LoadingImageState());
+        await Future.delayed(2.seconds());
+        emit(DismissDialogState());
         emit(UpdateUserImageSuccessState(imagePath: file.path));
       }
     } catch (e) {

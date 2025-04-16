@@ -91,8 +91,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
             title: state.errorMessage,
             onButtonPressed: () => context.popSafely()
           );
-        } else if (state is OpeningMediaState) {
-          context.popSafely(); 
+        } else if (state is LoadingImageState) {
+          context.showLoadingDialog();
+        } else if (state is DismissDialogState) {
+          context.popSafely();
         }
       },
       builder: (context, state) {
