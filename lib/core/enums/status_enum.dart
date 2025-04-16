@@ -1,18 +1,18 @@
-enum Status {
+enum StatusEnum {
   todo,
   inProgress,
   completed
 }
 
-extension StatusExt on Status {
+extension StatusExt on StatusEnum {
 
   String getTitle() {
     switch (this) {
-      case Status.todo:
+      case StatusEnum.todo:
         return "To Do";
-      case Status.inProgress:
+      case StatusEnum.inProgress:
         return "In Progress";
-      case Status.completed:
+      case StatusEnum.completed:
         return "Completed";
     }
   }

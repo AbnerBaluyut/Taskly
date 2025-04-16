@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:taskly/core/enums/status.dart';
+import 'package:taskly/core/enums/status_enum.dart';
 import 'package:taskly/core/extensions/context_ext.dart';
 import 'package:taskly/core/extensions/double_ext.dart';
 

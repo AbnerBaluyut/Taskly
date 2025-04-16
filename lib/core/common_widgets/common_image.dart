@@ -5,7 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:taskly/core/extensions/string_ext.dart';
 
-import '../enums/image_source_type.dart';
+import '../enums/image_source_type_enum.dart';
 import 'common_shimmer.dart';
 
 class CommonImage extends StatelessWidget {
@@ -73,7 +73,7 @@ class CommonImage extends StatelessWidget {
   Widget _buildImage() {
 
     switch (name.imageSourceType) {
-      case ImageSourceType.network:
+      case ImageSourceTypeEnum.network:
         return CachedNetworkImage(
           imageUrl: name,
           height: height, 
@@ -87,7 +87,7 @@ class CommonImage extends StatelessWidget {
             return errorWidget ?? _errorWidget();
           },
         );
-      case ImageSourceType.file:
+      case ImageSourceTypeEnum.file:
         return Image.file(
           File(name),
           height: height, 
@@ -104,7 +104,7 @@ class CommonImage extends StatelessWidget {
             return errorWidget ?? _errorWidget();
           }
         );
-      case ImageSourceType.base64:
+      case ImageSourceTypeEnum.base64:
         return Image.memory(
           base64.decode(name),
           height: height, 
@@ -121,7 +121,7 @@ class CommonImage extends StatelessWidget {
             return errorWidget ?? _errorWidget();
           }
         );
-      case ImageSourceType.assset:
+      case ImageSourceTypeEnum.assset:
         return Image.asset(
           name,
           height: height, 
@@ -138,7 +138,7 @@ class CommonImage extends StatelessWidget {
             return errorWidget ?? _errorWidget();
           }
         );
-      case ImageSourceType.unknown:
+      case ImageSourceTypeEnum.unknown:
         return Image.asset(
           name,
           height: height, 

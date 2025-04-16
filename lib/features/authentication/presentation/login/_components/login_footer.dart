@@ -8,7 +8,7 @@ import 'package:taskly/core/extensions/double_ext.dart';
 
 import '../../../../../core/styles/custom_colors.dart';
 import '../../../../../core/styles/dimension.dart';
-import '../../../../../core/enums/social.dart';
+import '../../../../../core/enums/social_enum.dart';
 // import '../../../models/social_model.dart';
 // import 'item_social_button.dart';
 
@@ -16,7 +16,7 @@ class LoginFooter extends StatelessWidget {
 
   const LoginFooter({super.key, required this.onTapSocial, required this.onTapRegister});
 
-  final Function(Social social) onTapSocial;
+  final Function(SocialEnum social) onTapSocial;
   final VoidCallback onTapRegister;
 
   @override

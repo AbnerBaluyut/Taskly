@@ -61,7 +61,6 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     
     emit(DismissDialogState());
     try {
-      emit(LoadingImageState());
       var file = await ImagePickerManager.cameraPhoto();
       if (file != null) {
         emit(LoadingImageState());

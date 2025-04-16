@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:taskly/core/extensions/null_ext.dart';
 import 'package:taskly/core/extensions/nullable_string_ext.dart';
 
-import '../enums/image_source_type.dart';
+import '../enums/image_source_type_enum.dart';
 
 extension StringExtension on String {
 
@@ -37,15 +37,15 @@ extension StringExtension on String {
 
   bool get isAssetPath => startsWith('assets/');
 
-  ImageSourceType get imageSourceType {
+  ImageSourceTypeEnum get imageSourceType {
     if (isHttpUrl) {
-      return ImageSourceType.network;
+      return ImageSourceTypeEnum.network;
     }  else if (isLocalFilePath) {
-      return ImageSourceType.file;
+      return ImageSourceTypeEnum.file;
     } else if (isAssetPath)  {
-      return ImageSourceType.assset;
+      return ImageSourceTypeEnum.assset;
     } else {
-      return ImageSourceType.unknown;
+      return ImageSourceTypeEnum.unknown;
     }
   }
 

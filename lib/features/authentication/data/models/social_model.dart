@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/enums/social.dart';
+import '../../../../core/enums/social_enum.dart';
 
 class SocialModel {
 
   final IconData icon;
-  final Social social;
+  final SocialEnum social;
   final Color? backgroundColor;
   final Color? iconColor;
 

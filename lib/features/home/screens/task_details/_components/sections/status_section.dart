@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:taskly/core/extensions/context_ext.dart';
 
-import '../../../../../../core/enums/status.dart';
+import '../../../../../../core/enums/status_enum.dart';
 import '../../../../../../core/styles/custom_colors.dart';
 import '../../../../../../core/styles/dimension.dart';
 
@@ -11,7 +11,7 @@ class StatusSection extends StatefulWidget {
 
   const StatusSection({super.key, this.onChanged});
 
-  final void Function(Status)? onChanged;
+  final void Function(StatusEnum)? onChanged;
 
   @override
   State<StatefulWidget> createState() => _StatusSectionState();
@@ -19,13 +19,13 @@ class StatusSection extends StatefulWidget {
 
 class _StatusSectionState extends State<StatusSection> {
 
-  final List<Status> _statuses = [
-    Status.todo,
-    Status.inProgress,
-    Status.completed,
+  final List<StatusEnum> _statuses = [
+    StatusEnum.todo,
+    StatusEnum.inProgress,
+    StatusEnum.completed,
   ];
 
-  Status? _selectedStatus;
+  StatusEnum? _selectedStatus;
 
   bool _isDropdownOpen = false;
 
@@ -46,7 +46,7 @@ class _StatusSectionState extends State<StatusSection> {
           ),
         ),
         DropdownButtonHideUnderline(
-          child: DropdownButton2<Status>(
+          child: DropdownButton2<StatusEnum>(
             hint: Text(
               "Select",
               style: TextStyle(
@@ -78,7 +78,7 @@ class _StatusSectionState extends State<StatusSection> {
                 ),
               ),
             ),
-            items: _statuses.map<DropdownMenuItem<Status>>((item) {
+            items: _statuses.map<DropdownMenuItem<StatusEnum>>((item) {
               return DropdownMenuItem(
                 value: item,
                 child: Text(
@@ -93,9 +93,9 @@ class _StatusSectionState extends State<StatusSection> {
             }).toList(),
             onChanged: (value) {
               setState(() {
-                _selectedStatus = value ?? Status.todo;
+                _selectedStatus = value ?? StatusEnum.todo;
               });
-              widget.onChanged?.call(_selectedStatus ?? Status.todo);
+              widget.onChanged?.call(_selectedStatus ?? StatusEnum.todo);
             },
             dropdownStyleData: DropdownStyleData(
               maxHeight: 200,
