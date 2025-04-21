@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
 import 'package:taskly/core/extensions/int_ext.dart';
 
 import '../../../../../_di/injections.dart';
@@ -18,8 +17,6 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
 
   final SharedPreferenceManager _sharedPreferenceManager;
   final EditProfileUseCase _editProfileUseCase;
-
-  CancelToken _cancelToken = CancelToken();
 
   EditProfileBloc(this._sharedPreferenceManager) :
     _editProfileUseCase = getIt(),
@@ -82,7 +79,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
 
     emit(SubmitProfileLoadingState());
     try {
-      var user = await _editProfileUseCase.execute(name: event.name, file: event.file, _cancelToken);
+      var user = await _editProfileUseCase.execute(name: event.name, file: event.file);
       var updateUser = _sharedPreferenceManager.getUser.copyWith(name: event.name, image: user.image);
       _sharedPreferenceManager.setUser(updateUser);
       emit(LoadDataState(user: updateUser));
@@ -92,15 +89,9 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     }
   }
 
-  void _cancel() {
-
-    _cancelToken.cancel();
-    _cancelToken = CancelToken();
-  }
-
   @override
   Future<void> close() {
-    _cancel();
+    _editProfileUseCase.cancel();
     return super.close();
   }
 }

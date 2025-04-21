@@ -1,5 +1,4 @@
 
-import 'package:dio/dio.dart';
 import 'package:taskly/features/authentication/data/models/user/user_model.dart';
 
 import '../../../../data/remote_sources/profile_remote_source.dart';
@@ -17,12 +16,15 @@ class ProfileRepositoryImpl implements ProfileRepository {
   });
 
   @override
-  Future<UserEntity> editProfile(EditProfileParam param, CancelToken? cancelToken) async {
+  Future<UserEntity> editProfile(EditProfileParam param) async {
     
-    final model = await remoteSource.editProfile(param.toFormData(), cancelToken);
+    final model = await remoteSource.editProfile(param.toFormData());
     return model.data.toEntity();
   }
 
   @override
-  Future<bool> changePassword(ChangePasswordParam param, CancelToken? cancelToken) => remoteSource.changePassword(param.toFormData(), cancelToken);
+  Future<bool> changePassword(ChangePasswordParam param) => remoteSource.changePassword(param.toFormData());
+  
+  @override
+  void cancel() => remoteSource.cancel();
 }

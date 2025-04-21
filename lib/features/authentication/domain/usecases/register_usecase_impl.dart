@@ -1,8 +1,5 @@
 import 'dart:io';
 
-
-import 'package:dio/dio.dart';
-
 import '../../../../data/repositories/auth_repository.dart';
 import '../../../../data/usecases/register_usecase.dart';
 import '../entities/user_entity.dart';
@@ -17,7 +14,7 @@ class RegisterUseCaseImpl implements RegisterUseCase {
   });
 
   @override
-  Future<UserEntity> execute(CancelToken cancelToken, {required String userName, required String userEmail, required String password, File? imageFile}) {
+  Future<UserEntity> execute({required String userName, required String userEmail, required String password, File? imageFile}) {
     
     var param = RegisterParam(
       userName: userName, 
@@ -27,6 +24,9 @@ class RegisterUseCaseImpl implements RegisterUseCase {
       imageFile: imageFile
     );
 
-    return repository.register(param, cancelToken);
+    return repository.register(param);
   }
+  
+  @override
+  void cancel() => repository.cancel();
 }

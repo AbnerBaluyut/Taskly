@@ -5,8 +5,8 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 
 import '../../../../core/constants/endpoints.dart';
-import '../../../../core/services/errors/unknown_exception.dart';
 import '../../../../core/services/dio_client.dart';
+import '../../../../core/services/errors/unknown_exception.dart';
 import '../../../../core/styles/strings.dart';
 import '../../../../data/remote_sources/auth_remote_source.dart';
 import '../models/login/login_response_model.dart';
@@ -22,14 +22,13 @@ class AuthRemoteSourceImpl implements AuthRemoteSource {
   });
 
   @override
-  Future<LoginResponseModel> login(body, CancelToken? cancelToken) async {
+  Future<LoginResponseModel> login(body) async {
     
     try {
       
-      final response = await client.instance.post(
+      final response = await client.post(
         Endpoints.login,
-        data: body,
-        cancelToken: cancelToken
+        body: body
       );
 
       return LoginResponseModel.fromJson(response.data);
@@ -43,14 +42,13 @@ class AuthRemoteSourceImpl implements AuthRemoteSource {
   }
 
   @override
-  Future<RegisterResponseModel> register(body, CancelToken? cancelToken) async {
+  Future<RegisterResponseModel> register(body) async {
    
     try {
       
-      final response = await client.instance.post(
+      final response = await client.post(
         Endpoints.register,
-        data: body,
-        cancelToken: cancelToken
+        body: body,
       );
 
       return RegisterResponseModel.fromJson(response.data);
@@ -68,9 +66,9 @@ class AuthRemoteSourceImpl implements AuthRemoteSource {
     
     try {
       
-      final response = await client.instance.post(
+      final response = await client.post(
         Endpoints.refreshToken,
-        data: body
+        body: body
       );
 
       return RefreshTokenResponseModel.fromJson(response.data);
@@ -82,4 +80,7 @@ class AuthRemoteSourceImpl implements AuthRemoteSource {
       throw Exception(Strings.errorMessage);
     }
   }
+  
+  @override
+  void cancel() => client.cancelRequest();
 }

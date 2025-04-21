@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
 
 import '../../../../../_di/injections.dart';
 import '../../../../../core/styles/strings.dart';
@@ -13,8 +12,6 @@ class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> 
 
   final ChangePasswordUseCase _changePasswordUseCase;
 
-  CancelToken _cancelToken = CancelToken();
-
   ChangePasswordBloc() :
     _changePasswordUseCase = getIt(),
     super(UpdatePasswordInitialState()) {
@@ -26,7 +23,7 @@ class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> 
     emit(UpdatePasswordLoadingState());
     try {
 
-      var isSuccess = await _changePasswordUseCase.execute(currentPassword: event.currentPassword, newPassword: event.newPassword, _cancelToken);
+      var isSuccess = await _changePasswordUseCase.execute(currentPassword: event.currentPassword, newPassword: event.newPassword);
 
       if (isSuccess) {
         emit(UpdatePasswordSuccessState());
@@ -39,15 +36,9 @@ class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> 
     }
   }
 
-  void _cancel() {
-
-    _cancelToken.cancel();
-    _cancelToken = CancelToken();
-  }
-
   @override
   Future<void> close() {
-    _cancel();
+    _changePasswordUseCase.cancel();
     return super.close();
   }
 }

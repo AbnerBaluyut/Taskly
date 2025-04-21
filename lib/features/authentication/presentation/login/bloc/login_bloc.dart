@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
 
 import '../../../../../_di/injections.dart';
 import '../../../../../core/utils/shared_preferences_manager.dart';
@@ -13,8 +12,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginUseCase _loginUseCase;
   final SharedPreferenceManager _sharedPrefsManager;
 
-  CancelToken _cancelToken = CancelToken();
-
   LoginBloc() : 
     _loginUseCase = getIt(),
     _sharedPrefsManager = getIt(),
@@ -26,7 +23,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   void _login(DoLoginEvent event, Emitter<LoginState> emit) async {
     emit(LoginLoadingState());
     try {
-      final result = await _loginUseCase.execute(email: event.email, password: event.password, _cancelToken);
+      final result = await _loginUseCase.execute(email: event.email, password: event.password);
       _sharedPrefsManager
         ..setUser(result)
         ..setIsLoggedIn(true);
@@ -37,8 +34,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   void _cancel(CancelEvent event, Emitter<LoginState> emit) {
-    _cancelToken.cancel();
-    _cancelToken = CancelToken();
+    _loginUseCase.cancel();
     emit(CancelState());
   }
 }

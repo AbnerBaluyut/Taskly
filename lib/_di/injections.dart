@@ -1,7 +1,5 @@
-import '../data/usecases/refresh_token_usecase.dart';
-import '../features/authentication/domain/usecases/refresh_token_usecase_impl.dart';
-import 'exports.dart';
 
+import 'exports.dart';
 
 final getIt = GetIt.I;
 
@@ -12,7 +10,7 @@ Future<void> initDependencies() async {
   final sharedPreferences = await SharedPreferences.getInstance();
   getIt.registerLazySingleton<SharedPreferenceManager>(() => SharedPreferenceManager(sharedPreferences));
 
-  getIt.registerLazySingleton(() => DioClient(
+  getIt.registerLazySingleton<DioClient>(() => DioClientImpl(
     baseUrl: Endpoints.baseUrl
   ));
 

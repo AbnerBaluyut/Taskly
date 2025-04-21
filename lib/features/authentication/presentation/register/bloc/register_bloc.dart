@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
 
 import '../../../../../_di/injections.dart';
 import '../../../../../core/utils/image_picker_manager.dart';
@@ -16,8 +15,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
   final RegisterUseCase _registerUseCase;
   final SharedPreferenceManager _sharedPrefsManager;
-
-  CancelToken _cancelToken = CancelToken();
 
   RegisterBloc() : 
     _registerUseCase = getIt(),
@@ -38,8 +35,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         userName: event.name, 
         userEmail: event.email, 
         password: event.password,
-        imageFile: event.imageFile,
-        _cancelToken
+        imageFile: event.imageFile
       );
       _sharedPrefsManager
         ..setUser(result)
@@ -86,14 +82,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     }
   }
 
-  void _cancel() {
-    _cancelToken.cancel();
-    _cancelToken = CancelToken();
-  }
-
   @override
   Future<void> close() {
-    _cancel();
+    _registerUseCase.cancel();
     return super.close();
   }
 }

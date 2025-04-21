@@ -1,11 +1,10 @@
-import 'package:dio/dio.dart';
 
 import '../../features/authentication/domain/entities/user_entity.dart';
+import '../_bases/base_usecase.dart';
 
-abstract class LoginUseCase {
+abstract class LoginUseCase extends BaseUseCase {
 
   Future<UserEntity> execute(
-    CancelToken? cancelToken,
     {
       required String email,
       required String password

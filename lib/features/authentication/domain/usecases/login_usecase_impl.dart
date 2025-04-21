@@ -1,6 +1,4 @@
 
-import 'package:dio/dio.dart';
-
 import '../../../../data/repositories/auth_repository.dart';
 import '../../../../data/usecases/login_usecase.dart';
 import '../entities/user_entity.dart';
@@ -15,8 +13,11 @@ class LoginUseCaseImpl implements LoginUseCase {
   });
 
   @override
-  Future<UserEntity> execute(CancelToken? cancelToken, {required String email, required String password}) {
+  Future<UserEntity> execute({required String email, required String password}) {
     final param = LoginParam(email: email, password: password);
-    return repository.login(param, cancelToken);
+    return repository.login(param);
   }
+  
+  @override
+  void cancel() => repository.cancel();
 }

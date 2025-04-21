@@ -1,9 +1,8 @@
-import 'package:dio/dio.dart';
+import '../_bases/base_usecase.dart';
 
-abstract class ChangePasswordUseCase {
+abstract class ChangePasswordUseCase extends BaseUseCase {
 
-  Future<bool> execute(
-    CancelToken? cancelToken, 
+  Future<bool> execute( 
     {
       required String currentPassword, 
       required String newPassword

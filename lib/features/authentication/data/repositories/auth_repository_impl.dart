@@ -1,5 +1,4 @@
 
-import 'package:dio/dio.dart';
 import 'package:taskly/features/authentication/data/models/refresh_token/refresh_token_response_model.dart';
 import 'package:taskly/features/authentication/data/models/user/user_model.dart';
 
@@ -20,14 +19,14 @@ class AuthRepositoryImpl implements AuthRepository {
   });
   
   @override
-  Future<UserEntity> login(LoginParam param, CancelToken? cancelToken) async {
-    final model = await remoteSource.login(param.toFormData(), cancelToken);
+  Future<UserEntity> login(LoginParam param) async {
+    final model = await remoteSource.login(param.toFormData());
     return model.data.toEntity();
   }
 
   @override
-  Future<UserEntity> register(RegisterParam param, CancelToken? cancelToken) async {
-    final model = await remoteSource.register(param.toFormData(), cancelToken);
+  Future<UserEntity> register(RegisterParam param) async {
+    final model = await remoteSource.register(param.toFormData());
     return model.data.toEntity();
   }
 
@@ -36,4 +35,7 @@ class AuthRepositoryImpl implements AuthRepository {
     final model = await remoteSource.refreshToken(param.toJson());
     return model.toEntity();
   }
+  
+  @override
+  void cancel() => remoteSource.cancel();
 }

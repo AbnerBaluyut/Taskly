@@ -1,7 +1,7 @@
 
 import 'dart:convert';
 
-import '../../../../data/base_entity.dart';
+import '../../../../data/_bases/base_entity.dart';
 
 class UserEntity extends BaseEntity {
 
