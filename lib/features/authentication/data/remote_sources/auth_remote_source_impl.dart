@@ -3,10 +3,10 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:fpdart/fpdart.dart';
 
 import '../../../../core/constants/endpoints.dart';
 import '../../../../core/services/dio_client.dart';
-import '../../../../core/services/errors/unknown_exception.dart';
 import '../../../../core/styles/strings.dart';
 import '../../../../data/remote_sources/auth_remote_source.dart';
 import '../models/login/login_response_model.dart';
@@ -22,63 +22,57 @@ class AuthRemoteSourceImpl implements AuthRemoteSource {
   });
 
   @override
-  Future<LoginResponseModel> login(body) async {
-    
-    try {
-      
+  TaskEither<String, LoginResponseModel> login(body) {
+
+    return TaskEither.tryCatch(() async {
       final response = await client.post(
         Endpoints.login,
         body: body
       );
-
       return LoginResponseModel.fromJson(response.data);
-
-    } on DioException catch (e) {
-      throw e.error ?? UnknownException(Strings.errorMessage);
-    } catch (e) {
-      log("login err: $e");
-      throw Exception(Strings.errorMessage);
-    }
+    }, (err, _) {
+      log("login err: $err");
+      if (err is DioException) {
+        return err.error.toString();
+      }
+      return Strings.errorMessage;
+    });
   }
 
   @override
-  Future<RegisterResponseModel> register(body) async {
-   
-    try {
-      
+  TaskEither<String, RegisterResponseModel> register(body) {
+
+    return TaskEither.tryCatch(() async {
       final response = await client.post(
         Endpoints.register,
         body: body,
       );
-
       return RegisterResponseModel.fromJson(response.data);
-
-    } on DioException catch (e) {
-      throw e.error ?? UnknownException(Strings.errorMessage);
-    } catch (e) {
-      log("register err: $e");
-      throw Exception(Strings.errorMessage);
-    }
+    }, (err, _) {
+      log("register err: $err");
+      if (err is DioException) {
+        return err.error.toString();
+      }
+      return Strings.errorMessage;
+    });
   }
   
   @override
-  Future<RefreshTokenResponseModel> refreshToken(body) async {
-    
-    try {
-      
+  TaskEither<String, RefreshTokenResponseModel> refreshToken(body) {
+
+    return TaskEither.tryCatch(() async {
       final response = await client.post(
         Endpoints.refreshToken,
         body: body
       );
-
       return RefreshTokenResponseModel.fromJson(response.data);
-
-    } on DioException catch (e) {
-      throw e.error ?? UnknownException(Strings.errorMessage);
-    } catch (e) {
-      log("refreshToken err: $e");
-      throw Exception(Strings.errorMessage);
-    }
+    }, (err, _) {
+      log("refreshToken err: $err");
+      if (err is DioException) {
+        return err.error.toString();
+      }
+      return Strings.errorMessage;
+    });
   }
   
   @override

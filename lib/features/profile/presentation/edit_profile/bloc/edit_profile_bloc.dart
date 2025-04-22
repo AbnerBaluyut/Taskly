@@ -78,15 +78,15 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
   _updateProfile(UpdateProfileEvent event, Emitter<EditProfileState> emit) async {
 
     emit(SubmitProfileLoadingState());
-    try {
-      var user = await _editProfileUseCase.execute(name: event.name, file: event.file);
+    var result = await _editProfileUseCase.execute(name: event.name, file: event.file).run();
+    result.match((err) {
+      emit(SubmitProfileErrorState(err));
+    }, (user) {
       var updateUser = _sharedPreferenceManager.getUser.copyWith(name: event.name, image: user.image);
       _sharedPreferenceManager.setUser(updateUser);
       emit(LoadDataState(user: updateUser));
       emit(SubmitProfileSuccessState());
-    } catch (e) {
-      emit(SubmitProfileErrorState(e.toString()));
-    }
+    });
   }
 
   @override

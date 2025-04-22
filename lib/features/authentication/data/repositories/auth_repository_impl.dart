@@ -1,4 +1,5 @@
 
+import 'package:fpdart/fpdart.dart';
 import 'package:taskly/features/authentication/data/models/refresh_token/refresh_token_response_model.dart';
 import 'package:taskly/features/authentication/data/models/user/user_model.dart';
 
@@ -19,21 +20,21 @@ class AuthRepositoryImpl implements AuthRepository {
   });
   
   @override
-  Future<UserEntity> login(LoginParam param) async {
-    final model = await remoteSource.login(param.toFormData());
-    return model.data.toEntity();
+  TaskEither<String, UserEntity> login(LoginParam param) {
+    final result = remoteSource.login(param.toFormData()).map((model) => model.data.toEntity());
+    return result;
   }
 
   @override
-  Future<UserEntity> register(RegisterParam param) async {
-    final model = await remoteSource.register(param.toFormData());
-    return model.data.toEntity();
+  TaskEither<String, UserEntity> register(RegisterParam param)  {
+    final result = remoteSource.register(param.toFormData()).map((model) => model.data.toEntity());
+    return result;
   }
 
   @override
-  Future<RefreshTokenEntity> refreshToken(RefreshTokenParam param) async {
-    final model = await remoteSource.refreshToken(param.toJson());
-    return model.toEntity();
+  TaskEither<String, RefreshTokenEntity> refreshToken(RefreshTokenParam param)  {
+    final result = remoteSource.refreshToken(param.toJson()).map((model) => model.toEntity());
+    return result;
   }
   
   @override

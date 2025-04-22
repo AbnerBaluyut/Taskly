@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:taskly/core/extensions/int_ext.dart';
 
@@ -32,17 +30,16 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       return;
     }
 
-    try {  
-      var data = await _refreshTokenUseCase.execute(refreshToken: _sharedPrefs.getUser.refreshToken);
+    var result = await _refreshTokenUseCase.execute(refreshToken: _sharedPrefs.getUser.refreshToken).run();
+    result.match((err) {
+      emit(SplashErrorState(err.toString().toLowerCase()));
+    }, (data) {
       _sharedPrefs.getUser.copyWith(
         accessToken: data.accessToken,
         refreshToken: data.refreshToken
       );
       emit(SplashLoadedState());
-    } catch (e) {
-      log("_refreshTokenUseCase err: $e");
-      emit(SplashErrorState(e.toString().toLowerCase()));
-    }
+    });
   }
 
   _clearPrefs(ClearPrefsEvent event, Emitter<SplashState> emit) async {

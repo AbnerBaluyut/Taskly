@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:fpdart/fpdart.dart';
+
 import '../../../../data/repositories/auth_repository.dart';
 import '../../../../data/usecases/register_usecase.dart';
 import '../entities/user_entity.dart';
@@ -14,7 +16,7 @@ class RegisterUseCaseImpl implements RegisterUseCase {
   });
 
   @override
-  Future<UserEntity> execute({required String userName, required String userEmail, required String password, File? imageFile}) {
+  TaskEither<String, UserEntity> execute({required String userName, required String userEmail, required String password, File? imageFile}) {
     
     var param = RegisterParam(
       userName: userName, 

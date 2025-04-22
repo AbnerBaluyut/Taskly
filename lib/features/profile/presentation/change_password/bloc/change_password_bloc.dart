@@ -21,19 +21,16 @@ class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> 
   _changePassword(UpdatePasswordEvent event, Emitter<ChangePasswordState> emit) async {
 
     emit(UpdatePasswordLoadingState());
-    try {
-
-      var isSuccess = await _changePasswordUseCase.execute(currentPassword: event.currentPassword, newPassword: event.newPassword);
-
+    var result = await _changePasswordUseCase.execute(currentPassword: event.currentPassword, newPassword: event.newPassword).run();
+    result.match((err) {
+      emit(UpdatePasswordErrorState(err));
+    }, (isSuccess) {
       if (isSuccess) {
         emit(UpdatePasswordSuccessState());
       } else {
         emit(UpdatePasswordErrorState(Strings.errorMessage));
       }
-      
-    } catch (e) {
-      emit(UpdatePasswordErrorState(e.toString()));
-    }
+    });
   }
 
   @override

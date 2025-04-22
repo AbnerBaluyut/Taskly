@@ -1,3 +1,5 @@
+import 'package:fpdart/fpdart.dart';
+
 import '../../../../data/repositories/auth_repository.dart';
 import '../../../../data/usecases/refresh_token_usecase.dart';
 import '../entities/refresh_token_entity.dart';
@@ -13,8 +15,7 @@ class RefreshTokenUseCaseImpl implements RefreshTokenUseCase {
   });
   
   @override
-  Future<RefreshTokenEntity> execute({required String refreshToken}) {
-    
+  TaskEither<String, RefreshTokenEntity> execute({required String refreshToken}) {
     var param = RefreshTokenParam(
       refreshToken: refreshToken
     );

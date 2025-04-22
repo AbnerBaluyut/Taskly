@@ -22,15 +22,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void _login(DoLoginEvent event, Emitter<LoginState> emit) async {
     emit(LoginLoadingState());
-    try {
-      final result = await _loginUseCase.execute(email: event.email, password: event.password);
+    final result = await _loginUseCase.execute(email: event.email, password: event.password).run();
+    result.match((err) {
+      emit(LoginFailureState(err));
+    }, (user) {
       _sharedPrefsManager
-        ..setUser(result)
+        ..setUser(user)
         ..setIsLoggedIn(true);
       emit(LoginSuccessState());
-    } catch (e) {
-      emit(LoginFailureState(e.toString()));
-    }
+    });
   }
 
   void _cancel(CancelEvent event, Emitter<LoginState> emit) {

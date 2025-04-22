@@ -1,4 +1,6 @@
 
+import 'package:fpdart/fpdart.dart';
+
 import '../../../../data/repositories/auth_repository.dart';
 import '../../../../data/usecases/login_usecase.dart';
 import '../entities/user_entity.dart';
@@ -13,7 +15,7 @@ class LoginUseCaseImpl implements LoginUseCase {
   });
 
   @override
-  Future<UserEntity> execute({required String email, required String password}) {
+  TaskEither<String, UserEntity> execute({required String email, required String password}) {
     final param = LoginParam(email: email, password: password);
     return repository.login(param);
   }

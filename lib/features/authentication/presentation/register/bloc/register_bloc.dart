@@ -29,21 +29,21 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
     emit(RegisterLoadingState());
 
-    try {
+    final result = await _registerUseCase.execute(
+      userName: event.name, 
+      userEmail: event.email, 
+      password: event.password,
+      imageFile: event.imageFile
+    ).run();
 
-      final result = await _registerUseCase.execute(
-        userName: event.name, 
-        userEmail: event.email, 
-        password: event.password,
-        imageFile: event.imageFile
-      );
+    result.match((err) {
+      emit(RegisterFailureState(err));
+    }, (user) {
       _sharedPrefsManager
-        ..setUser(result)
+        ..setUser(user)
         ..setIsLoggedIn(true);
       emit(RegisterSuccessState());
-    } catch (e) {
-      emit(RegisterFailureState(e.toString()));
-    }
+    });
   }
 
   _openGallery(OpenGalleryEvent event, Emitter<RegisterState> emit) async {

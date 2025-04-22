@@ -1,10 +1,10 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:fpdart/fpdart.dart';
 
 import '../../../../core/constants/endpoints.dart';
 import '../../../../core/services/dio_client.dart';
-import '../../../../core/services/errors/unknown_exception.dart';
 import '../../../../core/styles/strings.dart';
 import '../../../../core/utils/shared_preferences_manager.dart';
 import '../../../../data/remote_sources/profile_remote_source.dart';
@@ -21,43 +21,39 @@ class ProfileRemoteSourceImpl implements ProfileRemoteSource {
   });
 
   @override
-  Future<EditProfileResponseModel> editProfile(body) async {
+  TaskEither<String, EditProfileResponseModel> editProfile(body) {
 
-    try {
-      
+    return TaskEither.tryCatch(() async {
       final response = await client.patch(
         "${Endpoints.editProfile}${sharedPreferenceManager.getUser.id}/",
         body: body,
       );
-
       return EditProfileResponseModel.fromJson(response.data);
-
-    } on DioException catch (e) {
-      throw e.error ?? UnknownException(Strings.errorMessage);
-    } catch (e) {
-      log("editProfile err: $e");
-      throw Exception(Strings.errorMessage);
-    }
+    }, (err, _) {
+      log("editProfile err: $err");
+      if (err is DioException) {
+        return err.error.toString();
+      }
+      return Strings.errorMessage;
+    });
   }
   
   @override
-  Future<bool> changePassword(body) async {
+  TaskEither<String, bool> changePassword(body) {
 
-    try {
-      
+    return TaskEither.tryCatch(() async {
       final response = await client.patch(
         Endpoints.changePassword,
         body: body
       );
-
       return response.statusCode == 200;
-
-    } on DioException catch (e) {
-      throw e.error ?? UnknownException(Strings.errorMessage);
-    } catch (e) {
-      log("changePassword err: $e");
-      throw Exception(Strings.errorMessage);
-    }
+    }, (err, _) {
+      log("changePassword err: $err");
+      if (err is DioException) {
+        return err.error.toString();
+      }
+      return Strings.errorMessage;
+    });
   }
   
   @override

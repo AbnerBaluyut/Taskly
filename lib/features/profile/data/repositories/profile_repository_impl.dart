@@ -1,4 +1,5 @@
 
+import 'package:fpdart/fpdart.dart';
 import 'package:taskly/features/authentication/data/models/user/user_model.dart';
 
 import '../../../../data/remote_sources/profile_remote_source.dart';
@@ -16,14 +17,13 @@ class ProfileRepositoryImpl implements ProfileRepository {
   });
 
   @override
-  Future<UserEntity> editProfile(EditProfileParam param) async {
-    
-    final model = await remoteSource.editProfile(param.toFormData());
-    return model.data.toEntity();
+  TaskEither<String, UserEntity> editProfile(EditProfileParam param) {
+    final result = remoteSource.editProfile(param.toFormData()).map((model) => model.data.toEntity());
+    return result;
   }
 
   @override
-  Future<bool> changePassword(ChangePasswordParam param) => remoteSource.changePassword(param.toFormData());
+  TaskEither<String, bool> changePassword(ChangePasswordParam param) => remoteSource.changePassword(param.toFormData());
   
   @override
   void cancel() => remoteSource.cancel();
