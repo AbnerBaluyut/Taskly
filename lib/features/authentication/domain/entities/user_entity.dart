@@ -58,4 +58,14 @@ class UserEntity extends BaseEntity {
   );
 
   factory UserEntity.fromJsonString(String source) => UserEntity.fromJson(json.decode(source));
+  
+  @override
+  List<Object?> get props => [
+    id,
+    email,
+    name,
+    image,
+    accessToken,
+    refreshToken
+  ];
 }

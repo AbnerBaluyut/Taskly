@@ -1,7 +1,8 @@
 import 'dart:convert';
 
-abstract class BaseEntity {
- 
+import 'package:equatable/equatable.dart';
+
+abstract class BaseEntity extends Equatable {
 
   // Converts the Entity to a JSON Map
   Map<String, dynamic> toJson();

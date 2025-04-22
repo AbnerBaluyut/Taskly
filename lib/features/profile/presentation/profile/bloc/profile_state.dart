@@ -1,13 +1,20 @@
 part of 'profile_bloc.dart';
 
-abstract class ProfileState {}
+abstract class ProfileState extends Equatable {
+  const ProfileState();
+  @override
+  List<Object?> get props => [];
+}
 
 // Profile
 class LoadDataState extends ProfileState {
   final UserEntity user;
-  LoadDataState({
+  const LoadDataState({
     required this.user
   });
+
+  @override
+  List<Object?> get props => [user];
 }
 class LogOutSuccessState extends ProfileState {}
 

@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 
 import '../../../../../_di/dependencies.dart';
 import '../../../../../core/styles/strings.dart';

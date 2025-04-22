@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import '../../../../authentication/domain/entities/user_entity.dart';
 import '../../../../../core/utils/shared_preferences_manager.dart';
 
