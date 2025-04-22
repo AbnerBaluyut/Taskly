@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:taskly/core/extensions/context_ext.dart';
 import 'package:taskly/core/extensions/double_ext.dart';
 
-import '../../../../_di/injections.dart';
+import '../../../../_di/dependencies.dart';
 import '../../../../core/common_widgets/common_back_button.dart';
 import '../../../../core/common_widgets/common_elevated_button.dart';
 import '../../../../core/common_widgets/common_image.dart';

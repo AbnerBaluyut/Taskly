@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 
-import '../../../../../_di/injections.dart';
+import '../../../../../_di/dependencies.dart';
 import '../../../../../core/utils/shared_preferences_manager.dart';
 import '../../../../../data/usecases/login_usecase.dart';
 

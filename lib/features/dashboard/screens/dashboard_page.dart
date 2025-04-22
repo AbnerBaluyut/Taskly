@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taskly/core/extensions/int_ext.dart';
-import '../../../_di/injections.dart';
+import '../../../_di/dependencies.dart';
 import '../../../core/common_widgets/common_scaffold.dart';
 import '../../../core/router/app_routes.dart';
 import '../../calendar/screens/bloc/calendar_bloc.dart';

@@ -1,4 +1,4 @@
-import '../../_di/injections.dart';
+import '../../_di/dependencies.dart';
 import '../utils/shared_preferences_manager.dart';
 import 'screens.dart';
 

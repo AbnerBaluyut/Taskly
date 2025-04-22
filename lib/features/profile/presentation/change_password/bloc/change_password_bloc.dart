@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 
-import '../../../../../_di/injections.dart';
+import '../../../../../_di/dependencies.dart';
 import '../../../../../core/styles/strings.dart';
 import '../../../../../data/usecases/change_password_usecase.dart';
 

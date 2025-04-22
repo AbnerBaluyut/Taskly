@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
-import '../../_di/injections.dart';
+import '../../_di/dependencies.dart';
 import '../styles/keys.dart';
 import '../utils/shared_preferences_manager.dart';
 import 'dio_client.dart';
