@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:taskly/core/extensions/context_ext.dart';
+// import 'package:taskly/core/extensions/context_ext.dart';
 import 'package:taskly/core/extensions/double_ext.dart';
 
 import '../../core/router/app_routes.dart';
@@ -35,18 +35,6 @@ class SplashPage extends StatelessWidget {
       listener: (context, state) {
         if (state is SplashLoadedState) {
           context.go(AppRoutes.onBoarding);
-        } else if (state is SplashErrorState) {
-          if (state.errorMessage == "session expired") {
-            context.showAnimatedErrorDialog(
-              title: "Your session has expired. Please login again.",
-              onButtonPressed: () {
-                context.read<SplashBloc>().add(ClearPrefsEvent());
-                context.go(AppRoutes.login);
-              }
-            );
-          } else {
-            context.go(AppRoutes.onBoarding);
-          }
         }
       },
       builder: (context, state) {
@@ -56,7 +44,7 @@ class SplashPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Logo(),
-              if (state is! SplashErrorState) LoadingAnimationWidget.threeRotatingDots(
+              LoadingAnimationWidget.threeRotatingDots(
                 color: CustomColors.primaryColor,
                 size: 30.0,
               ),

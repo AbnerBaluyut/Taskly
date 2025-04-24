@@ -125,6 +125,7 @@ extension ContextExtension on BuildContext {
 
   void showAnimatedErrorDialog({
     required String title,
+    String buttonText = "OK",
     VoidCallback? onButtonPressed,
   }) {
     showGeneralDialog(
@@ -189,7 +190,7 @@ extension ContextExtension on BuildContext {
                   ),
                   Dimension.spacingMedium.height(),
                   CommonElevatedButton(
-                    text: "OK",
+                    text: buttonText,
                     fontColor: Colors.white,
                     backgroundColor: Colors.red.shade600,
                     fontSize: 16.0,

@@ -59,29 +59,25 @@ class DioClientImpl implements DioClient {
           // Handle the response here if needed
           return handler.next(response);
         },
-        onError: (e, handler) {
+        onError: (e, handler) async {
           if (e.type == DioExceptionType.cancel) {
             return;
           }
+
+          final code = e.response?.statusCode ?? 0;
+          final data = e.response?.data;
+          final isSessionExpired = data?['message'] != null && (data?['message'] as String).contains("expired"); 
+          
+          // Check if the access token is expired
+          if ((code == 400 || code == 401) && isSessionExpired) {
+            handler.reject(DioException(requestOptions: e.requestOptions, error: UnknownException(Keys.sessionExpired)));
+            return;
+          }
+
           return handler.reject(_mapError(e));
         },
       ),
     );
-  }
-
-  // Dio get instance => _dio;
-
-  void _logData(dynamic data) {
-
-    if (data is FormData) {
-      final Map<String, dynamic> formDataMap = {};
-      for (var field in data.fields) {
-        formDataMap[field.key] = field.value;
-      }
-      log("~~~ Params: ${formDataMap.toString()}");
-    } else {
-      log("~~~ Params: $data");
-    }
   }
 
   DioException _mapError(DioException e) {
@@ -96,15 +92,12 @@ class DioClientImpl implements DioClient {
 
       switch (code) {
         case 400:
-          if (data['old_password'] != null) {
+          if (data?['old_password'] != null) {
             return DioException(requestOptions: e.requestOptions, error: ServerException("Your current password is incorrect", code: code));
           } 
-          return DioException(requestOptions: e.requestOptions, error: ServerException(data['message'] ?? "Bad Request", code: code));
+          return DioException(requestOptions: e.requestOptions, error: ServerException(data?['message'] ?? "Bad Request", code: code));
         case 401:
-          if (data['code'] != null) {
-            return DioException(requestOptions: e.requestOptions, error: ServerException("Session Expired", code: code));
-          }
-          return DioException(requestOptions: e.requestOptions, error: UnauthorizedException(data?['messages']?["message"] ?? data['message'] ?? "Unauthorized", code: code));
+          return DioException(requestOptions: e.requestOptions, error: UnauthorizedException(data?['messages']?["message"] ?? data?['message'] ?? "Unauthorized", code: code));
         case 404:
           return DioException(requestOptions: e.requestOptions, error: NotFoundException());
         default:
@@ -117,6 +110,19 @@ class DioClientImpl implements DioClient {
     }
 
     return DioException(requestOptions: e.requestOptions, error: UnknownException(Strings.errorMessage));
+  }
+
+  void _logData(dynamic data) {
+
+    if (data is FormData) {
+      final Map<String, dynamic> formDataMap = {};
+      for (var field in data.fields) {
+        formDataMap[field.key] = field.value;
+      }
+      log("~~~ Params: ${formDataMap.toString()}");
+    } else {
+      log("~~~ Params: $data");
+    }
   }
 
   @override
