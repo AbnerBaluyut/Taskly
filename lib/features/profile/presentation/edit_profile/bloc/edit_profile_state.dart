@@ -6,6 +6,8 @@ sealed class EditProfileState extends Equatable {
   List<Object?> get props => [];
 }
 
+class EditProfileInitialState extends EditProfileState {}
+
 class LoadDataState extends EditProfileState {
   final UserEntity user;
   const LoadDataState({

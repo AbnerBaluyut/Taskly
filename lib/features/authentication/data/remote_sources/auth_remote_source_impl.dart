@@ -15,7 +15,7 @@ import '../models/register/register_response_model.dart';
 
 class AuthRemoteSourceImpl implements AuthRemoteSource {
 
-  final DioClient client;
+  final DioClient? client;
 
   AuthRemoteSourceImpl({
     required this.client
@@ -25,11 +25,11 @@ class AuthRemoteSourceImpl implements AuthRemoteSource {
   TaskEither<String, LoginResponseModel> login(body) {
 
     return TaskEither.tryCatch(() async {
-      final response = await client.post(
+      final response = await client?.post(
         Endpoints.login,
         body: body
       );
-      return LoginResponseModel.fromJson(response.data);
+      return LoginResponseModel.fromJson(response?.data);
     }, (err, _) {
       log("login err: $err");
       if (err is DioException) {
@@ -43,11 +43,11 @@ class AuthRemoteSourceImpl implements AuthRemoteSource {
   TaskEither<String, RegisterResponseModel> register(body) {
 
     return TaskEither.tryCatch(() async {
-      final response = await client.post(
+      final response = await client?.post(
         Endpoints.register,
         body: body,
       );
-      return RegisterResponseModel.fromJson(response.data);
+      return RegisterResponseModel.fromJson(response?.data);
     }, (err, _) {
       log("register err: $err");
       if (err is DioException) {
@@ -61,11 +61,11 @@ class AuthRemoteSourceImpl implements AuthRemoteSource {
   TaskEither<String, RefreshTokenResponseModel> refreshToken(body) {
 
     return TaskEither.tryCatch(() async {
-      final response = await client.post(
+      final response = await client?.post(
         Endpoints.refreshToken,
         body: body
       );
-      return RefreshTokenResponseModel.fromJson(response.data);
+      return RefreshTokenResponseModel.fromJson(response?.data);
     }, (err, _) {
       log("refreshToken err: $err");
       if (err is DioException) {
@@ -76,5 +76,5 @@ class AuthRemoteSourceImpl implements AuthRemoteSource {
   }
   
   @override
-  void cancel() => client.cancelRequest();
+  void cancel() => client?.cancelRequest();
 }

@@ -6,7 +6,7 @@ import 'package:equatable/equatable.dart';
 
 import '../../../../../_di/dependencies.dart';
 import '../../../../../core/utils/image_picker_manager.dart';
-import '../../../../../core/utils/shared_preferences_manager.dart';
+import '../../../../../core/utils/secure_storage_manager.dart';
 import '../../../../../data/usecases/register_usecase.dart';
 
 part 'register_event.dart';
@@ -15,7 +15,7 @@ part 'register_state.dart';
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
   final RegisterUseCase _registerUseCase;
-  final SharedPreferenceManager _sharedPrefsManager;
+  final SecureStorageManager _sharedPrefsManager;
 
   RegisterBloc() : 
     _registerUseCase = getIt(),

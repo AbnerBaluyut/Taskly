@@ -1,6 +1,6 @@
 export 'package:flutter_dotenv/flutter_dotenv.dart';
 export 'package:get_it/get_it.dart';
-export 'package:shared_preferences/shared_preferences.dart';
+export 'package:taskly/core/extensions/get_it_ext.dart';
 
 export '../data/remote_sources/auth_remote_source.dart';
 export '../data/remote_sources/profile_remote_source.dart';
@@ -23,4 +23,5 @@ export '../features/profile/domain/usecases/edit_profile_usecase_impl.dart';
 export '../core/constants/endpoints.dart';
 export '../core/services/dio_client_impl.dart';
 export '../core/services/dio_client.dart';
-export '../core/utils/shared_preferences_manager.dart';
+export '../core/utils/secure_storage_manager.dart';
+export 'package:flutter_secure_storage/flutter_secure_storage.dart';

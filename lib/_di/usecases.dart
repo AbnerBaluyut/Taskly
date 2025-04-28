@@ -2,28 +2,28 @@ part of 'dependencies.dart';
 
 Future<void> _initUseCases() async {
 
-  getIt.registerLazySingleton<LoginUseCase>(
+  getIt.registerLazySingletonWithLog<LoginUseCase>(
     () => LoginUseCaseImpl(
       repository: getIt()
     )
   );
-  getIt.registerLazySingleton<RegisterUseCase>(
+  getIt.registerLazySingletonWithLog<RegisterUseCase>(
     () => RegisterUseCaseImpl(
       repository: getIt() 
     )
   );
-  getIt.registerLazySingleton<RefreshTokenUseCase>(
+  getIt.registerLazySingletonWithLog<RefreshTokenUseCase>(
     () => RefreshTokenUseCaseImpl(
       repository: getIt()
     )
   );
 
-  getIt.registerLazySingleton<EditProfileUseCase>(
+  getIt.registerLazySingletonWithLog<EditProfileUseCase>(
     () => EditProfileUseCaseImpl(
       repository: getIt()
     )
   );
-  getIt.registerLazySingleton<ChangePasswordUseCase>(
+  getIt.registerLazySingletonWithLog<ChangePasswordUseCase>(
     () => ChangePasswordUseCaseImpl(
       repository: getIt()
     )

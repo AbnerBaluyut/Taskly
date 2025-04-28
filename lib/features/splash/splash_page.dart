@@ -33,8 +33,12 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<SplashBloc, SplashState>(
       listener: (context, state) {
-        if (state is SplashLoadedState) {
+        if (state is GoToOnBoardingState) {
           context.go(AppRoutes.onBoarding);
+        } else if (state is GoToLoginState) {
+          context.go(AppRoutes.login);
+        } else if (state is GoToDashboardState) {
+          context.go(AppRoutes.dashboard);
         }
       },
       builder: (context, state) {

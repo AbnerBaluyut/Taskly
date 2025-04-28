@@ -1,14 +1,14 @@
 part of 'dependencies.dart';
 
-Future _initRemoteSources() async {
+Future<void> _initRemoteSources() async {
 
-  getIt.registerLazySingleton<AuthRemoteSource>(
+  getIt.registerLazySingletonWithLog<AuthRemoteSource>(
     () => AuthRemoteSourceImpl(
       client: getIt(),
     )
   );
 
-  getIt.registerLazySingleton<ProfileRemoteSource>(
+  getIt.registerLazySingletonWithLog<ProfileRemoteSource>(
       () => ProfileRemoteSourceImpl(
       client: getIt(),
       sharedPreferenceManager: getIt()

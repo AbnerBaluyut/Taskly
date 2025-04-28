@@ -6,6 +6,8 @@ sealed class ProfileState extends Equatable {
   List<Object?> get props => [];
 }
 
+class ProfileInitialState extends ProfileState {}
+
 // Profile
 class LoadDataState extends ProfileState {
   final UserEntity user;

@@ -1,27 +1,9 @@
-import '../../_di/dependencies.dart';
-import '../utils/shared_preferences_manager.dart';
 import 'screens.dart';
 
 class AppRouter {
 
-  static SharedPreferenceManager get _sharedPres => getIt();
-
   static GoRouter router = GoRouter(
     initialLocation: AppRoutes.splash,
-    redirect: (context, state) {
-      
-      final isLoggedIn = _sharedPres.isLoggedIn;
-      final isCompleteOnBoarding = _sharedPres.isSkipOnBoarding;
-      final isGoingToOnBoarding = state.uri.path == AppRoutes.onBoarding;
-
-      if (isLoggedIn && isGoingToOnBoarding) {
-        return AppRoutes.dashboard;
-      } else if (!isLoggedIn && isCompleteOnBoarding && isGoingToOnBoarding) {
-        return AppRoutes.login;
-      }
-
-      return null;
-    },
     routes: [
       GoRoute(
         path: AppRoutes.splash, 

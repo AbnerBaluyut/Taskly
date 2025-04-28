@@ -7,7 +7,7 @@ import 'package:taskly/core/extensions/int_ext.dart';
 
 import '../../../../../_di/dependencies.dart';
 import '../../../../../core/utils/image_picker_manager.dart';
-import '../../../../../core/utils/shared_preferences_manager.dart';
+import '../../../../../core/utils/secure_storage_manager.dart';
 import '../../../../../data/usecases/edit_profile_usecase.dart';
 import '../../../../authentication/domain/entities/user_entity.dart';
 
@@ -16,21 +16,21 @@ part 'edit_profile_state.dart';
 
 class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
 
-  final SharedPreferenceManager _sharedPreferenceManager;
+  final SecureStorageManager _sharedPreferenceManager;
   final EditProfileUseCase _editProfileUseCase;
 
   EditProfileBloc(this._sharedPreferenceManager) :
     _editProfileUseCase = getIt(),
-    super(LoadDataState(user: _sharedPreferenceManager.getUser)) {
+    super(EditProfileInitialState()) {
       on<LoadDataEvent>(_loadData);
       on<UpdateProfileEvent>(_updateProfile);
       on<OpenGalleryEvent>(_openGallery);
       on<OpenCameraEvent>(_openCamera);
     }
 
-  _loadData(LoadDataEvent event, Emitter<EditProfileState> emit) {
+  _loadData(LoadDataEvent event, Emitter<EditProfileState> emit) async {
     emit(LoadDataState(
-      user: _sharedPreferenceManager.getUser
+      user: await _sharedPreferenceManager.getUser
     ));
   }
 
@@ -82,8 +82,9 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     var result = await _editProfileUseCase.execute(name: event.name, file: event.file).run();
     result.match((err) {
       emit(SubmitProfileErrorState(err));
-    }, (user) {
-      var updateUser = _sharedPreferenceManager.getUser.copyWith(name: event.name, image: user.image);
+    }, (user) async {
+      final user = await _sharedPreferenceManager.getUser;
+      final updateUser = user.copyWith(name: event.name, image: user.image);
       _sharedPreferenceManager.setUser(updateUser);
       emit(LoadDataState(user: updateUser));
       emit(SubmitProfileSuccessState());

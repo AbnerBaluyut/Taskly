@@ -2,13 +2,13 @@ part of 'dependencies.dart';
 
 Future<void> _initRepositories() async {
 
-  getIt.registerLazySingleton<AuthRepository>(
+  getIt.registerLazySingletonWithLog<AuthRepository>(
     () => AuthRepositoryImpl(
       remoteSource: getIt()
     )
   );
 
-  getIt.registerLazySingleton<ProfileRepository>(
+  getIt.registerLazySingletonWithLog<ProfileRepository>(
     () => ProfileRepositoryImpl(
       remoteSource: getIt()
     )

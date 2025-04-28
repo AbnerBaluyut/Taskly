@@ -2,13 +2,13 @@
 import 'package:bloc/bloc.dart';
 
 import '../../../../_di/dependencies.dart';
-import '../../../../core/utils/shared_preferences_manager.dart';
+import '../../../../core/utils/secure_storage_manager.dart';
 part 'welcome_event.dart';
 part 'welcome_state.dart';
 
 class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
   
-  final SharedPreferenceManager _sharedPreferenceManager;
+  final SecureStorageManager _sharedPreferenceManager;
 
   WelcomeBloc() : 
     _sharedPreferenceManager = getIt(),

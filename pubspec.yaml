@@ -41,13 +41,19 @@ dependencies:
   equatable: ^2.0.7
 
   # Router
-  go_router: ^15.0.0
+  go_router: ^15.1.1
   
   # Page Indicator
   smooth_page_indicator: ^1.2.1
-  shared_preferences: ^2.5.3
+  
+  # Splash
   flutter_native_splash: ^2.4.6
+
+  # Icons
   font_awesome_flutter: ^10.8.0
+
+  # Security
+  flutter_secure_storage: ^9.2.4
 
   # SVG
   flutter_svg: ^2.1.0

@@ -10,4 +10,6 @@ class SplashInitialState extends SplashState {}
 
 class SplashLoadingState extends SplashState {}
 
-class SplashLoadedState extends SplashState {}
+class GoToOnBoardingState extends SplashState {}
+class GoToLoginState extends SplashState {}
+class GoToDashboardState extends SplashState {}

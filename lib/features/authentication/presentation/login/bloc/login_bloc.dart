@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../../_di/dependencies.dart';
-import '../../../../../core/utils/shared_preferences_manager.dart';
+import '../../../../../core/utils/secure_storage_manager.dart';
 import '../../../../../data/usecases/login_usecase.dart';
 
 part 'login_event.dart';
@@ -11,7 +11,7 @@ part 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   final LoginUseCase _loginUseCase;
-  final SharedPreferenceManager _sharedPrefsManager;
+  final SecureStorageManager _sharedPrefsManager;
 
   LoginBloc() : 
     _loginUseCase = getIt(),

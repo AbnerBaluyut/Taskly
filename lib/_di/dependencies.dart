@@ -1,7 +1,7 @@
-
 import 'exports.dart';
 
 part 'app.dart';
+part 'network.dart';
 part 'remote_sources.dart';
 part 'repositories.dart';
 part 'usecases.dart';
@@ -13,6 +13,9 @@ Future<void> initDependencies() async {
   // App
   await _initApp();
 
+  // Network
+  await _initNetwork();
+  
   // Remote Sources
   await _initRemoteSources();
 
@@ -21,9 +24,4 @@ Future<void> initDependencies() async {
 
   // UseCases
   await _initUseCases();
-
-  // Network
-  getIt.registerLazySingleton<DioClient>(() => DioClientImpl(
-    baseUrl: Endpoints.baseUrl
-  ));
 }

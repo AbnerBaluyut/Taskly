@@ -3,11 +3,11 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 
 import '../../_di/dependencies.dart';
-import '../../core/utils/shared_preferences_manager.dart';
+import '../../core/utils/secure_storage_manager.dart';
 
 class DarkModeCubit extends Cubit<bool> {
 
-   final SharedPreferenceManager _sharedPrefsManager;
+   final SecureStorageManager _sharedPrefsManager;
   
   DarkModeCubit() :
     _sharedPrefsManager = getIt(), 
@@ -16,7 +16,7 @@ class DarkModeCubit extends Cubit<bool> {
     }
 
   void _loadState() async {
-    final isDarkMode = _sharedPrefsManager.isDarkMode;
+    final isDarkMode = await _sharedPrefsManager.isDarkMode;
     emit(isDarkMode);
   }
 
