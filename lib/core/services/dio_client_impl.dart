@@ -49,7 +49,7 @@ class DioClientImpl implements DioClient {
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
-          _setAuthorization(options);
+          await _setAuthorization(options);
           _logData(options.data);
           return handler.next(options);
         },
@@ -59,21 +59,21 @@ class DioClientImpl implements DioClient {
         },
         onError: (e, handler) async {
           if (e.type == DioExceptionType.cancel) return;
-          _handleRefreshToken(e, handler);
+          await _handleRefreshToken(e, handler);
           return handler.reject(_mapError(e));
         },
       ),
     );
   }
 
-  void _setAuthorization(RequestOptions options) async {
+  Future<void> _setAuthorization(RequestOptions options) async {
     if (await _sharedPreferenceManager.isLoggedIn) {
       final user = await _sharedPreferenceManager.getUser;
       options.headers[Keys.authorization] = 'Bearer ${user.accessToken}';
     }
   }
 
-  void _handleRefreshToken(DioException e, ErrorInterceptorHandler handler) async {  
+  Future<void> _handleRefreshToken(DioException e, ErrorInterceptorHandler handler) async {  
 
     if (await _sharedPreferenceManager.isLoggedIn) {
 
